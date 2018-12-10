@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>bgl.png</file>
+        <file>bgr.png</file>
+        <file>PhotosGrid.qml</file>
+        <file>mask.png</file>
+        <file>PhotosShow.qml</file>
+        <file>Loading.qml</file>
+        <file>GestureArea.qml</file>
+    </qresource>
+</RCC>
