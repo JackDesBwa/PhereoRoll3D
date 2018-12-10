@@ -12,13 +12,11 @@ First, you need this phone, since it is primary intended for it. When the phone 
 
 The app opens "Popular" list at startup.
 
-List view
-'''''''''
+### List view
 
 This view lists all images of the currently selected category/user/album (only first items are loaded, but you can load more images).
 
-Photo view
-''''''''''
+### Photo view
 
 This view shows the photograph and some of its metadata, including comments.
 
