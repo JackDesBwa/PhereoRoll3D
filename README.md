@@ -16,6 +16,35 @@ The app opens "Popular" list at startup.
 
 This view lists all images of the currently selected category/user/album (only first items are loaded, but you can load more images).
 
+![List view](https://raw.githubusercontent.com/JackDesBwa/PhereoP83D/master/screenshots/screenshot_list.png)
+
+(1)
+Tabs to access Phereo's categories.
+The current tab is underlined
+
+(2)
+Currently selected category/user/album
+
+(3)
+Current image number / Total images in the list.
+A + sign is appended if there are more images in the list.
+Clicking on the text loads next images.
+
+(4)
+List of images' thumbnails. Swipe to view all.
+
+(5)
+Current image thumbnail.
+Click to view
+
+(6)
+Statistics of photos in categories.
+It is limited to loaded images.
+
+(7)
+Informations about selected image (title, author, date, likes, views, comments).
+Clicking on the author opens user photos.
+
 ### Photo view
 
 This view shows the photograph and some of its metadata, including comments.
