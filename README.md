@@ -108,6 +108,15 @@ Each comment has the avatar of its author, the date and the comment itself.
 
 Clicking on the author name or avatar opens its gallery.
 
+Stereo screenshots
+------------------
+
+Cross view
+![Photo view - stereo screenshot X](screenshots/screenshot_stereo_X.jpg)
+
+Parallel view
+![Photo view - stereo screenshot P](screenshots/screenshot_stereo_P.jpg)
+
 Licence
 -------
 
