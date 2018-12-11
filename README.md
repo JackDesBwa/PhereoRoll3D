@@ -16,7 +16,7 @@ The app opens "Popular" list at startup.
 
 This view lists all images of the currently selected category/user/album (only first items are loaded, but you can load more images).
 
-![List view](https://raw.githubusercontent.com/JackDesBwa/PhereoP83D/master/screenshots/screenshot_list.png)
+![List view](screenshots/screenshot_list.png)
 
 (1)
 Tabs to access Phereo's categories.
@@ -48,6 +48,65 @@ Clicking on the author opens user photos.
 ### Photo view
 
 This view shows the photograph and some of its metadata, including comments.
+
+![Photo view - simple](screenshots/screenshot_photo_simple.png)
+
+(1) Left edge
+
+Click: Previous image in the current list
+
+Slide up/down: Change zoom (when slide is started, you can go to the right of the screen to have finer control)
+
+Two fingers: reset scale
+
+(2) Rigt edge
+
+Click: Next image in the current list
+
+Slide up/down: Change divergence/z axis origin (when slide is started, you can go to the left of the screen to have finer control)
+
+Two fingers: reset divergence
+
+(3) Top edge
+
+Click: Go to list
+
+Slide or two fingers: Swap left/right
+
+(4) Bottom edge
+
+Click or slide: open infos
+
+Two fingers: Reset image position
+
+(5) Central zone
+
+Use pinch to zoom/move image
+
+![Photo view - infos](screenshots/screenshot_photo_info.jpg)
+
+The information about image are
+
+- Avatar of author (clicking on it opens user photos)
+- Name of image
+- Name of author (clicking on it opens user photos)
+- Date of publication
+- Number of likes, views, comments
+- Optionally, categories of the photo (Popular, Featured, Staff)
+- Description of image
+- Currently selected category/user/album +  current image number / Total images in the list.
+  A + sign is appended if there are more images in the list.
+  Clicking on the text loads next images.
+- Optionally, the list of tags
+- Optionnally, the list of albums in which the image is (clicking on it opens the album)
+
+Clicking on the information zone opens comments if present.
+
+![Photo view - infos](screenshots/screenshot_photo_comments.jpg)
+
+Each comment has the avatar of its author, the date and the comment itself.
+
+Clicking on the author name or avatar opens its gallery.
 
 Licence
 -------
