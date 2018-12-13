@@ -1,14 +1,14 @@
 PhereoP83D
 ==========
 
-I was frustrated to not be able to use native autostereoscopic capabilities of my ELEPHONE P8 3D to watch stereophotographs of Phereo website ; so I made this app to display them nicely.
+I was frustrated to not be able to use native autostereoscopic capabilities of my ELEPHONE P8 3D to watch stereophotographs of Phereo website ; so I made this app to display them nicely. Some other display modes were added afterwards.
 
 Status: Proof of concept — It is working and I might improve depending of my needs
 
 Usage
 -----
 
-First, you need this phone, since it is primary intended for it. When the phone is in landscape mode, the app displays itself in column-interleaved to be in 3D thanks to autostereoscopic display.
+The defaults parameters are set so that when the phone is in landscape orientation, the app displays itself in column-interleaved to be seen in 3D thanks to autostereoscopic display. You can use other type of 3D thanks to other display modes.
 
 The app opens "Popular" list at startup.
 
@@ -47,6 +47,9 @@ Clicking on the author opens user photos.
 
 (+)
 Top right click: Use alternative display 3D mode
+
+(+)
+Bottom right: The current display mode is shown. Clicking on it opens the settongs page.
 
 ### Photo view
 
@@ -113,6 +116,12 @@ Clicking on the information zone opens comments if present.
 Each comment has the avatar of its author, the date and the comment itself.
 
 Clicking on the author name or avatar opens its gallery.
+
+![Settings page](screenshots/screenshot_settings.jpg)
+
+Select the orientation you want to show/change on the left list, and show/select associated 3D mode on the right list.
+
+Click elsewhere to come back to list view.
 
 Stereo screenshots
 ------------------
