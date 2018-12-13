@@ -8,5 +8,7 @@
         <file>Loading.qml</file>
         <file>GestureArea.qml</file>
         <file>Settings.qml</file>
+        <file>CLabel.qml</file>
+        <file>PLabel.qml</file>
     </qresource>
 </RCC>

@@ -119,131 +119,102 @@ Item {
                                     anchors.verticalCenter: parent.verticalCenter
                                     Row {
                                         spacing: 5
-                                        Text {
+                                        PLabel {
                                             text: phereo.photo.title
-                                            font.pixelSize: 13
                                             font.bold: true
-                                            color: "white"
                                         }
-                                        Text {
+                                        CLabel {
                                             text: phereo.photo.user
-                                            font.pixelSize: 13
-                                            color: "white"
-                                            MouseArea {
-                                                anchors.fill: parent
-                                                onClicked: {
-                                                    phereo.showList();
-                                                    phereo.loadUser(phereo.photo.userid, phereo.photo.user);
-                                                }
+                                            onClicked: {
+                                                phereo.showList();
+                                                phereo.loadUser(phereo.photo.userid, phereo.photo.user);
                                             }
                                         }
                                     }
                                     Row {
                                         spacing: 5
-                                        Text {
+                                        PLabel {
                                             function pad(nb) { return nb < 10 ? "0"+nb : nb; }
                                             text: {
                                                 var d = new Date(phereo.photo.datetime * 1000);
                                                 return [d.getFullYear(), pad(d.getMonth()+1), pad(d.getDate())].join('-') +' ' +
                                                         [pad(d.getHours()), pad(d.getMinutes())].join(':');
                                             }
-                                            font.pixelSize: 13
-                                            color: "white"
                                         }
-                                        Text { text: " ❤ " + phereo.photo.likes; color: "white"; font.pixelSize: 13; font.bold: true }
-                                        Text { text: " 👁 " + phereo.photo.views; color: "white"; font.pixelSize: 13; font.italic: true }
-                                        Text { text: " 💬 " + phereo.photo.comments; color: "white"; font.pixelSize: 13; font.italic: true }
+                                        PLabel { text: " ❤ " + phereo.photo.likes; font.bold: true }
+                                        PLabel { text: " 👁 " + phereo.photo.views; font.italic: true }
+                                        PLabel { text: " 💬 " + phereo.photo.comments; font.italic: true }
                                     }
                                     Row {
                                         spacing: 5
-                                        Text { text: "🏷 Popular"; visible: phereo.photo.flagPopular; color: "white"; font.pixelSize: 10
-                                            MouseArea {
-                                                anchors.fill: parent
-                                                onClicked: {
-                                                    phereo.showList();
-                                                    phereo.loadCategory(0);
-                                                }
+                                        CLabel {
+                                            text: "🏷 Popular"
+                                            visible: phereo.photo.flagPopular
+                                            small: true
+                                            onClicked: {
+                                                phereo.showList();
+                                                phereo.loadCategory(0);
                                             }
                                         }
-                                        Text { text: "🏷 Featured"; visible: phereo.photo.flagFeatured; color: "white"; font.pixelSize: 10
-                                            MouseArea {
-                                                anchors.fill: parent
-                                                onClicked: {
-                                                    phereo.showList();
-                                                    phereo.loadCategory(2);
-                                                }
+                                        CLabel {
+                                            text: "🏷 Featured"
+                                            visible: phereo.photo.flagFeatured
+                                            small: true
+                                            onClicked: {
+                                                phereo.showList();
+                                                phereo.loadCategory(2);
                                             }
                                         }
-                                        Text { text: "🏷 Staff"; visible: phereo.photo.flagStaff; color: "white"; font.pixelSize: 10
-                                            MouseArea {
-                                                anchors.fill: parent
-                                                onClicked: {
-                                                    phereo.showList();
-                                                    phereo.loadCategory(3);
-                                                }
+                                        CLabel {
+                                            text: "🏷 Staff"
+                                            visible: phereo.photo.flagStaff
+                                            small: true
+                                            onClicked: {
+                                                phereo.showList();
+                                                phereo.loadCategory(3);
                                             }
                                         }
                                     }
                                 }
                             }
-                            Text {
+                            PLabel {
                                 width: parent.width
                                 text: phereo.photo.description
-                                font.pixelSize: 13
-                                color: "white"
                                 visible: text
-                                wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+                                horizontalAlignment: Text.AlignLeft
                             }
                             Row {
                                 spacing: 5
-                                Text {
+                                PLabel {
                                     text: phereo.category
-                                    font.pixelSize: 13
                                     font.bold: true
-                                    color: "white"
                                 }
-                                Text {
+                                CLabel {
                                     text: (phereo.selection+1) + "/" + phereo.photosList.count + (phereo.photosList.count < phereo.nbImagesMax ? "+": "")
-                                    font.pixelSize: 13
-                                    color: "white"
-                                    MouseArea {
-                                        anchors.fill: parent
-                                        onClicked: {
-                                            phereo.loadNext();
-                                        }
-                                    }
+                                    onClicked: phereo.loadNext()
                                 }
                             }
-                            Text {
+                            PLabel {
                                 text: "Tags: " + phereo.photo.tags
-                                font.pixelSize: 13
-                                color: "white"
                                 visible: phereo.photo.tags
                                 font.italic: true
                             }
                             Flow {
                                 spacing: 5
                                 width: parent.width
-                                Text {
+                                PLabel {
                                     text: "Albums:"
-                                    font.pixelSize: 13
-                                    color: "white"
                                     visible: phereo.photo.albums.count > 0
                                     font.italic: true
                                 }
                                 Repeater {
                                     model: phereo.photo.albums
-                                    delegate: Text {
+                                    delegate: CLabel {
                                         text: model.title
-                                        font.pixelSize: 13
-                                        color: "white"
                                         font.italic: true
-                                        MouseArea {
-                                            anchors.fill: parent
-                                            onClicked: {
-                                                phereo.showList();
-                                                phereo.loadAlbum(model.id, "%1 [%2]".arg(model.title).arg(phereo.photo.user));
-                                            }
+                                        onClicked: {
+                                            phereo.showList();
+                                            phereo.loadAlbum(model.id, "%1 [%2]".arg(model.title).arg(phereo.photo.user));
                                         }
                                     }
                                 }
@@ -283,20 +254,15 @@ Item {
                                     }
                                     Column {
                                         anchors.verticalCenter: parent.verticalCenter
-                                        Text {
+                                        CLabel {
                                             text: model.user
-                                            color: "white"
                                             font.bold: true
-                                            font.pixelSize: 13
-                                            MouseArea {
-                                                anchors.fill: parent
-                                                onClicked: {
-                                                    phereo.showList();
-                                                    phereo.loadUser(model.userid, model.user);
-                                                }
+                                            onClicked: {
+                                                phereo.showList();
+                                                phereo.loadUser(model.userid, model.user);
                                             }
                                         }
-                                        Text {
+                                        PLabel {
                                             function pad(nb) { return nb < 10 ? "0"+nb : nb; }
                                             text: {
                                                 var d = new Date(model.datetime * 1000);
@@ -304,17 +270,13 @@ Item {
                                                         [pad(d.getHours()), pad(d.getMinutes())].join(':');
                                             }
                                             font.italic: true
-                                            font.pixelSize: 13
-                                            color: "white"
                                         }
                                     }
                                 }
-                                Text {
+                                PLabel {
                                     text: model.comment
-                                    color: "white"
-                                    font.pixelSize: 13
                                     width: parent.width
-                                    wrapMode: Text.WordWrap
+                                    horizontalAlignment: Text.AlignLeft
                                 }
                             }
                         }

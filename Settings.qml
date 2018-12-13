@@ -16,17 +16,12 @@ MouseArea {
                 Column {
                     Repeater {
                         model: ["Landscape", "Landscape Alt.", "Portrait", "Portrait Alt."]
-                        Text {
+                        CLabel {
                             anchors.horizontalCenter: parent.horizontalCenter;
                             anchors.horizontalCenterOffset: page.selection == index ? direction : 0;
                             text: modelData
-                            font.pixelSize: 13
-                            color: "white"
                             font.bold: page.selection == index
-                            MouseArea {
-                                anchors.fill: parent
-                                onClicked: page.selection = index
-                            }
+                            onClicked: page.selection = index
                         }
                     }
                 }
@@ -35,15 +30,14 @@ MouseArea {
                     spacing: 5
                     Repeater {
                         model: phereo.mode3D.list
-                        Text {
+                        CLabel {
                             property string prop: ["landscapeMode", "landscapeModeAlt", "portraitMode", "portraitModeAlt"][page.selection]
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.horizontalCenterOffset: index === phereo.mode3D[prop] ? direction : 0
                             text: modelData
-                            font.pixelSize: 10
-                            color: "white"
+                            small: true
                             font.bold: index === phereo.mode3D[prop]
-                            MouseArea { anchors.fill: parent; onClicked: phereo.mode3D[prop] = index }
+                            onClicked: phereo.mode3D[prop] = index
                         }
                     }
                 }

@@ -67,16 +67,13 @@ Row {
                         property string category: model.text
                         width: 80
                         height: 20
-                        Text {
+                        PLabel {
                             property bool hl: category === phereo.category
                             anchors.fill: parent;
                             anchors.leftMargin: hl ? direction*2 : 0
                             text: model.text
                             font.bold: hl
                             font.underline: hl
-                            horizontalAlignment: Text.AlignHCenter
-                            verticalAlignment: Text.AlignVCenter
-                            color: "white"
                         }
                         MouseArea {
                             anchors.fill: parent
@@ -90,64 +87,47 @@ Row {
                 y: parent.height/2 - 120
                 spacing: 5
 
-                Text {
+                PLabel {
                     text: phereo.category
-                    font.pixelSize: 13
                     font.bold: true
-                    color: "white"
                 }
-                Text {
+                CLabel {
                     text: (phereo.selection+1) + "/" + phereo.photosList.count + (phereo.photosList.count < phereo.nbImagesMax ? "+": "")
-                    font.pixelSize: 13
-                    color: "white"
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: {
-                            phereo.loadNext();
-                        }
-                    }
+                    onClicked: phereo.loadNext()
                 }
             }
             Column {
                 anchors.horizontalCenter: parent.horizontalCenter
                 y: parent.height/2 + 115
-                Text {
+                PLabel {
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.horizontalCenterOffset: direction
                     visible: phereo.photosList.count > 0
                     text: phereo.photo.title
                     font.bold: true
                     font.pixelSize: 15
-                    color: "white"
                 }
-                Text {
+                CLabel {
                     anchors.horizontalCenter: parent.horizontalCenter
                     visible: phereo.photosList.count > 0
                     text: phereo.photo.user
-                    font.pixelSize: 13
-                    color: "white"
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: phereo.loadUser(phereo.photo.userid, phereo.photo.user)
-                    }
+                    onClicked: phereo.loadUser(phereo.photo.userid, phereo.photo.user)
                 }
                 Row {
                     anchors.horizontalCenter: parent.horizontalCenter
                     spacing: 5
                     visible: phereo.photosList.count > 0
-                    Text {
+                    PLabel {
                         function pad(nb) { return nb < 10 ? "0"+nb : nb; }
                         text: {
                             var d = new Date(phereo.photo.datetime * 1000);
                             return [d.getFullYear(), pad(d.getMonth()+1), pad(d.getDate())].join('-') +' ' +
                                     [pad(d.getHours()), pad(d.getMinutes())].join(':');
                         }
-                        font.pixelSize: 13
-                        color: "white"
                     }
-                    Text { text: " ❤ " + phereo.photo.likes; font.pixelSize: 13; color: "white"; font.bold: true }
-                    Text { text: " 👁 " + phereo.photo.views; font.pixelSize: 13; color: "white"; font.italic: true }
-                    Text { text: " 💬 " + phereo.photo.comments; font.pixelSize: 13; color: "white"; font.italic: true }
+                    PLabel { text: " ❤ " + phereo.photo.likes; font.bold: true }
+                    PLabel { text: " 👁 " + phereo.photo.views; font.italic: true }
+                    PLabel { text: " 💬 " + phereo.photo.comments; font.italic: true }
                 }
             }
             Column {
@@ -172,23 +152,22 @@ Row {
                     totalFeatured = fc;
                     totalStaff = sc;
                 }
-                Text { text: "🏷 Popular " + parent.totalPopular; color: "white"; font.pixelSize: 10 }
-                Text { text: "🏷 Featured " + parent.totalFeatured; color: "white"; font.pixelSize: 10 }
-                Text { text: "🏷 Staff " + parent.totalStaff; color: "white"; font.pixelSize: 10 }
+                PLabel { text: "🏷 Popular " + parent.totalPopular; small: true }
+                PLabel { text: "🏷 Featured " + parent.totalFeatured; small: true }
+                PLabel { text: "🏷 Staff " + parent.totalStaff; small: true }
             }
             Column {
                 anchors.right: parent.right
                 anchors.bottom: parent.bottom
                 anchors.margins: 5
-                Text {
+                CLabel {
                     width: Math.max(implicitWidth, 200)
                     height: Math.max(implicitHeight, 20)
                     text: phereo.mode3D.name
-                    color: "white"
-                    font.pixelSize: 10
+                    small: true
                     horizontalAlignment: Text.AlignRight
                     verticalAlignment: Text.AlignBottom
-                    MouseArea { anchors.fill: parent; onClicked: phereo.showSettings() }
+                    onClicked: phereo.showSettings()
                 }
             }
         }
