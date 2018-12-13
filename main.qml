@@ -1,6 +1,6 @@
 import QtQuick 2.9
 import QtQuick.Window 2.2
-import Qt.labs.settings 1.0
+import Qt.labs.settings 1.0 as QtLabsSettings
 
 Window {
     id: win
@@ -163,6 +163,9 @@ Window {
        function showPhoto(sel) {
            selection = sel;
            loader.setSource("qrc:/PhotosShow.qml", {"phereo": phereo});
+       }
+       function showSettings() {
+           loader.setSource("qrc:/Settings.qml", {"phereo": phereo});
        }
        function next() {
            var sel = selection + 1;
@@ -377,7 +380,7 @@ void main(void) {
         }
     }
 
-    Settings {
+    QtLabsSettings.Settings {
         property alias mode3D_portraitMode: mode3D.portraitMode
         property alias mode3D_landscapeMode: mode3D.landscapeMode
         property alias mode3D_portraitModeAlt: mode3D.portraitModeAlt

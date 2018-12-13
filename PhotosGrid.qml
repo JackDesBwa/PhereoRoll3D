@@ -180,7 +180,16 @@ Row {
                 anchors.right: parent.right
                 anchors.bottom: parent.bottom
                 anchors.margins: 5
-                Text { text: phereo.mode3D.name; color: "white"; font.pixelSize: 10 }
+                Text {
+                    width: Math.max(implicitWidth, 200)
+                    height: Math.max(implicitHeight, 20)
+                    text: phereo.mode3D.name
+                    color: "white"
+                    font.pixelSize: 10
+                    horizontalAlignment: Text.AlignRight
+                    verticalAlignment: Text.AlignBottom
+                    MouseArea { anchors.fill: parent; onClicked: phereo.showSettings() }
+                }
             }
         }
     }

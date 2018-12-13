@@ -8,5 +8,6 @@
         <file>PhotosShow.qml</file>
         <file>Loading.qml</file>
         <file>GestureArea.qml</file>
+        <file>Settings.qml</file>
     </qresource>
 </RCC>
