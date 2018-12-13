@@ -45,6 +45,9 @@ It is limited to loaded images.
 Informations about selected image (title, author, date, likes, views, comments).
 Clicking on the author opens user photos.
 
+(+)
+Top right click: Use alternative display 3D mode
+
 ### Photo view
 
 This view shows the photograph and some of its metadata, including comments.
@@ -82,6 +85,9 @@ Two fingers: Reset image position
 (5) Central zone
 
 Use pinch to zoom/move image
+
+(+)
+Top right click: Use alternative display 3D mode
 
 ![Photo view - infos](screenshots/screenshot_photo_info.jpg)
 
