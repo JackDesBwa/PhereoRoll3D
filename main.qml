@@ -72,8 +72,8 @@ Window {
            property bool modeAlt: false
            property int portraitMode: leftView
            property int landscapeMode: columnsInterleaved
-           property int portraitModeAlt: rightView
-           property int landscapeModeAlt: anaglyphDubois
+           property int portraitModeAlt: rowsInterleaved
+           property int landscapeModeAlt: anaglyphMonochrome
            property int activeMode: win.width > win.height ?
                                           (modeAlt ? landscapeModeAlt : landscapeMode) :
                                           (modeAlt ? portraitModeAlt : portraitMode)
