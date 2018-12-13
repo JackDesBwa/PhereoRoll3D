@@ -132,7 +132,7 @@ Item {
                                         }
                                     }
                                     Row {
-                                        spacing: 5
+                                        spacing: 8
                                         PLabel {
                                             function pad(nb) { return nb < 10 ? "0"+nb : nb; }
                                             text: {
@@ -141,37 +141,61 @@ Item {
                                                         [pad(d.getHours()), pad(d.getMinutes())].join(':');
                                             }
                                         }
-                                        PLabel { text: " ❤ " + phereo.photo.likes; font.bold: true }
-                                        PLabel { text: " 👁 " + phereo.photo.views; font.italic: true }
-                                        PLabel { text: " 💬 " + phereo.photo.comments; font.italic: true }
+                                        Row {
+                                            spacing: 2
+                                            Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/likes.png" }
+                                            PLabel { text: phereo.photo.likes; font.bold: true }
+                                        }
+                                        Row {
+                                            spacing: 2
+                                            Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/views.png" }
+                                            PLabel { text: phereo.photo.views; font.italic: true }
+                                        }
+                                        Row {
+                                            spacing: 2
+                                            Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/comments.png" }
+                                            PLabel { text: phereo.photo.comments; font.italic: true }
+                                        }
                                     }
                                     Row {
                                         spacing: 5
-                                        CLabel {
-                                            text: "🏷 Popular"
+                                        Row {
+                                            spacing: 3
                                             visible: phereo.photo.flagPopular
-                                            small: true
-                                            onClicked: {
-                                                phereo.showList();
-                                                phereo.loadCategory(0);
+                                            Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/label.png" }
+                                            CLabel {
+                                                text: "Popular"
+                                                small: true
+                                                onClicked: {
+                                                    phereo.showList();
+                                                    phereo.loadCategory(0);
+                                                }
                                             }
                                         }
-                                        CLabel {
-                                            text: "🏷 Featured"
+                                        Row {
+                                            spacing: 3
                                             visible: phereo.photo.flagFeatured
-                                            small: true
-                                            onClicked: {
-                                                phereo.showList();
-                                                phereo.loadCategory(2);
+                                            Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/label.png" }
+                                            CLabel {
+                                                text: "Featured"
+                                                small: true
+                                                onClicked: {
+                                                    phereo.showList();
+                                                    phereo.loadCategory(2);
+                                                }
                                             }
                                         }
-                                        CLabel {
-                                            text: "🏷 Staff"
+                                        Row {
+                                            spacing: 3
                                             visible: phereo.photo.flagStaff
-                                            small: true
-                                            onClicked: {
-                                                phereo.showList();
-                                                phereo.loadCategory(3);
+                                            Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/label.png" }
+                                            CLabel {
+                                                text: "Staff"
+                                                small: true
+                                                onClicked: {
+                                                    phereo.showList();
+                                                    phereo.loadCategory(3);
+                                                }
                                             }
                                         }
                                     }

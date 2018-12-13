@@ -10,5 +10,9 @@
         <file>Settings.qml</file>
         <file>CLabel.qml</file>
         <file>PLabel.qml</file>
+        <file>comments.png</file>
+        <file>label.png</file>
+        <file>likes.png</file>
+        <file>views.png</file>
     </qresource>
 </RCC>

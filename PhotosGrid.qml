@@ -121,7 +121,7 @@ Row {
                 }
                 Row {
                     anchors.horizontalCenter: parent.horizontalCenter
-                    spacing: 5
+                    spacing: 8
                     visible: phereo.photosList.count > 0
                     PLabel {
                         function pad(nb) { return nb < 10 ? "0"+nb : nb; }
@@ -131,12 +131,25 @@ Row {
                                     [pad(d.getHours()), pad(d.getMinutes())].join(':');
                         }
                     }
-                    PLabel { text: " ❤ " + phereo.photo.likes; font.bold: true }
-                    PLabel { text: " 👁 " + phereo.photo.views; font.italic: true }
-                    PLabel { text: " 💬 " + phereo.photo.comments; font.italic: true }
+                    Row {
+                        spacing: 2
+                        Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/likes.png" }
+                        PLabel { text: phereo.photo.likes; font.bold: true }
+                    }
+                    Row {
+                        spacing: 2
+                        Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/views.png" }
+                          PLabel { text: phereo.photo.views; font.italic: true }
+                    }
+                    Row {
+                        spacing: 2
+                        Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/comments.png" }
+                        PLabel { text: phereo.photo.comments; font.italic: true }
+                    }
                 }
             }
             Column {
+                id: labels
                 anchors.left: parent.left
                 anchors.bottom: parent.bottom
                 anchors.margins: 5
@@ -158,9 +171,21 @@ Row {
                     totalFeatured = fc;
                     totalStaff = sc;
                 }
-                PLabel { text: "🏷 Popular " + parent.totalPopular; small: true }
-                PLabel { text: "🏷 Featured " + parent.totalFeatured; small: true }
-                PLabel { text: "🏷 Staff " + parent.totalStaff; small: true }
+                Row {
+                    spacing: 3
+                    Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/label.png" }
+                    PLabel { text: "Popular " + labels.totalPopular; small: true }
+                }
+                Row {
+                    spacing: 3
+                    Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/label.png" }
+                    PLabel { text: "Featured " + labels.totalFeatured; small: true }
+                }
+                Row {
+                    spacing: 3
+                    Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/label.png" }
+                    PLabel { text: "Staff " + labels.totalStaff; small: true }
+                }
             }
             Column {
                 anchors.right: parent.right
