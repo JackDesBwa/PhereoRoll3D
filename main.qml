@@ -1,5 +1,6 @@
 import QtQuick 2.9
 import QtQuick.Window 2.2
+import Qt.labs.settings 1.0
 
 Window {
     id: win
@@ -367,5 +368,13 @@ void main(void) {
 }"
         }
     }
+
+    Settings {
+        property alias mode3D_portraitMode: mode3D.portraitMode
+        property alias mode3D_landscapeMode: mode3D.landscapeMode
+        property alias mode3D_portraitModeAlt: mode3D.portraitModeAlt
+        property alias mode3D_landscapeModeAlt: mode3D.landscapeModeAlt
+    }
+
     Component.onCompleted: phereo.showList()
 }
