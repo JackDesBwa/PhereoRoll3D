@@ -12,13 +12,15 @@ MouseArea {
             Row {
                 anchors.centerIn: parent
                 width: Math.min(implicitWidth, parent.width)
-                spacing: 20
+                spacing: 10
                 Column {
                     Repeater {
                         model: ["Landscape", "Landscape Alt.", "Portrait", "Portrait Alt."]
                         CLabel {
                             anchors.horizontalCenter: parent.horizontalCenter;
                             anchors.horizontalCenterOffset: page.selection == index ? direction : 0;
+                            width: Math.max(implicitWidth, 150)
+                            height: 25
                             text: modelData
                             font.bold: page.selection == index
                             onClicked: page.selection = index
@@ -27,13 +29,14 @@ MouseArea {
                 }
 
                 Column {
-                    spacing: 5
                     Repeater {
                         model: phereo.mode3D.list
                         CLabel {
                             property string prop: ["landscapeMode", "landscapeModeAlt", "portraitMode", "portraitModeAlt"][page.selection]
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.horizontalCenterOffset: index === phereo.mode3D[prop] ? direction : 0
+                            width: Math.max(implicitWidth, 150)
+                            height: 20
                             text: modelData
                             small: true
                             font.bold: index === phereo.mode3D[prop]

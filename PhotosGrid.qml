@@ -161,8 +161,8 @@ Row {
                 anchors.bottom: parent.bottom
                 anchors.margins: 5
                 CLabel {
-                    width: Math.max(implicitWidth, 200)
-                    height: Math.max(implicitHeight, 20)
+                    width: Math.max(implicitWidth, 150)
+                    height: Math.max(implicitHeight, 40)
                     text: phereo.mode3D.name
                     small: true
                     horizontalAlignment: Text.AlignRight
