@@ -4,8 +4,8 @@ import QtQuick.Window 2.2
 Window {
     id: win
     visible: true
-    width: 711
-    height: 400
+    width: 640
+    height: 336
     title: qsTr("Phereo unofficial")
     color: "black"
 
