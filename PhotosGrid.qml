@@ -176,6 +176,12 @@ Row {
                 Text { text: "🏷 Featured " + parent.totalFeatured; color: "white"; font.pixelSize: 10 }
                 Text { text: "🏷 Staff " + parent.totalStaff; color: "white"; font.pixelSize: 10 }
             }
+            Column {
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
+                anchors.margins: 5
+                Text { text: phereo.mode3D.name; color: "white"; font.pixelSize: 10 }
+            }
         }
     }
 
