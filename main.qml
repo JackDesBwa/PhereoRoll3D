@@ -2,10 +2,12 @@ import QtQuick 2.9
 import QtQuick.Window 2.2
 
 Window {
+    id: win
     visible: true
     width: 711
     height: 400
     title: qsTr("Phereo unofficial")
+    color: "black"
 
     ListModel {
         id: photosList
@@ -35,6 +37,47 @@ Window {
                comments: 0,
            }
        property alias photosList: photosList
+
+       property var mode3D: QtObject {
+           id: mode3D
+           readonly property int leftView: 0
+           readonly property int rightView: 1
+           readonly property int columnsInterleaved: 2
+           readonly property int columnsInterleavedInv: 3
+           readonly property int rowsInterleaved: 4
+           readonly property int rowsInterleavedInv: 5
+           readonly property int parallelHalfView: 6
+           readonly property int parallelFullView: 7
+           readonly property int crossHalfView: 8
+           readonly property int crossFullView: 9
+           readonly property int anaglyphMonochrome: 10
+           readonly property int anaglyphDubois: 11
+
+           readonly property var list: [
+               "left view",
+               "right view",
+               "columns interleaved",
+               "columns interleaved inverted",
+               "rows interleaved",
+               "rows interleaved inverted",
+               "parallel half view",
+               "parallel full view",
+               "cross half view",
+               "cross full view",
+               "anaglyph monochrome",
+               "anaglyph Dubois"
+           ]
+
+           property bool modeAlt: false
+           property int portraitMode: leftView
+           property int landscapeMode: columnsInterleaved
+           property int portraitModeAlt: rightView
+           property int landscapeModeAlt: anaglyphDubois
+           property int activeMode: win.width > win.height ?
+                                          (modeAlt ? landscapeModeAlt : landscapeMode) :
+                                          (modeAlt ? portraitModeAlt : portraitMode)
+           property string name: list[activeMode]
+       }
 
        function loadCategory(cat) {
            var caturl;
@@ -159,10 +202,30 @@ Window {
             anchors.fill: parent
         }
 
-        layer.enabled: parallel_surface.width == 1280
+        layer.enabled: true
         layer.effect: ShaderEffect {
             property variant src: parallel_surface
-            property variant mask: Image { source: "qrc:/mask.png" }
+            property int mode: phereo.mode3D.activeMode
+            property variant mask: Canvas {
+                property bool _vert: phereo.mode3D.activeMode === 4 || phereo.mode3D.activeMode === 5
+                width: _vert ? 1 : src.width / 2 * Screen.devicePixelRatio;
+                height: _vert ? src.height * Screen.devicePixelRatio : 1;
+                onWidthChanged: requestPaint()
+                onHeightChanged: requestPaint()
+                onPaint: {
+                    var ctx = getContext("2d");
+                    var img = ctx.createImageData(width, height)
+                    ctx.fillStyle = "black";
+                    ctx.fillRect(0, 0, width, height);
+                    ctx.fillStyle = "white";
+                    if (_vert)
+                        for (var i = 0; i < height; i += 2)
+                            ctx.fillRect(0, i, width, 1);
+                    else
+                        for (var i = 0; i < width; i += 2)
+                            ctx.fillRect(i, 0, 1, height);
+                }
+            }
             vertexShader: "
 uniform highp mat4 qt_Matrix;
 attribute highp vec4 qt_Vertex;
@@ -174,21 +237,135 @@ void main() {
 }"
             fragmentShader: "
 varying highp vec2 coord;
+uniform int mode;
 uniform sampler2D src;
 uniform sampler2D mask;
 uniform lowp float qt_Opacity;
 
 void main(void) {
-    lowp vec4 l = texture2D(src, coord);
-    lowp vec4 r = texture2D(src, coord+vec2(0.5,0));
-    lowp float m = texture2D(mask, coord*2.0).r;
-    if (m > 0.5)
-      gl_FragColor = l * qt_Opacity;
-    else
-      gl_FragColor = r * qt_Opacity;
+    if (mode == 0) { // LeftView
+        lowp vec4 l = texture2D(src, coord);
+        gl_FragColor = l * qt_Opacity;
+
+    } else if (mode == 1) { // RightView
+        lowp vec4 r = texture2D(src, coord + vec2(0.5, 0.0));
+        gl_FragColor = r * qt_Opacity;
+
+    } else if (mode == 2) { // ColumnsInterleaved
+        lowp vec4 l = texture2D(src, coord);
+        lowp vec4 r = texture2D(src, coord + vec2(0.5, 0.0));
+        lowp float m = texture2D(mask, coord * 2.0).r;
+        if (m > 0.5)
+            gl_FragColor = l * qt_Opacity;
+        else
+            gl_FragColor = r * qt_Opacity;
+
+    } else if (mode == 3) { // ColumnsInterleavedInv
+        lowp vec4 l = texture2D(src, coord);
+        lowp vec4 r = texture2D(src, coord + vec2(0.5, 0.0));
+        lowp float m = texture2D(mask, coord * 2.0).r;
+        if (m > 0.5)
+            gl_FragColor = r * qt_Opacity;
+        else
+            gl_FragColor = l * qt_Opacity;
+
+    } else if (mode == 4) { // RowsInterleaved
+        lowp vec4 l = texture2D(src, coord);
+        lowp vec4 r = texture2D(src, coord + vec2(0.5, 0.0));
+        lowp float m = texture2D(mask, coord).r;
+        if (m > 0.5)
+            gl_FragColor = l * qt_Opacity;
+        else
+            gl_FragColor = r * qt_Opacity;
+
+    } else if (mode == 5) { // RowsInterleavedInv
+        lowp vec4 l = texture2D(src, coord);
+        lowp vec4 r = texture2D(src, coord + vec2(0.5, 0.0));
+        lowp float m = texture2D(mask, coord).r;
+        if (m > 0.5)
+            gl_FragColor = r * qt_Opacity;
+        else
+            gl_FragColor = l * qt_Opacity;
+
+    } else if (mode == 6) { // ParallelHalfView
+        lowp vec2 coord2 = vec2(coord.x * 2.0, coord.y);
+        lowp vec4 l = texture2D(src, coord2);
+        lowp vec4 r = texture2D(src, coord2);
+        if (coord2.x < 0.5)
+            gl_FragColor = l * qt_Opacity;
+        else
+            gl_FragColor = r * qt_Opacity;
+
+    } else if (mode == 7) { // ParallelFullView
+        lowp vec2 coord2 = vec2(coord.x * 2.0, coord.y * 2.0) - vec2(0.0, 0.5);
+        lowp vec4 l = texture2D(src, coord2);
+        lowp vec4 r = texture2D(src, coord2);
+        if (coord2.y < 0.0 || coord.y > 0.75)
+            gl_FragColor = vec4(0);
+        else if (coord2.x < 0.5)
+            gl_FragColor = l * qt_Opacity;
+        else
+            gl_FragColor = r * qt_Opacity;
+
+    } else if (mode == 8) { // CrossHalfView
+        lowp vec2 coord2 = vec2(coord.x * 2.0, coord.y);
+        lowp vec4 l = texture2D(src, coord2 - vec2(0.5, 0.0));
+        lowp vec4 r = texture2D(src, coord2 + vec2(0.5, 0.0));
+        if (coord2.x < 0.5)
+            gl_FragColor = r * qt_Opacity;
+        else
+            gl_FragColor = l * qt_Opacity;
+
+    } else if (mode == 9) { // CrossFullView
+        lowp vec2 coord2 = vec2(coord.x * 2.0, coord.y * 2.0) - vec2(0.0, 0.5);
+        lowp vec4 l = texture2D(src, coord2 - vec2(0.5, 0.0));
+        lowp vec4 r = texture2D(src, coord2 + vec2(0.5, 0.0));
+        if (coord2.y < 0.0 || coord.y > 0.75)
+            gl_FragColor = vec4(0);
+        else if (coord2.x < 0.5)
+            gl_FragColor = r * qt_Opacity;
+        else
+            gl_FragColor = l * qt_Opacity;
+
+    } else if (mode == 10) { // AnaglyphMonochrome
+        lowp vec4 l = texture2D(src, coord);
+        lowp vec4 r = texture2D(src, coord + vec2(0.5, 0.0));
+        lowp mat4 duboisL = mat4(
+            +0.299, +0.000, +0.000, 0.0,
+            +0.587, +0.000, +0.000, 0.0,
+            +0.114, +0.000, +0.000, 0.0,
+            +0.000, +0.000, +0.000, 1.0
+        );
+        lowp mat4 duboisR = mat4(
+            +0.000, +0.299, +0.299, 0.0,
+            +0.000, +0.587, +0.587, 0.0,
+            +0.000, +0.114, +0.114, 0.0,
+            +0.000, +0.000, +0.000, 1.0
+        );
+        gl_FragColor = duboisL * l + duboisR * r;
+
+    } else if (mode == 11) { // AnaglyphDubois
+        lowp vec4 l = texture2D(src, coord);
+        lowp vec4 r = texture2D(src, coord + vec2(0.5, 0.0));
+        lowp mat4 duboisL = mat4(
+            +0.456, -0.040, -0.015, 0.0,
+            +0.500, -0.038, -0.021, 0.0,
+            +0.176, -0.016, -0.005, 0.0,
+            +0.000, +0.000, +0.000, 1.0
+        );
+        lowp mat4 duboisR = mat4(
+            -0.043, +0.378, -0.072, 0.0,
+            -0.088, +0.734, -0.113, 0.0,
+            -0.002, -0.018, +1.226, 0.0,
+            +0.000, +0.000, +0.000, 1.0
+        );
+        gl_FragColor = duboisL * l + duboisR * r;
+
+    } else {
+        gl_FragColor = vec4(0); // Not supported
+    }
 }"
         }
     }
-
     Component.onCompleted: phereo.showList()
 }
