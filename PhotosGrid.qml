@@ -110,7 +110,7 @@ Row {
             }
             Column {
                 anchors.horizontalCenter: parent.horizontalCenter
-                y: parent.height/2 + 120
+                y: parent.height/2 + 115
                 Text {
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.horizontalCenterOffset: direction
