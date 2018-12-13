@@ -33,6 +33,12 @@ Row {
                     fillMode: Image.PreserveAspectFit
                 }
 
+                Loading {
+                    anchors.fill: parent
+                    visible: img.status == Image.Loading
+                    value: img.progress
+                }
+
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
