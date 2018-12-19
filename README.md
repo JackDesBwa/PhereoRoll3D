@@ -1,5 +1,5 @@
-PhereoP83D
-==========
+PhereoRoll3D
+============
 
 I was frustrated to not be able to use native autostereoscopic capabilities of my ELEPHONE P8 3D to watch stereophotographs of Phereo website ; so I made this app to display them nicely. Some other display modes were added afterwards.
 
