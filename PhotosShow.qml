@@ -350,7 +350,10 @@ Item {
         onTopClicked: back()
         onBottomClicked: {
             if (showInfos) {
-                showComments = true;
+                if (phereo.photo.comments > 0 && !showComments)
+                    showComments = true;
+                else
+                    showComments = false;
             } else {
                 showInfos = true;
             }
