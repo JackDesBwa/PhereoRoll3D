@@ -5,6 +5,11 @@ MouseArea {
     property var phereo: null
     property int selection: 0
 
+    function back() {
+        phereo.showList();
+        return true;
+    }
+
     Component {
         id: infos
         Item {

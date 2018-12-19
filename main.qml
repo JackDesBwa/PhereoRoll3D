@@ -186,6 +186,23 @@ Window {
         width: parent.width * 2
         height: parent.height
 
+        focus: true
+        Keys.onReleased: {
+            if (event.key === Qt.Key_VolumeUp || event.key === Qt.Key_Left) {
+                phereo.previous();
+                event.accepted = true;
+            } else if (event.key === Qt.Key_VolumeDown || event.key === Qt.Key_Right) {
+                phereo.next();
+                event.accepted = true;
+            } else if (event.key === Qt.Key_Back || event.key === Qt.Key_Escape) {
+                if (loader.item.back && loader.item.back()) {
+                    event.accepted = true;
+                } else {
+                    Qt.quit();
+                }
+            }
+        }
+
         Row {
             Image {
                 width: parallel_surface.width/2

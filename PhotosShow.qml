@@ -39,6 +39,12 @@ Item {
         xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
         xhr.send();
     }
+
+    function back() {
+        phereo.showList();
+        return true;
+    }
+
     Connections {
         target: phereo
         onSelectionChanged: {
@@ -341,7 +347,7 @@ Item {
 
         onLeftClicked: phereo.previous()
         onRightClicked: phereo.next()
-        onTopClicked: phereo.showList()
+        onTopClicked: back()
         onBottomClicked: {
             if (showInfos) {
                 showComments = true;

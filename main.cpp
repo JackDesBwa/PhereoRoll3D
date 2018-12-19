@@ -4,6 +4,7 @@
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    qputenv("QT_ANDROID_VOLUME_KEYS", "1");
 
     QGuiApplication app(argc, argv);
     app.setOrganizationName("DesBwa");
