@@ -7,7 +7,7 @@ Window {
     visible: true
     width: 640
     height: 336
-    title: qsTr("Phereo unofficial")
+    title: qsTr("PhereoRoll3D - unofficial phereo viewer")
     color: "black"
 
     ListModel {

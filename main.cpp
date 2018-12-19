@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
     app.setOrganizationName("DesBwa");
     app.setOrganizationDomain("desbwa.org");
-    app.setApplicationName("PhereoP83D");
+    app.setApplicationName("PhereoRoll3D");
 
     QQmlApplicationEngine engine;
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
