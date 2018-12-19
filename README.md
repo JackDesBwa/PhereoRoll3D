@@ -12,6 +12,12 @@ The defaults parameters are set so that when the phone is in landscape orientati
 
 The app opens "Popular" list at startup.
 
+### Keys
+
+Volume Up/Down and Left/Right arrow keys: Previous/Next image
+
+Back and Escape: Return to list view (or exit)
+
 ### List view
 
 This view lists all images of the currently selected category/user/album (only first items are loaded, but you can load more images).
