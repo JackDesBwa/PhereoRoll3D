@@ -3,7 +3,7 @@ PhereoRoll3D
 
 I was frustrated to not be able to use native autostereoscopic capabilities of my ELEPHONE P8 3D to watch stereophotographs of Phereo website ; so I made this app to display them nicely. Some other display modes were added afterwards.
 
-Status: Proof of concept — It is working and I might improve depending of my needs
+Status: Proof of concept — It is working and I might improve depending of my needs (patches are welcome)
 
 Usage
 -----
