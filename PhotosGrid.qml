@@ -158,19 +158,28 @@ Row {
                 property int totalPopular: 0
                 property int totalFeatured: 0
                 property int totalStaff: 0
+                property int totalLove: 0
                 onCountChanged: {
                     var pc = 0;
                     var fc = 0;
                     var sc = 0;
+                    var love = 0;
                     for (var i = 0; i < phereo.photosList.count; i++) {
                         var photo = phereo.photosList.get(i);
                         if (photo.flagPopular) pc += 1;
                         if (photo.flagFeatured) fc += 1;
                         if (photo.flagStaff) sc += 1;
+                        love += photo.likes;
                     }
                     totalPopular = pc;
                     totalFeatured = fc;
                     totalStaff = sc;
+                    totalLove = love;
+                }
+                Row {
+                    spacing: 3
+                    Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/likes.png" }
+                    PLabel { text: labels.totalLove; small: true }
                 }
                 Row {
                     spacing: 3
