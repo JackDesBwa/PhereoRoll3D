@@ -5,6 +5,7 @@ import Qt.labs.settings 1.0 as QtLabsSettings
 Window {
     id: win
     visible: true
+    visibility: Qt.platform.os === "android" ? Window.FullScreen : Window.Windowed
     width: 640
     height: 336
     title: qsTr("PhereoRoll3D - unofficial phereo viewer")
@@ -210,6 +211,8 @@ Window {
                 } else {
                     Qt.quit();
                 }
+            } else if (event.key === Qt.Key_F || event.key === Qt.Key_F11) {
+                win.visibility = (win.visibility == Window.Windowed) ? Window.FullScreen :  Window.Windowed
             }
         }
 

@@ -18,6 +18,8 @@ Volume Up/Down and Left/Right arrow keys: Previous/Next image
 
 Back and Escape: Return to list view (or exit)
 
+F and F11: Toggle fullscreen
+
 ### List view
 
 This view lists all images of the currently selected category/user/album (only first items are loaded, but you can load more images).
