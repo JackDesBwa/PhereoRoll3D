@@ -37,7 +37,6 @@ Item {
             }
         }
         xhr.open("GET", "http://api.phereo.com/images/%1/comments?offset=0&count=100".arg(phereo.photo.imgid));
-        xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
         xhr.send();
     }
 
