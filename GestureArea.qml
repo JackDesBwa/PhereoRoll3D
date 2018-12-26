@@ -78,11 +78,12 @@ Item {
         onTouchUpdated: {
             var moved;
             if (touchPoints.length === 2) {
+                if (lMove || rMove || tMove || bMove)
+                    component.canceled();
                 lMove = false;
                 tMove = false;
                 rMove = false;
                 bMove = false;
-                component.canceled();
 
                 moved = (Math.pow(touchPoints[0].x - touchPoints[0].startX, 2) + Math.pow(touchPoints[0].y - touchPoints[0].startY, 2) > Math.pow(gestureThreshold, 2)) ||
                         (Math.pow(touchPoints[1].x - touchPoints[1].startX, 2) + Math.pow(touchPoints[1].y - touchPoints[1].startY, 2) > Math.pow(gestureThreshold, 2));
