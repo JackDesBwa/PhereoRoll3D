@@ -23,6 +23,9 @@ Window {
        property var _photo: photosList.get(selection)
        property var photo: _photo ? _photo : {
                imgid: 0,
+               imgurl: "",
+               thumburl: "",
+               avatarurl: "",
                title: "",
                description: "",
                tags: "",
@@ -129,6 +132,9 @@ Window {
                        var photo = res["assets"][i];
                        photosList.append({
                          imgid: photo.id,
+                         imgurl: "http://api.phereo.com/imagestore2/%1/sidebyside/m/".arg(photo.id),
+                         thumburl: "http://api.phereo.com/imagestore/%1/thumb.square/280/".arg(photo.id),
+                         avatarurl: "http://api.phereo.com/avatar/%1/100.100".arg(photo.user.id),
                          title: photo.title,
                          description: photo.description,
                          tags: photo.tags,
@@ -151,6 +157,7 @@ Window {
                        selection = 0;
                }
            }
+
            xhr.open("GET", "http://api.phereo.com/api/open/" + category_url + "offset=" + photosList.count + "&count=100&adultFilter=2");
            xhr.setRequestHeader("Accept", "application/vnd.phereo.v3+json");
            xhr.send();

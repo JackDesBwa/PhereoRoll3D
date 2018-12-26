@@ -29,7 +29,7 @@ Row {
                     anchors.centerIn: parent
                     width: 200
                     height: 200
-                    source: "http://api.phereo.com/imagestore/%1/thumb.square/280/".arg(model.imgid)
+                    source: model.thumburl
                     fillMode: Image.PreserveAspectFit
                 }
 

@@ -27,6 +27,7 @@ Item {
                 for (var i in res["data"]) {
                     var photo = res["data"][i];
                     commentList.append({
+                      avatarurl: "http://api.phereo.com/avatar/%1/100.100".arg(photo.user.id),
                       comment: photo.body,
                       datetime: photo.created,
                       user: photo.user.name,
@@ -112,7 +113,7 @@ Item {
                                 Image {
                                     width: 45
                                     height: 45
-                                    source:"http://api.phereo.com/avatar/%1/100.100".arg(phereo.photo.userid)
+                                    source: phereo.photo.avatarurl
                                     MouseArea {
                                         anchors.fill: parent
                                         onClicked: {
@@ -273,7 +274,7 @@ Item {
                                     Image {
                                         width: 45
                                         height: 45
-                                        source:"http://api.phereo.com/avatar/%1/100.100".arg(model.userid)
+                                        source: model.avatarurl
                                         MouseArea {
                                             anchors.fill: parent
                                             onClicked: {
@@ -407,7 +408,7 @@ Item {
             id: imgl
             x: parent.width/2 - width/2 * scale + posX + divergence
             y: parent.height/2 - height/2 * scale + posY
-            source: "http://api.phereo.com/imagestore2/%1/sidebyside/m/".arg(phereo.photo.imgid)
+            source: phereo.photo.imgurl
             fillMode: Image.PreserveAspectCrop
             width: imgr.width
             horizontalAlignment: inverted ? Image.AlignRight : Image.AlignLeft
@@ -440,7 +441,7 @@ Item {
             x: parent.width/2 - width/2 * scale + posX - divergence
             y: parent.height/2 - height/2 * scale + posY
             property real fitScale: Math.min(2 * parent.width / implicitWidth, parent.height/implicitHeight)
-            source: "http://api.phereo.com/imagestore2/%1/sidebyside/m/".arg(phereo.photo.imgid)
+            source: phereo.photo.imgurl
             fillMode: Image.PreserveAspectCrop
             width: implicitWidth/2
             horizontalAlignment: inverted ? Image.AlignLeft : Image.AlignRight
