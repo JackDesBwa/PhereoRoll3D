@@ -119,6 +119,7 @@ Item {
                                             phereo.showList();
                                             phereo.loadUser(phereo.photo.userid, phereo.photo.user);
                                         }
+                                        onPressAndHold: phereo.showUser()
                                     }
                                 }
                                 Column {
@@ -135,6 +136,7 @@ Item {
                                                 phereo.showList();
                                                 phereo.loadUser(phereo.photo.userid, phereo.photo.user);
                                             }
+                                            onPressAndHold: phereo.showUser()
                                         }
                                     }
                                     Row {
@@ -280,6 +282,10 @@ Item {
                                                 phereo.showList();
                                                 phereo.loadUser(model.userid, model.user);
                                             }
+                                            onPressAndHold: {
+                                                phereo.showUser();
+                                                phereo.loadUser(model.userid, model.user);
+                                            }
                                         }
                                     }
                                     Column {
@@ -289,6 +295,10 @@ Item {
                                             font.bold: true
                                             onClicked: {
                                                 phereo.showList();
+                                                phereo.loadUser(model.userid, model.user);
+                                            }
+                                            onPressAndHold: {
+                                                phereo.showUser();
                                                 phereo.loadUser(model.userid, model.user);
                                             }
                                         }

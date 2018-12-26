@@ -171,6 +171,9 @@ Window {
            selection = sel;
            loader.setSource("qrc:/PhotosShow.qml", {"phereo": phereo});
        }
+       function showUser() {
+           loader.setSource("qrc:/UserProfile.qml", {"phereo": phereo});
+       }
        function showSettings() {
            loader.setSource("qrc:/Settings.qml", {"phereo": phereo});
        }

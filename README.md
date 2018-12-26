@@ -49,7 +49,7 @@ It is limited to loaded images.
 
 (7)
 Informations about selected image (title, author, date, likes, views, comments).
-Clicking on the author opens user photos.
+Clicking on the author opens user photos, long press opens user infos.
 
 (+)
 Top right click: Use alternative display 3D mode
@@ -102,9 +102,9 @@ Top right click: Use alternative display 3D mode
 
 The information about image are
 
-- Avatar of author (clicking on it opens user photos)
+- Avatar of author (clicking on it opens user photos, long press opens user infos)
 - Name of image
-- Name of author (clicking on it opens user photos)
+- Name of author (clicking on it opens user photos, long press opens user infos)
 - Date of publication
 - Number of likes, views, comments
 - Optionally, categories of the photo (Popular, Featured, Staff)
@@ -121,7 +121,7 @@ Clicking on the information zone opens comments if present.
 
 Each comment has the avatar of its author, the date and the comment itself.
 
-Clicking on the author name or avatar opens its gallery.
+Clicking on the author name or avatar opens its gallery, long press opens user infos.
 
 ![Settings page](screenshots/screenshot_settings.jpg)
 

@@ -14,5 +14,6 @@
         <file>label.png</file>
         <file>likes.png</file>
         <file>views.png</file>
+        <file>UserProfile.qml</file>
     </qresource>
 </RCC>

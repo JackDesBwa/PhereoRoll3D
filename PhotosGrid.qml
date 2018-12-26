@@ -118,6 +118,7 @@ Row {
                     visible: phereo.photosList.count > 0
                     text: phereo.photo.user
                     onClicked: phereo.loadUser(phereo.photo.userid, phereo.photo.user)
+                    onPressAndHold: phereo.showUser()
                 }
                 Row {
                     anchors.horizontalCenter: parent.horizontalCenter
