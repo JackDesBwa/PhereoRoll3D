@@ -5,6 +5,7 @@ Item {
     property var phereo: null
 
     property var profileData: {
+        "userid": "",
         "username": "",
         "screenName":	"",
         "description": "",
@@ -38,6 +39,7 @@ Item {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 var res = JSON.parse(xhr.responseText);
                 profileData = {
+                    "userid": uid,
                     "avatarurl": "http://api.phereo.com/avatar/%1/100.100".arg(uid),
                     "username": res.username || "",
                     "screenName": res.screenName || "",
@@ -62,6 +64,33 @@ Item {
                     "favoritesCount": res.favoritesCount || 0
                 }
                 currentUid = uid;
+                var xhr2 = new XMLHttpRequest();
+                xhr2.onreadystatechange = function() {
+                    if (xhr2.readyState === XMLHttpRequest.DONE) {
+                        var res = JSON.parse(xhr2.responseText);
+                        albumsList.clear();
+                        albumsList.append({
+                            title: "All photos",
+                            count: profileData.amount,
+                            albumid: "-",
+                            albumthumburl: profileData.avatarurl
+                        });
+                        for (var i in res.assets) {
+                            var album = res.assets[i];
+                            if (album.id && album.count) {
+                                albumsList.append({
+                                    title: album.title,
+                                    count: album.count,
+                                    albumid: "" + album.id,
+                                    albumthumburl: "http://api.phereo.com/imagestore/%1/thumb.square/280/".arg(album.cover)
+                                });
+                            }
+                        }
+                    }
+                }
+                xhr2.open("GET", "http://api.phereo.com/api/open/albums/?user=%1&offset=0&count=500&adultFilter=2".arg(uid));
+                xhr2.setRequestHeader("Accept", "application/vnd.phereo.v3+json");
+                xhr2.send();
             }
         }
         xhr.open("GET", "http://api.phereo.com/api/open/userprofile/?id=%1".arg(uid));
@@ -166,10 +195,13 @@ Item {
             }
         }
     }
+    ListModel {
+        id: albumsList
+    }
     Loader {
         anchors {
             top: parent.top
-            bottom: parent.bottom
+            bottom: pvl.top
             left: parent.left
             right: parent.horizontalCenter
         }
@@ -179,11 +211,145 @@ Item {
     Loader {
         anchors {
             top: parent.top
-            bottom: parent.bottom
+            bottom: pvr.top
             left: parent.horizontalCenter
             right: parent.right
         }
         sourceComponent: infos
         onLoaded: item.direction = -1
+    }
+
+    Component {
+        id: entryDelegate
+        Item {
+            id: item
+            anchors.verticalCenter: parent.verticalCenter
+            property real dx: PathView.view.dir * PathView.itemZ
+            property bool isCurrentItem: PathView.isCurrentItem
+            property string title: model.title + " (" + model.count + ")"
+
+            visible: PathView.onPath
+            scale: PathView.itemScale
+            opacity: PathView.itemOpacity
+            z: PathView.itemZ
+
+            width: 105
+            height: 105
+            Rectangle {
+                x: dx
+                y: 5 - Math.pow((parent.z - 3), 2)
+                width: 105
+                height: 105
+                Image {
+                    id: img
+                    anchors.centerIn: parent
+                    width: 100
+                    height: 100
+                    source: model.albumthumburl
+                    fillMode: Image.PreserveAspectFit
+                }
+
+                Loading {
+                    anchors.fill: parent
+                    visible: img.status == Image.Loading
+                    value: img.progress
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        if (item.isCurrentItem) {
+                            if (model.albumid === "-") {
+                                phereo.showList();
+                                phereo.loadUser(profileData.userid, profileData.screenName);
+                            } else {
+                                phereo.showList();
+                                phereo.loadAlbum(model.albumid, "%1 [%2]".arg(model.title).arg(profileData.screenName));
+                            }
+                        } else {
+                            pvl.positionViewAtIndex(index, ListView.Center);
+                            pvr.positionViewAtIndex(index, ListView.Center);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    Path {
+        id: commonPath
+        startX: 0
+
+        PathAttribute { name: "itemOpacity"; value: 0.1; }
+        PathAttribute { name: "itemScale"; value: 0.5; }
+        PathAttribute { name: "itemZ"; value: -4 }
+        PathLine { x: page.width/2*0.4; }
+        PathPercent { value: 0.48; }
+        PathLine { x: page.width/2*0.5; }
+        PathAttribute { name: "itemOpacity"; value: 1; }
+        PathAttribute { name: "itemScale"; value: 1.0; }
+        PathAttribute { name: "itemZ"; value: 3 }
+        PathLine { x: page.width/2*0.6; }
+        PathPercent { value: 0.52; }
+        PathLine { x: page.width/2; }
+        PathAttribute { name: "itemOpacity"; value: 0.1; }
+        PathAttribute { name: "itemScale"; value: 0.5; }
+        PathAttribute { name: "itemZ"; value: -4 }
+    }
+    PathView {
+        id: pvl
+        property real dir: 1
+
+        anchors.bottom: parent.bottom
+        width: parent.width/2
+        height: 130
+
+        model: albumsList
+        delegate: entryDelegate
+
+        clip: true
+        path: commonPath
+
+        pathItemCount: 9
+
+        preferredHighlightBegin: 0.5
+        preferredHighlightEnd: 0.5
+
+        onOffsetChanged: if(moving) pvr.offset = offset
+
+        PLabel {
+            anchors.top: parent.top
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: pvl.currentItem ? pvl.currentItem.title: ""
+            font.bold: true
+        }
+    }
+    PathView {
+        id: pvr
+        property real dir: -1
+
+        anchors.bottom: parent.bottom
+        x:parent.width/2
+        width: parent.width/2
+        height: 130
+
+        model: albumsList
+        delegate: entryDelegate
+
+        clip: true
+        path: commonPath
+
+        pathItemCount: 9
+
+        preferredHighlightBegin: 0.5
+        preferredHighlightEnd: 0.5
+
+        onOffsetChanged: if(moving) pvl.offset = offset
+
+        PLabel {
+            anchors.top: parent.top
+            anchors.horizontalCenter: parent.horizontalCenter
+            text: pvl.currentItem ? pvl.currentItem.title: ""
+            font.bold: true
+        }
     }
 }
