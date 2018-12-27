@@ -124,6 +124,15 @@ Window {
            selection = -1;
            loadNext();
        }
+       function loadTag(tagname) {
+           photosList.clear();
+           category = "%1 [tag]".arg(tagname);
+           category_url = "search_tags/?ss=%1&userId=&userApi=&".arg(encodeURIComponent(tagname));
+           nbImagesMax = 0;
+           selection = -1;
+           loadNext();
+       }
+
        function loadNext() {
            var xhr = new XMLHttpRequest();
            xhr.onreadystatechange = function() {
