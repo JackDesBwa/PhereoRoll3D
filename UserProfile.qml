@@ -123,12 +123,41 @@ Item {
         id: infos
         Item {
             property real direction: 1
-            Image {
+            Rectangle {
                 x: 5
                 y: 5
                 width: 75
                 height: 75
-                source: profileData.avatarurl
+                Image {
+                    anchors.fill: parent
+                    anchors.margins: 2
+                    source: profileData && profileData.avatarurl || ""
+                }
+            }
+            Column {
+                x: 5
+                y: 85
+                width: 75
+                Repeater {
+                    model: 5
+                    delegate: CLabel {
+                        width: parent.width
+                        height: 20
+                        text: {
+                            if (index == 0)
+                                return profileData.amount + " photos";
+                            else if (index == 1)
+                                return profileData.albums + " albums";
+                            else if (index == 2)
+                                return profileData.followeesCount + " followees";
+                            else if (index == 3)
+                                return profileData.followersCount + " followers";
+                            else if (index == 4)
+                                return profileData.favoritesCount + " likes";
+                        }
+                        small: true
+                    }
+                }
             }
             Flickable {
                 id: flickableProperties
@@ -165,19 +194,7 @@ Item {
                         width: parent.width
                         horizontalAlignment: Text.AlignJustify
                     }
-                    PLabel {
-                        width: parent.width
-                        height: implicitHeight + 5
-                        small: true
-                        text: profileData.amount + " photos, " +
-                              profileData.albums + " albums, " +
-                              profileData.followeesCount + " followees, " +
-                              profileData.followersCount + " followers, " +
-                              profileData.favoritesCount + " likes"
-                        horizontalAlignment: Text.AlignLeft
-                        verticalAlignment: Text.AlignTop
-                        visible: profileData.username
-                    }
+                    Item { width: 5; height: 5 }
                     Repeater {
                         model: ["firstName", "lastName", "email", "phone", "location", "stereocamera", "viewer", "blog", "website", "flickr", "twitter", "facebook", "googleplus"]
                         delegate: Item {
