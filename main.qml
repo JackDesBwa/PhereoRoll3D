@@ -132,6 +132,14 @@ Window {
            selection = -1;
            loadNext();
        }
+       function loadSearch(keyword) {
+           photosList.clear();
+           category = "%1 [search]".arg(keyword);
+           category_url = "search/?ss=%1&userId=&userApi=&".arg(encodeURIComponent(keyword));
+           nbImagesMax = 0;
+           selection = -1;
+           loadNext();
+       }
 
        function loadNext() {
            var xhr = new XMLHttpRequest();
@@ -186,6 +194,9 @@ Window {
        }
        function showSettings() {
            loader.setSource("qrc:/Settings.qml", {"phereo": phereo});
+       }
+       function showSearch() {
+           loader.setSource("qrc:/SearchPage.qml", {"phereo": phereo});
        }
        function next() {
            var sel = selection + 1;

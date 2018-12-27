@@ -18,5 +18,6 @@
         <file>Roll.qml</file>
         <file>gear.png</file>
         <file>mag.png</file>
+        <file>SearchPage.qml</file>
     </qresource>
 </RCC>

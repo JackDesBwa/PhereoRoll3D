@@ -167,7 +167,10 @@ Roll {
                     width: 32
                     height: 32
                     source: "qrc:/mag.png"
-                    visible: false
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: phereo.showSearch()
+                    }
                 }
                 Image {
                     width: 32
