@@ -16,5 +16,7 @@
         <file>views.png</file>
         <file>UserProfile.qml</file>
         <file>Roll.qml</file>
+        <file>gear.png</file>
+        <file>mag.png</file>
     </qresource>
 </RCC>

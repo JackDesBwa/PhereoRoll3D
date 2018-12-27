@@ -159,14 +159,32 @@ Roll {
             anchors.right: parent.right
             anchors.bottom: parent.bottom
             anchors.margins: 5
-            CLabel {
-                width: Math.max(implicitWidth, 150)
-                height: Math.max(implicitHeight, 40)
+            spacing: 5
+            Row {
+                spacing: 5
+                anchors.horizontalCenter: parent.horizontalCenter
+                Image {
+                    width: 32
+                    height: 32
+                    source: "qrc:/mag.png"
+                    visible: false
+                }
+                Image {
+                    width: 32
+                    height: 32
+                    source: "qrc:/gear.png"
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: phereo.showSettings()
+                    }
+                }
+            }
+            PLabel {
+                anchors.right: parent.right
                 text: phereo.mode3D.name
                 small: true
                 horizontalAlignment: Text.AlignRight
                 verticalAlignment: Text.AlignBottom
-                onClicked: phereo.showSettings()
             }
         }
     }
