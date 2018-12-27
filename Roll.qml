@@ -5,6 +5,7 @@ Item {
     property var model
     readonly property var modelItem: pvl.currentItem ? pvl.currentItem.modelItem : null
     property int size: 200
+    property int dy: 0
     property string modelThumb
     property Component both
     property alias currentIndex: pvl.currentIndex
@@ -28,7 +29,7 @@ Item {
             height: size + 5
             Rectangle {
                 x: dx
-                y: 5 - Math.pow((parent.z - 3), 2)
+                y: 5 - Math.pow((parent.z - 3), 2) + dy
                 width: size + 5
                 height: size + 5
                 Image {
