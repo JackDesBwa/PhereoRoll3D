@@ -32,6 +32,39 @@ Item {
     property real flickY: 0
     property string currentUid
 
+    function loadAlbums() {
+        if (albumsList.count > 0)
+            return;
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                var res = JSON.parse(xhr.responseText);
+                albumsList.clear();
+                albumsList.append({
+                    title: "All photos",
+                    count: profileData.amount,
+                    albumid: "-",
+                    albumthumburl: profileData.avatarurl
+                });
+                for (var i in res.assets) {
+                    var album = res.assets[i];
+                    if (album.id && album.count) {
+                        albumsList.append({
+                            title: album.title,
+                            count: album.count,
+                            albumid: "" + album.id,
+                            albumthumburl: "http://api.phereo.com/imagestore/%1/thumb.square/280/".arg(album.cover)
+                        });
+                    }
+                }
+            }
+        }
+        xhr.open("GET", "http://api.phereo.com/api/open/albums/?user=%1&offset=0&count=500&adultFilter=2".arg(currentUid));
+        xhr.setRequestHeader("Accept", "application/vnd.phereo.v3+json");
+        albumsList.clear();
+        xhr.send();
+    }
+
     function updateProfile() {
         var uid = phereo.photo.userid;
         var xhr = new XMLHttpRequest();
@@ -64,33 +97,8 @@ Item {
                     "favoritesCount": res.favoritesCount || 0
                 }
                 currentUid = uid;
-                var xhr2 = new XMLHttpRequest();
-                xhr2.onreadystatechange = function() {
-                    if (xhr2.readyState === XMLHttpRequest.DONE) {
-                        var res = JSON.parse(xhr2.responseText);
-                        albumsList.clear();
-                        albumsList.append({
-                            title: "All photos",
-                            count: profileData.amount,
-                            albumid: "-",
-                            albumthumburl: profileData.avatarurl
-                        });
-                        for (var i in res.assets) {
-                            var album = res.assets[i];
-                            if (album.id && album.count) {
-                                albumsList.append({
-                                    title: album.title,
-                                    count: album.count,
-                                    albumid: "" + album.id,
-                                    albumthumburl: "http://api.phereo.com/imagestore/%1/thumb.square/280/".arg(album.cover)
-                                });
-                            }
-                        }
-                    }
-                }
-                xhr2.open("GET", "http://api.phereo.com/api/open/albums/?user=%1&offset=0&count=500&adultFilter=2".arg(uid));
-                xhr2.setRequestHeader("Accept", "application/vnd.phereo.v3+json");
-                xhr2.send();
+                albumsList.clear();
+                loadAlbums();
             }
         }
         xhr.open("GET", "http://api.phereo.com/api/open/userprofile/?id=%1".arg(uid));
@@ -195,9 +203,7 @@ Item {
             }
         }
     }
-    ListModel {
-        id: albumsList
-    }
+    ListModel { id: albumsList }
     Loader {
         anchors {
             top: parent.top
