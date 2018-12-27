@@ -226,33 +226,69 @@ Item {
                                     onClicked: phereo.loadNext()
                                 }
                             }
-                            PLabel {
-                                text: "Tags: " + phereo.photo.tags
-                                visible: phereo.photo.tags
-                                font.italic: true
-                            }
-                            Flow {
-                                spacing: 5
+                            Item {
                                 width: parent.width
-                                PLabel {
-                                    text: "Albums:"
-                                    visible: phereo.photo.albums.count > 0
-                                    font.italic: true
+                                height: tagTextFlow.height
+                                visible: tagslist.count > 0
+                                property var tags: phereo.photo.tags
+                                ListModel { id: tagslist }
+                                onTagsChanged: {
+                                    tagslist.clear();
+                                    var s = tags.split(",");
+                                    for (var i in s)
+                                        tagslist.append({ text: s[i] });
                                 }
-                                Repeater {
-                                    model: phereo.photo.albums
-                                    delegate: CLabel {
-                                        text: model.title
-                                        font.italic: true
-                                        onClicked: {
-                                            phereo.showList();
-                                            phereo.loadAlbum(model.id, "%1 [%2]".arg(model.title).arg(phereo.photo.user));
+                                PLabel { id: tagAlign; text: " " }
+                                PLabel {
+                                    anchors.baseline: tagAlign.baseline
+                                    id: tagLabel
+                                    text: "Tags:"
+                                    small: true
+                                }
+                                Flow {
+                                    id: tagTextFlow
+                                    x: tagLabel.width + 5
+                                    width: parent.width - tagLabel.width - 10
+                                    Repeater {
+                                        model: tagslist
+                                        delegate: CLabel {
+                                            width: implicitWidth + 5
+                                            text: modelData
+                                            font.italic: true
                                         }
                                     }
                                 }
                             }
+                            Item {
+                                width: parent.width
+                                height: albumsTextFlow.height
+                                visible: phereo.photo.albums.count > 0
+                                PLabel { id: albumsAlign; text: " " }
+                                PLabel {
+                                    anchors.baseline: albumsAlign.baseline
+                                    id: albumsLabel
+                                    text: "Albums:"
+                                    small: true
+                                }
+                                Flow {
+                                    id: albumsTextFlow
+                                    x: albumsLabel.width + 5
+                                    width: parent.width - albumsLabel.width - 10
+                                    Repeater {
+                                        model: phereo.photo.albums
+                                        delegate: CLabel {
+                                            width: implicitWidth + 5
+                                            text: model.title
+                                            font.italic: true
+                                            onClicked: {
+                                                phereo.showList();
+                                                phereo.loadAlbum(model.id, "%1 [%2]".arg(model.title).arg(phereo.photo.user));
 
-
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                     Repeater {
