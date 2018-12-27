@@ -255,6 +255,10 @@ Item {
                                             width: implicitWidth + 5
                                             text: modelData
                                             font.italic: true
+                                            onClicked: {
+                                                phereo.showList();
+                                                phereo.loadTag(modelData);
+                                            }
                                         }
                                     }
                                 }
