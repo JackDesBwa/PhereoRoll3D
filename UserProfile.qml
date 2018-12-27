@@ -31,8 +31,12 @@ Item {
 
     property real flickY: 0
     property string currentUid
+    property int rollData: -1
 
     function loadAlbums() {
+        roll.model = albumsList;
+        roll.modelThumb = "albumthumburl";
+        rollData = 1;
         if (albumsList.count > 0)
             return;
         var xhr = new XMLHttpRequest();
@@ -40,19 +44,13 @@ Item {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 var res = JSON.parse(xhr.responseText);
                 albumsList.clear();
-                albumsList.append({
-                    title: "All photos",
-                    count: profileData.amount,
-                    albumid: "-",
-                    albumthumburl: profileData.avatarurl
-                });
                 for (var i in res.assets) {
                     var album = res.assets[i];
                     if (album.id && album.count) {
                         albumsList.append({
                             title: album.title,
                             count: album.count,
-                            albumid: "" + album.id,
+                            albumid: album.id,
                             albumthumburl: "http://api.phereo.com/imagestore/%1/thumb.square/280/".arg(album.cover)
                         });
                     }
@@ -62,6 +60,60 @@ Item {
         xhr.open("GET", "http://api.phereo.com/api/open/albums/?user=%1&offset=0&count=500&adultFilter=2".arg(currentUid));
         xhr.setRequestHeader("Accept", "application/vnd.phereo.v3+json");
         albumsList.clear();
+        xhr.send();
+    }
+    function loadFollowees() {
+        roll.model = followeesList;
+        roll.modelThumb = "avatarurl";
+        rollData = 2;
+        if (followeesList.count > 0)
+            return;
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                var res = JSON.parse(xhr.responseText);
+                followeesList.clear();
+                for (var i in res.assets) {
+                    var user = res.assets[i];
+                    followeesList.append({
+                        userid: user.id,
+                        username: user.screenName,
+                        amount: user.amount,
+                        avatarurl: "http://api.phereo.com/avatar/%1/100.100".arg(user.id)
+                    });
+                }
+            }
+        }
+        xhr.open("GET", "http://api.phereo.com/api/open/userfollows/?id=%1&offset=0&count=500".arg(currentUid));
+        xhr.setRequestHeader("Accept", "application/vnd.phereo.v3+json");
+        followeesList.clear();
+        xhr.send();
+    }
+    function loadFollowers() {
+        roll.model = followersList;
+        roll.modelThumb = "avatarurl";
+        rollData = 3;
+        if (followersList.count > 0)
+            return;
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                var res = JSON.parse(xhr.responseText);
+                followersList.clear();
+                for (var i in res.assets) {
+                    var user = res.assets[i];
+                    followersList.append({
+                        userid: user.id,
+                        username: user.screenName,
+                        amount: user.amount,
+                        avatarurl: "http://api.phereo.com/avatar/%1/100.100".arg(user.id)
+                    });
+                }
+            }
+        }
+        xhr.open("GET", "http://api.phereo.com/api/open/userfollowers/?id=%1&offset=0&count=500".arg(currentUid));
+        xhr.setRequestHeader("Accept", "application/vnd.phereo.v3+json");
+        followersList.clear();
         xhr.send();
     }
 
@@ -98,6 +150,8 @@ Item {
                 }
                 currentUid = uid;
                 albumsList.clear();
+                followeesList.clear();
+                followersList.clear();
                 loadAlbums();
             }
         }
@@ -122,6 +176,7 @@ Item {
     Component {
         id: infos
         Item {
+            id: infosItem
             property real direction: 1
             Rectangle {
                 x: 5
@@ -141,6 +196,7 @@ Item {
                 Repeater {
                     model: 5
                     delegate: CLabel {
+                        x: (index == rollData) * infosItem.direction
                         width: parent.width
                         height: 20
                         text: {
@@ -155,7 +211,20 @@ Item {
                             else if (index == 4)
                                 return profileData.favoritesCount + " likes";
                         }
+                        font.bold: index == rollData
                         small: true
+                        onClicked: {
+                            if (index == 0) {
+                                phereo.showList();
+                                phereo.loadUser(profileData.userid, profileData.screenName);
+                            } else if (index == 1) {
+                                loadAlbums();
+                            } else if (index == 2) {
+                                loadFollowees();
+                            } else if (index == 3) {
+                                loadFollowers();
+                            }
+                        }
                     }
                 }
             }
@@ -221,6 +290,8 @@ Item {
         }
     }
     ListModel { id: albumsList }
+    ListModel { id: followeesList }
+    ListModel { id: followersList }
     Loader {
         anchors {
             top: parent.top
@@ -248,16 +319,12 @@ Item {
         height: 130
         size: 100
 
-        model: albumsList
-        modelThumb: "albumthumburl"
-
         onClicked: {
-            if (roll.modelItem.albumid === "-") {
-                phereo.showList();
-                phereo.loadUser(profileData.userid, profileData.screenName);
-            } else {
+            if (rollData == 1) {
                 phereo.showList();
                 phereo.loadAlbum(roll.modelItem.albumid, "%1 [%2]".arg(roll.modelItem.title).arg(profileData.screenName));
+            } if (rollData == 2 || rollData == 3) {
+                phereo.loadUser(roll.modelItem.userid, roll.modelItem.username);
             }
         }
 
@@ -265,7 +332,16 @@ Item {
             PLabel {
                 anchors.top: parent.top
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: roll.modelItem ? roll.modelItem.title + " (" + roll.modelItem.count + ")" : ""
+                text: {
+                    if (roll.modelItem) {
+                        if (rollData == 1) {
+                            return roll.modelItem.title + " (" + roll.modelItem.count + ")";
+                        } if (rollData == 2 || rollData == 3) {
+                            return roll.modelItem.username + " (" + roll.modelItem.amount + ")";
+                        }
+                    }
+                    return "";
+                }
                 font.bold: true
             }
         }
