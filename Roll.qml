@@ -105,7 +105,7 @@ Item {
             anchors.fill: parent
             sourceComponent: roll.both
             onLoaded: {
-                if (item.direction)
+                if (item.direction !== undefined)
                     item.direction = parent.dir;
             }
         }
@@ -136,7 +136,7 @@ Item {
             anchors.fill: parent
             sourceComponent: roll.both
             onLoaded: {
-                if (item.direction)
+                if (item.direction !== undefined)
                     item.direction = parent.dir;
             }
         }
