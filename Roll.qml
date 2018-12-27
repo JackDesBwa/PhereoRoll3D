@@ -36,7 +36,7 @@ Item {
                     anchors.centerIn: parent
                     width: size
                     height: size
-                    source: model[modelThumb]
+                    source: model && model[modelThumb] || ""
                     fillMode: Image.PreserveAspectFit
                 }
 
