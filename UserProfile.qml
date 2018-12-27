@@ -201,7 +201,7 @@ Item {
     Loader {
         anchors {
             top: parent.top
-            bottom: pvl.top
+            bottom: roll.top
             left: parent.left
             right: parent.horizontalCenter
         }
@@ -211,145 +211,40 @@ Item {
     Loader {
         anchors {
             top: parent.top
-            bottom: pvr.top
+            bottom: roll.top
             left: parent.horizontalCenter
             right: parent.right
         }
         sourceComponent: infos
         onLoaded: item.direction = -1
     }
+    Roll {
+        id: roll
+        anchors.bottom: parent.bottom
+        width: parent.width
+        height: 130
+        size: 100
 
-    Component {
-        id: entryDelegate
-        Item {
-            id: item
-            anchors.verticalCenter: parent.verticalCenter
-            property real dx: PathView.view.dir * PathView.itemZ
-            property bool isCurrentItem: PathView.isCurrentItem
-            property string title: model.title + " (" + model.count + ")"
+        model: albumsList
+        modelThumb: "albumthumburl"
 
-            visible: PathView.onPath
-            scale: PathView.itemScale
-            opacity: PathView.itemOpacity
-            z: PathView.itemZ
-
-            width: 105
-            height: 105
-            Rectangle {
-                x: dx
-                y: 5 - Math.pow((parent.z - 3), 2)
-                width: 105
-                height: 105
-                Image {
-                    id: img
-                    anchors.centerIn: parent
-                    width: 100
-                    height: 100
-                    source: model.albumthumburl
-                    fillMode: Image.PreserveAspectFit
-                }
-
-                Loading {
-                    anchors.fill: parent
-                    visible: img.status == Image.Loading
-                    value: img.progress
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        if (item.isCurrentItem) {
-                            if (model.albumid === "-") {
-                                phereo.showList();
-                                phereo.loadUser(profileData.userid, profileData.screenName);
-                            } else {
-                                phereo.showList();
-                                phereo.loadAlbum(model.albumid, "%1 [%2]".arg(model.title).arg(profileData.screenName));
-                            }
-                        } else {
-                            pvl.positionViewAtIndex(index, ListView.Center);
-                            pvr.positionViewAtIndex(index, ListView.Center);
-                        }
-                    }
-                }
+        onClicked: {
+            if (roll.modelItem.albumid === "-") {
+                phereo.showList();
+                phereo.loadUser(profileData.userid, profileData.screenName);
+            } else {
+                phereo.showList();
+                phereo.loadAlbum(roll.modelItem.albumid, "%1 [%2]".arg(roll.modelItem.title).arg(profileData.screenName));
             }
         }
-    }
-    Path {
-        id: commonPath
-        startX: 0
 
-        PathAttribute { name: "itemOpacity"; value: 0.1; }
-        PathAttribute { name: "itemScale"; value: 0.5; }
-        PathAttribute { name: "itemZ"; value: -4 }
-        PathLine { x: page.width/2*0.4; }
-        PathPercent { value: 0.48; }
-        PathLine { x: page.width/2*0.5; }
-        PathAttribute { name: "itemOpacity"; value: 1; }
-        PathAttribute { name: "itemScale"; value: 1.0; }
-        PathAttribute { name: "itemZ"; value: 3 }
-        PathLine { x: page.width/2*0.6; }
-        PathPercent { value: 0.52; }
-        PathLine { x: page.width/2; }
-        PathAttribute { name: "itemOpacity"; value: 0.1; }
-        PathAttribute { name: "itemScale"; value: 0.5; }
-        PathAttribute { name: "itemZ"; value: -4 }
-    }
-    PathView {
-        id: pvl
-        property real dir: 1
-
-        anchors.bottom: parent.bottom
-        width: parent.width/2
-        height: 130
-
-        model: albumsList
-        delegate: entryDelegate
-
-        clip: true
-        path: commonPath
-
-        pathItemCount: 9
-
-        preferredHighlightBegin: 0.5
-        preferredHighlightEnd: 0.5
-
-        onOffsetChanged: if(moving) pvr.offset = offset
-
-        PLabel {
-            anchors.top: parent.top
-            anchors.horizontalCenter: parent.horizontalCenter
-            text: pvl.currentItem ? pvl.currentItem.title: ""
-            font.bold: true
-        }
-    }
-    PathView {
-        id: pvr
-        property real dir: -1
-
-        anchors.bottom: parent.bottom
-        x:parent.width/2
-        width: parent.width/2
-        height: 130
-
-        model: albumsList
-        delegate: entryDelegate
-
-        clip: true
-        path: commonPath
-
-        pathItemCount: 9
-
-        preferredHighlightBegin: 0.5
-        preferredHighlightEnd: 0.5
-
-        onOffsetChanged: if(moving) pvl.offset = offset
-
-        PLabel {
-            anchors.top: parent.top
-            anchors.horizontalCenter: parent.horizontalCenter
-            text: pvl.currentItem ? pvl.currentItem.title: ""
-            font.bold: true
+        both: Item {
+            PLabel {
+                anchors.top: parent.top
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: roll.modelItem ? roll.modelItem.title + " (" + roll.modelItem.count + ")" : ""
+                font.bold: true
+            }
         }
     }
 }

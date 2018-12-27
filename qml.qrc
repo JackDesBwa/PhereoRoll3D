@@ -15,5 +15,6 @@
         <file>likes.png</file>
         <file>views.png</file>
         <file>UserProfile.qml</file>
+        <file>Roll.qml</file>
     </qresource>
 </RCC>
