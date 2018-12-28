@@ -112,7 +112,7 @@ Item {
                                 Image {
                                     width: 45
                                     height: 45
-                                    source: phereo.photo.avatarurl
+                                    source: showInfos ? phereo.photo.avatarurl : ""
                                     MouseArea {
                                         anchors.fill: parent
                                         onClicked: {
