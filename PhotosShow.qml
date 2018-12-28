@@ -412,13 +412,13 @@ Item {
 
         onLeftProportionalStart: i_scale = scaleFactor
         onLeftProportionalUpdate: {
-            var pos = vv*vh/10+0.5;
+            var pos = -vv*vh/10+0.5;
             setScale((pos > 0.5 ? (pos - 0.5) * 2 * 4 + 1 : 1 / ((1 - pos * 2) * 4 + 1)) * i_scale)
         }
         onLeftDuoPressed: setScale(1)
 
         onRightProportionalStart: i_divergence = divergence
-        onRightProportionalUpdate: setDivergence(vv * vh * 100 + i_divergence)
+        onRightProportionalUpdate: setDivergence(vv * vh * -100 + i_divergence)
         onRightDuoPressed: setDivergence(0)
 
         onTopProportionalStop: inverted = !inverted
