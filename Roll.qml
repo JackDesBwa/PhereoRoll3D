@@ -6,6 +6,7 @@ Item {
     readonly property var modelItem: pvl.currentItem ? pvl.currentItem.modelItem : null
     property int size: 200
     property int dy: 0
+    property bool replaceOnError: false
     property string modelThumb
     property Component both
     property alias currentIndex: pvl.currentIndex
@@ -32,11 +33,12 @@ Item {
                 y: 5 - Math.pow((parent.z - 3), 2) + dy
                 width: size + 5
                 height: size + 5
-                Image {
+                AvatarImage {
                     id: img
                     anchors.centerIn: parent
                     width: size
                     height: size
+                    replaceOnError: roll.replaceOnError
                     source: model && model[modelThumb] || ""
                     fillMode: Image.PreserveAspectFit
                 }

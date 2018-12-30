@@ -10,7 +10,10 @@ class Toolbox : public QObject {
 
 public:
     explicit Toolbox(QObject *parent = nullptr);
+
+public slots:
     bool hasWritePermissions();
+    QString md5(QString txt);
 };
 
 #endif // TOOLBOX_H

@@ -4,6 +4,7 @@
 #include <QDir>
 #include <QStandardPaths>
 #include <QFileInfo>
+#include <QCryptographicHash>
 
 namespace {
 QString picturesPath = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
@@ -19,4 +20,8 @@ bool Toolbox::hasWritePermissions() {
         testPath = picturesPath;
     QFileInfo picturesPathInfo(testPath);
     return (picturesPathInfo.isDir() && picturesPathInfo.isWritable());
+}
+
+QString Toolbox::md5(QString txt) {
+    return QCryptographicHash::hash(txt.toUtf8(), QCryptographicHash::Md5).toHex();
 }

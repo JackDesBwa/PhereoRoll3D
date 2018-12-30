@@ -36,6 +36,7 @@ Item {
     function loadAlbums() {
         roll.model = albumsList;
         roll.modelThumb = "albumthumburl";
+        roll.replaceOnError = false;
         rollData = 1;
         if (albumsList.count > 0)
             return;
@@ -65,6 +66,7 @@ Item {
     function loadFollowees() {
         roll.model = followeesList;
         roll.modelThumb = "avatarurl";
+        roll.replaceOnError = true;
         rollData = 2;
         if (followeesList.count > 0)
             return;
@@ -92,6 +94,7 @@ Item {
     function loadFollowers() {
         roll.model = followersList;
         roll.modelThumb = "avatarurl";
+        roll.replaceOnError = true;
         rollData = 3;
         if (followersList.count > 0)
             return;
@@ -183,7 +186,7 @@ Item {
                 y: 5
                 width: 75
                 height: 75
-                Image {
+                AvatarImage {
                     anchors.fill: parent
                     anchors.margins: 2
                     source: profileData && profileData.avatarurl || ""

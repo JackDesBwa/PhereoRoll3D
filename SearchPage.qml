@@ -73,6 +73,7 @@ Item {
 
         model: ListModel { id: usersFound }
         modelThumb: "avatarurl"
+        replaceOnError: true
 
         onClicked: {
             phereo.loadUser(roll.modelItem.userid, roll.modelItem.username);

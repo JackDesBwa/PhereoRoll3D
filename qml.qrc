@@ -19,5 +19,6 @@
         <file>gear.png</file>
         <file>mag.png</file>
         <file>SearchPage.qml</file>
+        <file>AvatarImage.qml</file>
     </qresource>
 </RCC>

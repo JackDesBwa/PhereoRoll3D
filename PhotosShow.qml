@@ -109,7 +109,7 @@ Item {
 
                             Row {
                                 spacing: 5
-                                Image {
+                                AvatarImage {
                                     width: 45
                                     height: 45
                                     source: showInfos ? phereo.photo.avatarurl : ""
@@ -312,7 +312,7 @@ Item {
                                 y: 5
                                 Row {
                                     spacing: 5
-                                    Image {
+                                    AvatarImage {
                                         width: 45
                                         height: 45
                                         source: model.avatarurl
