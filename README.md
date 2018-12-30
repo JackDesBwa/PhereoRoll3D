@@ -121,6 +121,8 @@ The information about image are
 
 Clicking on the information zone opens comments if present.
 
+On Android, when the app has permissions to write to the shared storage, a download button appears on the right. Clicking on it will silently download the stereophoto in side-by-side (parallel) format into [Pictures]/PhereoRoll3D/ folder.
+
 ![Photo view - infos](screenshots/screenshot_photo_comments.jpg)
 
 Each comment has the avatar of its author, the date and the comment itself.
