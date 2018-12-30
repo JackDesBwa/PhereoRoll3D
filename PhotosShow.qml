@@ -234,9 +234,11 @@ Item {
                                 ListModel { id: tagslist }
                                 onTagsChanged: {
                                     tagslist.clear();
-                                    var s = tags.split(",");
-                                    for (var i in s)
-                                        tagslist.append({ text: s[i] });
+                                    if (tags !== "") {
+                                        var s = tags.split(",");
+                                        for (var i in s)
+                                            tagslist.append({ text: s[i] });
+                                    }
                                 }
                                 PLabel { id: tagAlign; text: " " }
                                 PLabel {
