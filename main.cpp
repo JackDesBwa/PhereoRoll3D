@@ -1,5 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include "httpcache.h"
 
 int main(int argc, char *argv[])
 {
@@ -12,6 +13,7 @@ int main(int argc, char *argv[])
     app.setApplicationName("PhereoRoll3D");
 
     QQmlApplicationEngine engine;
+    engine.setNetworkAccessManagerFactory(new HttpCache_NAMF);
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;

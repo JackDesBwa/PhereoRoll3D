@@ -2,7 +2,13 @@ QT += quick
 CONFIG += c++11
 DEFINES += QT_DEPRECATED_WARNINGS
 
-SOURCES += main.cpp
+HEADERS += \
+    httpcache.h
+
+SOURCES += \
+    main.cpp \
+    httpcache.cpp
+
 RESOURCES += qml.qrc
 
 qnx: target.path = /tmp/$${TARGET}/bin
