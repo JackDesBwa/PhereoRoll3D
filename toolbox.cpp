@@ -30,5 +30,6 @@ QString Toolbox::md5(QString txt) {
 
 QString Toolbox::reformatText(QString txt) {
     txt.replace(regexpURL, "<a href=\"\\1\" style=\"color: white;\">\\1</a>");
+    txt.replace("\n", "<br>");
     return txt;
 }
