@@ -107,31 +107,40 @@ Item {
                         Column {
                             width: parent.width-10
 
-                            Row {
-                                spacing: 5
-                                AvatarImage {
-                                    width: 45
-                                    height: 45
-                                    source: showInfos ? phereo.photo.avatarurl : ""
-                                    MouseArea {
-                                        anchors.fill: parent
-                                        onClicked: {
-                                            phereo.showList();
-                                            phereo.loadUser(phereo.photo.userid, phereo.photo.user);
+                            Item {
+                                height: childrenRect.height
+                                width: parent.width
+                                Row {
+                                    id: righttools
+                                    anchors.right: parent.right
+                                    anchors.top: parent.top
+                                    anchors.topMargin: 5
+                                    Item {
+                                        width: 45
+                                        height: 45
+                                        Image {
+                                            anchors.centerIn: parent
+                                            width: 25
+                                            height: 25
+                                            source: "qrc:/dl.png"
+                                            visible: toolbox.hasWritePermissions
+                                            MouseArea {
+                                                anchors.fill: parent
+                                                onClicked: toolbox.download(phereo.photo.imgurl, phereo.photo.imgid)
+                                            }
                                         }
-                                        onPressAndHold: phereo.showUser()
                                     }
                                 }
-                                Column {
-                                    anchors.verticalCenter: parent.verticalCenter
-                                    Row {
-                                        spacing: 5
-                                        PLabel {
-                                            text: phereo.photo.title
-                                            font.bold: true
-                                        }
-                                        CLabel {
-                                            text: phereo.photo.user
+                                Row {
+                                    anchors.left: parent.left
+                                    anchors.right: righttools.left
+                                    spacing: 5
+                                    AvatarImage {
+                                        width: 45
+                                        height: 45
+                                        source: showInfos ? phereo.photo.avatarurl : ""
+                                        MouseArea {
+                                            anchors.fill: parent
                                             onClicked: {
                                                 phereo.showList();
                                                 phereo.loadUser(phereo.photo.userid, phereo.photo.user);
@@ -139,70 +148,88 @@ Item {
                                             onPressAndHold: phereo.showUser()
                                         }
                                     }
-                                    Row {
-                                        spacing: 8
-                                        PLabel {
-                                            function pad(nb) { return nb < 10 ? "0"+nb : nb; }
-                                            text: {
-                                                var d = new Date(phereo.photo.datetime * 1000);
-                                                return [d.getFullYear(), pad(d.getMonth()+1), pad(d.getDate())].join('-') +' ' +
-                                                        [pad(d.getHours()), pad(d.getMinutes())].join(':');
+                                    Column {
+                                        anchors.verticalCenter: parent.verticalCenter
+                                        Row {
+                                            spacing: 5
+                                            PLabel {
+                                                text: phereo.photo.title
+                                                font.bold: true
+                                            }
+                                            CLabel {
+                                                text: phereo.photo.user
+                                                onClicked: {
+                                                    phereo.showList();
+                                                    phereo.loadUser(phereo.photo.userid, phereo.photo.user);
+                                                }
+                                                onPressAndHold: phereo.showUser()
                                             }
                                         }
                                         Row {
-                                            spacing: 2
-                                            Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/likes.png" }
-                                            PLabel { text: phereo.photo.likes; font.bold: true }
-                                        }
-                                        Row {
-                                            spacing: 2
-                                            Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/views.png" }
-                                            PLabel { text: phereo.photo.views; font.italic: true }
-                                        }
-                                        Row {
-                                            spacing: 2
-                                            Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/comments.png" }
-                                            PLabel { text: phereo.photo.comments; font.italic: true }
-                                        }
-                                    }
-                                    Row {
-                                        spacing: 5
-                                        Row {
-                                            spacing: 3
-                                            visible: phereo.photo.flagPopular
-                                            Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/label.png" }
-                                            CLabel {
-                                                text: "Popular"
-                                                small: true
-                                                onClicked: {
-                                                    phereo.showList();
-                                                    phereo.loadCategory(0);
+                                            spacing: 8
+                                            PLabel {
+                                                function pad(nb) { return nb < 10 ? "0"+nb : nb; }
+                                                text: {
+                                                    var d = new Date(phereo.photo.datetime * 1000);
+                                                    return [d.getFullYear(), pad(d.getMonth()+1), pad(d.getDate())].join('-') +' ' +
+                                                            [pad(d.getHours()), pad(d.getMinutes())].join(':');
                                                 }
                                             }
-                                        }
-                                        Row {
-                                            spacing: 3
-                                            visible: phereo.photo.flagFeatured
-                                            Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/label.png" }
-                                            CLabel {
-                                                text: "Featured"
-                                                small: true
-                                                onClicked: {
-                                                    phereo.showList();
-                                                    phereo.loadCategory(2);
-                                                }
+                                            Row {
+                                                spacing: 2
+                                                Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/likes.png" }
+                                                PLabel { text: phereo.photo.likes; font.bold: true }
+                                            }
+                                            Row {
+                                                spacing: 2
+                                                Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/views.png" }
+                                                PLabel { text: phereo.photo.views; font.italic: true }
+                                            }
+                                            Row {
+                                                spacing: 2
+                                                Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/comments.png" }
+                                                PLabel { text: phereo.photo.comments; font.italic: true }
                                             }
                                         }
                                         Row {
-                                            spacing: 3
-                                            visible: phereo.photo.flagStaff
-                                            Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/label.png" }
-                                            CLabel {
-                                                text: "Staff"
-                                                small: true
-                                                onClicked: {
-                                                    phereo.showList();
-                                                    phereo.loadCategory(3);
+                                            spacing: 5
+                                            Row {
+                                                spacing: 3
+                                                visible: phereo.photo.flagPopular
+                                                Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/label.png" }
+                                                CLabel {
+                                                    text: "Popular"
+                                                    small: true
+                                                    onClicked: {
+                                                        phereo.showList();
+                                                        phereo.loadCategory(0);
+                                                    }
+                                                }
+                                            }
+                                            Row {
+                                                spacing: 3
+                                                visible: phereo.photo.flagFeatured
+                                                Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/label.png" }
+                                                CLabel {
+                                                    text: "Featured"
+                                                    small: true
+                                                    onClicked: {
+                                                        phereo.showList();
+                                                        phereo.loadCategory(2);
+                                                    }
+                                                }
+                                            }
+                                            Row {
+                                                spacing: 3
+                                                visible: phereo.photo.flagStaff
+                                                Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/label.png" }
+                                                CLabel {
+                                                    text: "Staff"
+                                                    small: true
+                                                    onClicked: {
+                                                        phereo.showList();
+                                                        phereo.loadCategory(3);
+                                                    }
                                                 }
                                             }
                                         }
