@@ -211,7 +211,7 @@ Item {
                             }
                             PLabel {
                                 width: parent.width
-                                text: phereo.photo.description
+                                text: toolbox.reformatText(phereo.photo.description)
                                 visible: text
                                 horizontalAlignment: Text.AlignLeft
                             }
@@ -356,7 +356,7 @@ Item {
                                     }
                                 }
                                 PLabel {
-                                    text: model.comment
+                                    text: toolbox.reformatText(model.comment)
                                     width: parent.width
                                     horizontalAlignment: Text.AlignLeft
                                 }

@@ -260,7 +260,7 @@ Item {
                         small: true
                     }
                     PLabel {
-                        text: profileData.description.trim()
+                        text: toolbox.reformatText(profileData.description.trim())
                         visible: text
                         font.italic: true
                         width: parent.width
@@ -283,7 +283,7 @@ Item {
                                 id: lineText
                                 x: lineLabel.width + 5
                                 width: columnProperties.width - lineLabel.width - 10
-                                text: profileData[modelData]
+                                text: toolbox.reformatText(profileData[modelData])
                                 horizontalAlignment: Text.AlignLeft
                             }
                         }

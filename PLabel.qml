@@ -6,5 +6,7 @@ Text {
     font.pixelSize: small ? 10 : 13
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignVCenter
+    textFormat: Text.RichText;
     wrapMode: Text.WordWrap
+    onLinkActivated: Qt.openUrlExternally(link)
 }

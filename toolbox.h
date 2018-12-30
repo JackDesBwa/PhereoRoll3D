@@ -2,6 +2,7 @@
 #define TOOLBOX_H
 
 #include <QObject>
+#include <QRegularExpression>
 
 class Toolbox : public QObject {
     Q_OBJECT
@@ -14,6 +15,10 @@ public:
 public slots:
     bool hasWritePermissions();
     QString md5(QString txt);
+    QString reformatText(QString txt);
+
+private:
+    QRegularExpression regexpURL;
 };
 
 #endif // TOOLBOX_H
