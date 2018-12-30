@@ -3,11 +3,13 @@ CONFIG += c++11
 DEFINES += QT_DEPRECATED_WARNINGS
 
 HEADERS += \
-    httpcache.h
+    httpcache.h \
+    toolbox.h
 
 SOURCES += \
     main.cpp \
-    httpcache.cpp
+    httpcache.cpp \
+    toolbox.cpp
 
 RESOURCES += qml.qrc
 

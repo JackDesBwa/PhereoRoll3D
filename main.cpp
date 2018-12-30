@@ -1,6 +1,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
 #include "httpcache.h"
+#include "toolbox.h"
 
 int main(int argc, char *argv[])
 {
@@ -12,8 +14,11 @@ int main(int argc, char *argv[])
     app.setOrganizationDomain("desbwa.org");
     app.setApplicationName("PhereoRoll3D");
 
+    Toolbox toolbox;
+
     QQmlApplicationEngine engine;
     engine.setNetworkAccessManagerFactory(new HttpCache_NAMF);
+    engine.rootContext()->setContextProperty("toolbox", &toolbox);
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;
