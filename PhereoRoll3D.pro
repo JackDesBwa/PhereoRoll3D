@@ -27,6 +27,6 @@ contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
         $$PWD/android
 
     ANDROID_EXTRA_LIBS = \
-        $$PWD/lib/libcrypto.so \
-        $$PWD/lib/libssl.so
+        $$PWD/android/lib/libcrypto.so \
+        $$PWD/android/lib/libssl.so
 }
