@@ -20,7 +20,8 @@ else: unix:!android: target.path = /tmp/$${TARGET}/bin
 DISTFILES += \
     android/AndroidManifest.xml \
     android/res/values/libs.xml \
-    android/build.gradle
+    android/build.gradle \
+    android/src/org/desbwa/phereoroll3d/PhereoRoll3DActivity.java
 
 contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
     ANDROID_PACKAGE_SOURCE_DIR = \

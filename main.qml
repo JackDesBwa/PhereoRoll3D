@@ -140,6 +140,82 @@ Window {
            selection = -1;
            loadNext();
        }
+       function loadUri(uri, display) {
+           var imgid;
+           uri = uri.toLowerCase();
+           // Check image url
+           var matches = (new RegExp("https?://phereo.com/image/([0-9a-f]+)")).exec(uri);
+           if (matches) {
+               imgid = matches[1];
+               if (imgid) {
+                   if (display) showPhoto(0);
+                   photosList.clear();
+                   category = "URL";
+                   category_url = "image/%1?userId=&userApi=&".arg(imgid);
+                   nbImagesMax = 0;
+                   selection = -1;
+                   loadNext();
+                   return;
+               }
+           }
+           // Check popular
+           if (uri.startsWith("http://phereo.com/popular") || uri.startsWith("https://phereo.com/popular")) {
+               if (display) showList();
+               loadCategory(0);
+               return;
+           }
+           // Check latest
+           if (uri.startsWith("http://phereo.com/latest") || uri.startsWith("https://phereo.com/latest")) {
+               if (display) showList();
+               loadCategory(1);
+               return;
+           }
+           // Check featured
+           if (uri.startsWith("http://phereo.com/featured") || uri.startsWith("https://phereo.com/featured")) {
+               if (display) showList();
+               loadCategory(2);
+               return;
+           }
+           // Check staff
+           if (uri.startsWith("http://phereo.com/staff") || uri.startsWith("https://phereo.com/staff")) {
+               if (display) showList();
+               loadCategory(3);
+               return;
+           }
+           // Check searches
+           matches = (new RegExp("https?://phereo.com/s/\\?(type=([^&]+)&)?ss=([^&]+)")).exec(uri);
+           if (matches) {
+               var t = matches[2];
+               var q = matches[3];
+               if (!t || t === "images") {
+                   if (display) showList();
+                   loadSearch(q);
+                   return;
+               } else if (t === "tag") {
+                   if (display) showList();
+                   loadTag(q);
+                   return;
+               }
+           }
+           // Check image from API server
+           matches = (new RegExp("https?://api.phereo.com/imagestore2/([0-9a-f]+)")).exec(uri);
+           if (matches) {
+               imgid = matches[1];
+               if (imgid) {
+                   if (display) showPhoto(0);
+                   photosList.clear();
+                   category = "URL";
+                   category_url = "image/%1?userId=&userApi=&".arg(imgid);
+                   nbImagesMax = 0;
+                   selection = -1;
+                   loadNext();
+                   return;
+               }
+           }
+           // Not found
+           if (display) showList();
+           loadCategory(0);
+       }
 
        function loadNext() {
            var xhr = new XMLHttpRequest();
@@ -181,8 +257,6 @@ Window {
            xhr.send();
        }
        function showList() {
-           if (photosList.count == 0)
-               loadCategory(0);
            loader.setSource("qrc:/PhotosGrid.qml", {"phereo": phereo});
        }
        function showPhoto(sel) {
@@ -209,6 +283,18 @@ Window {
            if (sel < 0)
                sel = photosList.count - 1;
            selection = sel;
+       }
+       function init() {
+           var handleUri = function(uri) {
+               loadUri(uri, true);
+           }
+           toolbox.uriReceived.connect(handleUri);
+           if (toolbox.lastUri) {
+               handleUri(toolbox.lastUri);
+           } else {
+               loadCategory(0);
+               showList();
+           }
        }
     }
 
@@ -437,5 +523,5 @@ void main(void) {
         property alias mode3D_landscapeModeAlt: mode3D.landscapeModeAlt
     }
 
-    Component.onCompleted: phereo.showList()
+    Component.onCompleted: phereo.init()
 }

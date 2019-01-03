@@ -9,6 +9,8 @@
 #include <QNetworkReply>
 
 namespace {
+Toolbox * toolboxInstance = nullptr;
+QString initUri;
 QString picturesPath = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
 QString picturesPathFinal = picturesPath + QDir::separator() + "PhereoRoll3D";
 }
@@ -16,6 +18,18 @@ QString picturesPathFinal = picturesPath + QDir::separator() + "PhereoRoll3D";
 Toolbox::Toolbox(QNetworkAccessManager & nam, QObject *parent) : QObject(parent), m_nam(nam) {
     regexpURL = QRegularExpression("(https?://([^\\s])+)");
     regexpURL.optimize();
+    toolboxInstance = this;
+    if (!initUri.isNull())
+        setUri(QString(initUri));
+}
+
+void Toolbox::setUri(QString uri) {
+    m_lastUri = uri;
+    uriReceived(m_lastUri);
+}
+
+QString Toolbox::lastUri() {
+    return m_lastUri;
 }
 
 bool Toolbox::hasWritePermissions() {
@@ -52,3 +66,16 @@ void Toolbox::download(QString imgurl, QString imgid) {
     QObject::connect(reply, QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error), reply, &QNetworkReply::deleteLater);
     QObject::connect(reply, &QNetworkReply::sslErrors, reply, &QNetworkReply::deleteLater);
 }
+
+#ifdef Q_OS_ANDROID
+#include <jni.h>
+extern "C" JNIEXPORT void JNICALL Java_org_desbwa_phereoroll3d_PhereoRoll3DActivity_openedUri(JNIEnv *env, jobject /*obj*/, jstring url) {
+    const char *urlStr = env->GetStringUTFChars(url, nullptr);
+    if (toolboxInstance) {
+        toolboxInstance->setUri(QString(urlStr));
+    } else {
+        initUri = QString(urlStr);
+    }
+    env->ReleaseStringUTFChars(url, urlStr);
+}
+#endif
