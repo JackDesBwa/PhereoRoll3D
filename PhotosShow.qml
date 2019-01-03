@@ -130,6 +130,20 @@ Item {
                                             }
                                         }
                                     }
+                                    Item {
+                                        width: 45
+                                        height: 45
+                                        Image {
+                                            anchors.centerIn: parent
+                                            width: 25
+                                            height: 25
+                                            source: "qrc:/web.png"
+                                            MouseArea {
+                                                anchors.fill: parent
+                                                onClicked: Qt.openUrlExternally("http://phereo.com/image/" + phereo.photo.imgid)
+                                            }
+                                        }
+                                    }
                                 }
                                 Row {
                                     anchors.left: parent.left

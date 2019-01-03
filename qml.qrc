@@ -21,5 +21,6 @@
         <file>SearchPage.qml</file>
         <file>AvatarImage.qml</file>
         <file>dl.png</file>
+        <file>web.png</file>
     </qresource>
 </RCC>
