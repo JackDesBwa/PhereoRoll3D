@@ -1,5 +1,15 @@
 <RCC>
     <qresource prefix="/">
+        <file>pics/bgl.png</file>
+        <file>pics/bgr.png</file>
+        <file>pics/comments.png</file>
+        <file>pics/dl.png</file>
+        <file>pics/gear.png</file>
+        <file>pics/label.png</file>
+        <file>pics/likes.png</file>
+        <file>pics/mag.png</file>
+        <file>pics/views.png</file>
+        <file>pics/web.png</file>
         <file>qml/main.qml</file>
         <file>qml/AvatarImage.qml</file>
         <file>qml/CLabel.qml</file>
@@ -12,15 +22,5 @@
         <file>qml/SearchPage.qml</file>
         <file>qml/Settings.qml</file>
         <file>qml/UserProfile.qml</file>
-        <file>bgl.png</file>
-        <file>bgr.png</file>
-        <file>comments.png</file>
-        <file>label.png</file>
-        <file>likes.png</file>
-        <file>views.png</file>
-        <file>gear.png</file>
-        <file>mag.png</file>
-        <file>dl.png</file>
-        <file>web.png</file>
     </qresource>
 </RCC>

@@ -92,17 +92,17 @@ Roll {
                 }
                 Row {
                     spacing: 2
-                    Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/likes.png" }
+                    Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/pics/likes.png" }
                     PLabel { text: phereo.photo.likes; font.bold: true }
                 }
                 Row {
                     spacing: 2
-                    Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/views.png" }
+                    Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/pics/views.png" }
                     PLabel { text: phereo.photo.views; font.italic: true }
                 }
                 Row {
                     spacing: 2
-                    Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/comments.png" }
+                    Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/pics/comments.png" }
                     PLabel { text: phereo.photo.comments; font.italic: true }
                 }
             }
@@ -136,22 +136,22 @@ Roll {
             }
             Row {
                 spacing: 3
-                Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/likes.png" }
+                Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/pics/likes.png" }
                 PLabel { text: labels.totalLove; small: true }
             }
             Row {
                 spacing: 3
-                Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/label.png" }
+                Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/pics/label.png" }
                 PLabel { text: "Popular " + labels.totalPopular; small: true }
             }
             Row {
                 spacing: 3
-                Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/label.png" }
+                Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/pics/label.png" }
                 PLabel { text: "Featured " + labels.totalFeatured; small: true }
             }
             Row {
                 spacing: 3
-                Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/label.png" }
+                Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/pics/label.png" }
                 PLabel { text: "Staff " + labels.totalStaff; small: true }
             }
         }
@@ -166,7 +166,7 @@ Roll {
                 Image {
                     width: 32
                     height: 32
-                    source: "qrc:/mag.png"
+                    source: "qrc:/pics/mag.png"
                     MouseArea {
                         anchors.fill: parent
                         onClicked: phereo.showSearch()
@@ -175,7 +175,7 @@ Roll {
                 Image {
                     width: 32
                     height: 32
-                    source: "qrc:/gear.png"
+                    source: "qrc:/pics/gear.png"
                     MouseArea {
                         anchors.fill: parent
                         onClicked: phereo.showSettings()

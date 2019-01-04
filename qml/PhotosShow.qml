@@ -122,7 +122,7 @@ Item {
                                             anchors.centerIn: parent
                                             width: 25
                                             height: 25
-                                            source: "qrc:/dl.png"
+                                            source: "qrc:/pics/dl.png"
                                             visible: toolbox.hasWritePermissions
                                             MouseArea {
                                                 anchors.fill: parent
@@ -137,7 +137,7 @@ Item {
                                             anchors.centerIn: parent
                                             width: 25
                                             height: 25
-                                            source: "qrc:/web.png"
+                                            source: "qrc:/pics/web.png"
                                             MouseArea {
                                                 anchors.fill: parent
                                                 onClicked: Qt.openUrlExternally("http://phereo.com/image/" + phereo.photo.imgid)
@@ -191,17 +191,17 @@ Item {
                                             }
                                             Row {
                                                 spacing: 2
-                                                Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/likes.png" }
+                                                Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/pics/likes.png" }
                                                 PLabel { text: phereo.photo.likes; font.bold: true }
                                             }
                                             Row {
                                                 spacing: 2
-                                                Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/views.png" }
+                                                Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/pics/views.png" }
                                                 PLabel { text: phereo.photo.views; font.italic: true }
                                             }
                                             Row {
                                                 spacing: 2
-                                                Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/comments.png" }
+                                                Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/pics/comments.png" }
                                                 PLabel { text: phereo.photo.comments; font.italic: true }
                                             }
                                         }
@@ -210,7 +210,7 @@ Item {
                                             Row {
                                                 spacing: 3
                                                 visible: phereo.photo.flagPopular
-                                                Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/label.png" }
+                                                Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/pics/label.png" }
                                                 CLabel {
                                                     text: "Popular"
                                                     small: true
@@ -223,7 +223,7 @@ Item {
                                             Row {
                                                 spacing: 3
                                                 visible: phereo.photo.flagFeatured
-                                                Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/label.png" }
+                                                Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/pics/label.png" }
                                                 CLabel {
                                                     text: "Featured"
                                                     small: true
@@ -236,7 +236,7 @@ Item {
                                             Row {
                                                 spacing: 3
                                                 visible: phereo.photo.flagStaff
-                                                Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/label.png" }
+                                                Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/pics/label.png" }
                                                 CLabel {
                                                     text: "Staff"
                                                     small: true

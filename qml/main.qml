@@ -326,13 +326,13 @@ Window {
             Image {
                 width: parallel_surface.width/2
                 height: parallel_surface.height
-                source: "qrc:/bgl.png"
+                source: "qrc:/pics/bgl.png"
                 fillMode: Image.Tile
             }
             Image {
                 width: parallel_surface.width/2
                 height: parallel_surface.height
-                source: "qrc:/bgr.png"
+                source: "qrc:/pics/bgr.png"
                 fillMode: Image.Tile
             }
         }
