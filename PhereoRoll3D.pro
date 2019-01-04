@@ -11,7 +11,7 @@ SOURCES += \
     src/httpcache.cpp \
     src/toolbox.cpp
 
-RESOURCES += qml.qrc
+RESOURCES += resources.qrc
 
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /tmp/$${TARGET}/bin
