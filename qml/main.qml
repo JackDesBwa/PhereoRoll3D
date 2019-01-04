@@ -257,20 +257,20 @@ Window {
            xhr.send();
        }
        function showList() {
-           loader.setSource("qrc:/PhotosGrid.qml", {"phereo": phereo});
+           loader.setSource("qrc:/qml/PhotosGrid.qml", {"phereo": phereo});
        }
        function showPhoto(sel) {
            selection = sel;
-           loader.setSource("qrc:/PhotosShow.qml", {"phereo": phereo});
+           loader.setSource("qrc:/qml/PhotosShow.qml", {"phereo": phereo});
        }
        function showUser() {
-           loader.setSource("qrc:/UserProfile.qml", {"phereo": phereo});
+           loader.setSource("qrc:/qml/UserProfile.qml", {"phereo": phereo});
        }
        function showSettings() {
-           loader.setSource("qrc:/Settings.qml", {"phereo": phereo});
+           loader.setSource("qrc:/qml/Settings.qml", {"phereo": phereo});
        }
        function showSearch() {
-           loader.setSource("qrc:/SearchPage.qml", {"phereo": phereo});
+           loader.setSource("qrc:/qml/SearchPage.qml", {"phereo": phereo});
        }
        function next() {
            var sel = selection + 1;

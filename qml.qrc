@@ -1,25 +1,25 @@
 <RCC>
     <qresource prefix="/">
-        <file>main.qml</file>
+        <file>qml/main.qml</file>
+        <file>qml/AvatarImage.qml</file>
+        <file>qml/CLabel.qml</file>
+        <file>qml/GestureArea.qml</file>
+        <file>qml/Loading.qml</file>
+        <file>qml/PhotosGrid.qml</file>
+        <file>qml/PhotosShow.qml</file>
+        <file>qml/PLabel.qml</file>
+        <file>qml/Roll.qml</file>
+        <file>qml/SearchPage.qml</file>
+        <file>qml/Settings.qml</file>
+        <file>qml/UserProfile.qml</file>
         <file>bgl.png</file>
         <file>bgr.png</file>
-        <file>PhotosGrid.qml</file>
-        <file>PhotosShow.qml</file>
-        <file>Loading.qml</file>
-        <file>GestureArea.qml</file>
-        <file>Settings.qml</file>
-        <file>CLabel.qml</file>
-        <file>PLabel.qml</file>
         <file>comments.png</file>
         <file>label.png</file>
         <file>likes.png</file>
         <file>views.png</file>
-        <file>UserProfile.qml</file>
-        <file>Roll.qml</file>
         <file>gear.png</file>
         <file>mag.png</file>
-        <file>SearchPage.qml</file>
-        <file>AvatarImage.qml</file>
         <file>dl.png</file>
         <file>web.png</file>
     </qresource>
