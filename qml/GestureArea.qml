@@ -33,6 +33,11 @@ Item {
     signal bottomProportionalUpdate(real vv, real vh);
     signal bottomProportionalStop(real vv, real vh, bool out);
 
+    signal swipedUp(real sqDist, real angle);
+    signal swipedDown(real sqDist, real angle);
+    signal swipedLeft(real sqDist, real angle);
+    signal swipedRight(real sqDist, real angle);
+
     signal centerClicked();
     signal centerDuoPressed();
 
@@ -190,17 +195,13 @@ Item {
             }
         }
         onReleased: {
-            if (pitchMove) {
-                pitchMove = false;
-                component.pitchStop();
-            }
-
             for (var i in touchPoints) {
                 var x = touchPoints[i].x;
                 var y = touchPoints[i].y;
                 var sx = touchPoints[i].startX;
                 var sy = touchPoints[i].startY;
-                var moved = (Math.pow(x - sx, 2) + Math.pow(y - sy, 2) > Math.pow(gestureThreshold, 2));
+                var sqDist = Math.pow(x - sx, 2) + Math.pow(y - sy, 2);
+                var moved = (sqDist > Math.pow(gestureThreshold, 2));
                 var vv, vh;
                 if (sx === 0 || sy === 0) {
                     sx = x;
@@ -262,6 +263,17 @@ Item {
                 } else {
                     if (!moved && !cDuo)
                         component.centerClicked();
+                    if (moved && !pitchMove) {
+                        var angle = Math.atan2(y-sy, x-sx) * 180 / Math.PI;
+                        if (angle < -135 || angle > 135)
+                            swipedLeft(sqDist, angle);
+                        else if (angle > -135 && angle < -45)
+                            swipedUp(sqDist, angle);
+                        else if (angle < 135 && angle > 45)
+                            swipedDown(sqDist, angle);
+                        else
+                            swipedRight(sqDist, angle);
+                    }
                 }
             }
 
@@ -271,6 +283,10 @@ Item {
             if (tDuo && !touched) tDuo = false;
             if (bDuo && !touched) bDuo = false;
             if (cDuo && !touched) cDuo = false;
+            if (pitchMove && !touched) {
+                pitchMove = false;
+                component.pitchStop();
+            }
         }
     }
 }
