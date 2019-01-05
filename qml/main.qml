@@ -342,14 +342,6 @@ Window {
             anchors.fill: parent
         }
 
-        MouseArea {
-            anchors.right: parent.horizontalCenter
-            anchors.top: parent.top
-            width: 40
-            height: 40
-            onClicked: phereo.mode3D.modeAlt = !phereo.mode3D.modeAlt
-        }
-
         layer.enabled: true
         layer.effect: ShaderEffect {
             property variant src: parallel_surface

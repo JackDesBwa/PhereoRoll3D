@@ -144,4 +144,12 @@ Item {
             }
         }
     }
+
+    MouseArea {
+        anchors.right: parent.horizontalCenter
+        anchors.top: parent.top
+        width: 40
+        height: 40
+        onClicked: phereo.mode3D.modeAlt = !phereo.mode3D.modeAlt
+    }
 }
