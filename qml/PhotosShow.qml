@@ -12,6 +12,7 @@ Item {
     property bool inverted: false
     property bool showInfos: false
     property bool showComments: false
+    property bool downloading: false
 
     onShowInfosChanged: {
         if (!showInfos)
@@ -119,14 +120,49 @@ Item {
                                         width: 45
                                         height: 45
                                         Image {
+                                            id: dlimg
                                             anchors.centerIn: parent
                                             width: 25
                                             height: 25
                                             source: "qrc:/pics/dl.png"
-                                            visible: toolbox.hasWritePermissions
+                                            visible: toolbox.hasWritePermissions && !downloading && imgl.status == Image.Ready
                                             MouseArea {
                                                 anchors.fill: parent
-                                                onClicked: toolbox.download(phereo.photo.imgurl, phereo.photo.imgid)
+                                                onClicked: {
+                                                    downloading = true;
+                                                    var dlHandler = function() {
+                                                        toolbox.downloadEnd.disconnect(dlHandler);
+                                                        downloading = false;
+                                                    }
+                                                    toolbox.downloadEnd.connect(dlHandler);
+                                                    toolbox.download(phereo.photo.imgurl, phereo.photo.imgid)
+                                                }
+                                            }
+                                            SequentialAnimation {
+                                                id: dlAnimation
+                                                loops: 3
+                                                alwaysRunToEnd: true
+                                                NumberAnimation {
+                                                    target: dlimg
+                                                    property: "opacity"
+                                                    duration: 150
+                                                    easing.type: Easing.InOutQuad
+                                                    to: 0
+                                                }
+                                                NumberAnimation {
+                                                    target: dlimg
+                                                    property: "opacity"
+                                                    duration: 150
+                                                    easing.type: Easing.InOutQuad
+                                                    to: 1
+                                                }
+                                            }
+                                            Connections {
+                                                target: show
+                                                onDownloadingChanged: {
+                                                    if (!downloading)
+                                                        dlAnimation.start();
+                                                }
                                             }
                                         }
                                     }

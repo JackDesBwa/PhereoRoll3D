@@ -55,16 +55,23 @@ void Toolbox::download(QString imgurl, QString imgid) {
     request.setUrl(QUrl(imgurl));
 
     QNetworkReply *reply = m_nam.get(request);
-    QObject::connect(reply, &QNetworkReply::readyRead, this, [reply, imgid](){
+    QObject::connect(reply, &QNetworkReply::readyRead, this, [this, reply, imgid](){
         QDir().mkpath(picturesPathFinal);
         QFile f(picturesPathFinal + QDir::separator() + imgid + "_3d_sbs.jpg");
         if (f.open(QFile::WriteOnly)) {
             f.write(reply->readAll());
+            emit downloadEnd(true, f.fileName());
+        } else {
+            emit downloadEnd(false);
         }
         reply->deleteLater();
     });
-    QObject::connect(reply, QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error), reply, &QNetworkReply::deleteLater);
-    QObject::connect(reply, &QNetworkReply::sslErrors, reply, &QNetworkReply::deleteLater);
+    auto error = [this, reply](){
+        emit downloadEnd(false);
+        reply->deleteLater();
+    };
+    QObject::connect(reply, QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error), this, error);
+    QObject::connect(reply, &QNetworkReply::sslErrors, this, error);
 }
 
 #ifdef Q_OS_ANDROID

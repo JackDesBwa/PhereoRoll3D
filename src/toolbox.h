@@ -17,6 +17,7 @@ public:
 
 signals:
     void uriReceived(QString uri);
+    void downloadEnd(bool success, QString path="");
 
 public slots:
     bool hasWritePermissions();
