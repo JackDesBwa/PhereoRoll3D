@@ -432,6 +432,24 @@ Item {
             posX = x;
             posY = y;
         }
+        function openInfosAndCOmments(action) {
+            if (action === true || action === undefined) { // Always open
+                if (showInfos) {
+                    if (phereo.photo.comments > 0 && !showComments)
+                        showComments = true;
+                    else if (action === undefined)
+                        showComments = false;
+                } else {
+                    showInfos = true;
+                }
+
+            } else if (action === false) { // Always close
+                if (showComments)
+                    showComments = false;
+                else if (showInfos)
+                    showInfos = false;
+            }
+        }
 
         onCanceled: {
             scaleFactor = i_scale;
@@ -441,16 +459,7 @@ Item {
         onLeftClicked: phereo.previous()
         onRightClicked: phereo.next()
         onTopClicked: back()
-        onBottomClicked: {
-            if (showInfos) {
-                if (phereo.photo.comments > 0 && !showComments)
-                    showComments = true;
-                else
-                    showComments = false;
-            } else {
-                showInfos = true;
-            }
-        }
+        onBottomClicked: openInfosAndCOmments()
         onCenterClicked: showInfos = !showInfos
 
         onLeftProportionalStart: i_scale = scaleFactor
@@ -467,14 +476,18 @@ Item {
         onTopProportionalStop: inverted = !inverted
         onTopDuoPressed: inverted = !inverted
 
-        onBottomProportionalStop: {
-            if (showInfos) {
-                showComments = true;
-            } else {
-                showInfos = true;
-            }
-        }
+        onBottomProportionalStop: openInfosAndCOmments(true)
         onBottomDuoPressed: posX = posY = 0
+
+        onSwipedLeft: phereo.next();
+        onSwipedRight: phereo.previous();
+        onSwipedUp:  openInfosAndCOmments(true);
+        onSwipedDown: {
+            if (showInfos)
+                openInfosAndCOmments(false);
+            else
+                inverted = !inverted;
+        }
 
         onPitchStart: {
             i_posX = posX;
