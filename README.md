@@ -3,7 +3,13 @@ PhereoRoll3D
 
 I was frustrated to not be able to use native autostereoscopic capabilities of my ELEPHONE P8 3D to watch stereophotographs of Phereo website ; so I made this app to display them nicely. Some other display modes were added afterwards.
 
-Status: Working. I might improve depending of my needs (patches are welcome)
+The app is developped in c++ with Qt/QML and a tiny bit of Java. Although only tested on Android and Linux, it is supposed to work on many platforms if compiled for them. Only Android prebuilds are provided.
+
+**Status: Working**
+
+This software is created on my spare time for my own usage, but I share it as a free software (MIT licence, see afterwards). If you really want to thank me for this sharing, you can find my email in my phereo profile.
+
+Source code is available, so if it lacks something for you, feel free to contribute yourself and share your changes back. Patches are welcome. I do not accept to be paid to add a feature, but some freelancers might do.
 
 * [Usage](#usage)
 * [Stereo screenshots](#stereo-screenshots)
@@ -170,6 +176,11 @@ Cross view
 
 Parallel view
 ![Photo view - stereo screenshot P](screenshots/screenshot_stereo_P.jpg)
+
+APK
+---
+
+Precompiled
 
 Licence
 -------
