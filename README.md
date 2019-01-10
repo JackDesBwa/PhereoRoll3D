@@ -55,6 +55,7 @@ Clicking on the author opens user photos, long press opens user infos.
 
 (8)
 The current display mode is shown.
+Clicking on the about icon opens the about page.
 Clicking on the magnifier icon opens the search page.
 Clicking on the settings icon opens the settings page.
 
