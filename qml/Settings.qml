@@ -50,12 +50,6 @@ MouseArea {
                     }
                 }
             }
-            PLabel {
-                anchors.bottom: parent.bottom
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.bottomMargin: 10
-                text: toolbox.reformatText("https://github.com/JackDesBwa/PhereoRoll3D")
-            }
         }
     }
 
