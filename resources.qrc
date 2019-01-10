@@ -1,16 +1,19 @@
 <RCC>
     <qresource prefix="/">
+        <file>pics/about.png</file>
         <file>pics/bgl.png</file>
         <file>pics/bgr.png</file>
         <file>pics/comments.png</file>
         <file>pics/dl.png</file>
         <file>pics/gear.png</file>
+        <file>pics/icon.png</file>
         <file>pics/label.png</file>
         <file>pics/likes.png</file>
         <file>pics/mag.png</file>
         <file>pics/views.png</file>
         <file>pics/web.png</file>
         <file>qml/main.qml</file>
+        <file>qml/AboutPage.qml</file>
         <file>qml/AvatarImage.qml</file>
         <file>qml/CLabel.qml</file>
         <file>qml/GestureArea.qml</file>

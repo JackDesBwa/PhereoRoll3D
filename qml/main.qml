@@ -272,6 +272,9 @@ Window {
        function showSearch() {
            loader.setSource("qrc:/qml/SearchPage.qml", {"phereo": phereo});
        }
+       function showAbout() {
+           loader.setSource("qrc:/qml/AboutPage.qml", {"phereo": phereo});
+       }
        function next() {
            var sel = selection + 1;
            if (sel >= photosList.count)

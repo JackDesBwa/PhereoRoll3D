@@ -172,6 +172,15 @@ Roll {
                 Image {
                     width: 32
                     height: 32
+                    source: "qrc:/pics/about.png"
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: phereo.showAbout()
+                    }
+                }
+                Image {
+                    width: 32
+                    height: 32
                     source: "qrc:/pics/mag.png"
                     MouseArea {
                         anchors.fill: parent
