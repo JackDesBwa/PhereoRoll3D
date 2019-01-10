@@ -56,7 +56,13 @@ Roll {
                 font.bold: true
             }
             CLabel {
-                text: (phereo.selection+1) + "/" + phereo.photosList.count + (phereo.photosList.count < phereo.nbImagesMax ? "+": "")
+                text: {
+                    if (phereo.selection === -1)
+                        return "...";
+                    if (phereo.photosList.count === 0)
+                        return "No result";
+                    return (phereo.selection+1) + "/" + phereo.photosList.count + (phereo.photosList.count < phereo.nbImagesMax ? "+": "")
+                }
                 onClicked: phereo.loadNext()
             }
         }
