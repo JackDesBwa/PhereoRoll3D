@@ -5,6 +5,10 @@ I was frustrated to not be able to use native autostereoscopic capabilities of m
 
 Status: Working. I might improve depending of my needs (patches are welcome)
 
+* [Usage](#usage)
+* [Stereo screenshots](#stereo-screenshots)
+* [Licence](#licence)
+
 Usage
 -----
 
