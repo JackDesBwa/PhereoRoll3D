@@ -13,6 +13,7 @@ Source code is available, so if it lacks something for you, feel free to contrib
 
 * [Usage](#usage)
 * [Stereo screenshots](#stereo-screenshots)
+* [Download or build](#download-or-build)
 * [Licence](#licence)
 
 Usage
@@ -177,10 +178,18 @@ Cross view
 Parallel view
 ![Photo view - stereo screenshot P](screenshots/screenshot_stereo_P.jpg)
 
-APK
----
+Download or build
+-----------------
 
-Precompiled
+### Precompiled APK
+
+APK is the format used by Android for applications package. This is the only binary version distributed. You can find them in the release page of github project.
+
+The app is not available on Google's store, but you can install by opening the APK file in your phone/tablet. Actually, there are tons of resources that explain how to install an APK, so I will not detail here.
+
+### Build for Linux/Windows/Mac/FreeBSD/EmbeddedLinux/QNX and so on
+
+This is a simple Qt/QML project with no external dependancy. Just get Qt on your system, configure it if needed, and build either with qmake/make in command line or by opening the project in QtCreator. See documentation of this framework for more details.  
 
 Licence
 -------
