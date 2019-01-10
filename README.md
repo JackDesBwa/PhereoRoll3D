@@ -100,7 +100,14 @@ Two fingers: Reset image position
 Use pinch to zoom/move image
 
 (+)
+
 Top right click: Use alternative display 3D mode
+
+Right/Left swaps (not starting at one edge): Change picture
+
+Up swipe: open infos/comments
+
+Down swipe: close comments, info (and swap left/right chips if all is closed)
 
 ![Photo view - infos](screenshots/screenshot_photo_info.jpg)
 
@@ -119,9 +126,11 @@ The information about image are
 - Optionally, the list of tags
 - Optionnally, the list of albums in which the image is (clicking on it opens the album)
 
-Clicking on the information zone opens comments if present.
+A web icon is present on the right. When clicked, it opens the image URL on phereo website. On Android, if multiple apps can open the link, the system asks you to choose which one to use. As a consequence, it is a also a quick access to official phereo app (useful to quickly add a like on a picture). 
 
 On Android, when the app has permissions to write to the shared storage, a download button appears on the right. Clicking on it will silently download the stereophoto in side-by-side (parallel) format into [Pictures]/PhereoRoll3D/ folder.
+
+Clicking on the information zone opens comments if present.
 
 ![Photo view - infos](screenshots/screenshot_photo_comments.jpg)
 
