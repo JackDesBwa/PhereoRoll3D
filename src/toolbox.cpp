@@ -60,6 +60,8 @@ void Toolbox::download(QString imgurl, QString imgid) {
         QFile f(picturesPathFinal + QDir::separator() + imgid + "_3d_sbs.jpg");
         if (f.open(QFile::WriteOnly)) {
             f.write(reply->readAll());
+            m_imgPath = f.fileName();
+            emit imgPathChanged();
             emit downloadEnd(true, f.fileName());
         } else {
             emit downloadEnd(false);
@@ -72,6 +74,12 @@ void Toolbox::download(QString imgurl, QString imgid) {
     };
     QObject::connect(reply, static_cast<void(QNetworkReply::*)(QNetworkReply::NetworkError)>(&QNetworkReply::error), this, error);
     QObject::connect(reply, &QNetworkReply::sslErrors, this, error);
+}
+
+void Toolbox::setDownloadId(QString imgid) {
+    QFile f(picturesPathFinal + QDir::separator() + imgid + "_3d_sbs.jpg");
+    m_imgPath = f.exists() ? f.fileName() : "";
+    emit imgPathChanged();
 }
 
 #ifdef Q_OS_ANDROID

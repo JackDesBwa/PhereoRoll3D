@@ -9,6 +9,8 @@ class Toolbox : public QObject {
     Q_OBJECT
 
     Q_PROPERTY(bool hasWritePermissions READ hasWritePermissions CONSTANT)
+    Q_PROPERTY(QString imgPath READ imgPath NOTIFY imgPathChanged)
+
     Q_PROPERTY(QString lastUri READ lastUri NOTIFY uriReceived)
 
 public:
@@ -18,6 +20,7 @@ public:
 signals:
     void uriReceived(QString uri);
     void downloadEnd(bool success, QString path="");
+    void imgPathChanged();
 
 public slots:
     bool hasWritePermissions();
@@ -25,11 +28,14 @@ public slots:
     QString reformatText(QString txt);
     void download(QString imgurl, QString imgid);
     QString lastUri();
+    void setDownloadId(QString n);
+    QString imgPath() { return m_imgPath; }
 
 private:
     QNetworkAccessManager & m_nam;
     QRegularExpression regexpURL;
     QString m_lastUri;
+    QString m_imgPath;
 };
 
 #endif // TOOLBOX_H

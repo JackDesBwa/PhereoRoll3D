@@ -19,6 +19,8 @@ Item {
             showComments = false;
     }
 
+    Component.onCompleted: toolbox.setDownloadId(phereo.photo.imgid)
+
     function updateComments() {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
@@ -51,6 +53,7 @@ Item {
         onSelectionChanged: {
             if (showComments)
                 updateComments();
+            toolbox.setDownloadId(phereo.photo.imgid);
         }
     }
     onShowCommentsChanged: {
@@ -124,18 +127,22 @@ Item {
                                             anchors.centerIn: parent
                                             width: 25
                                             height: 25
-                                            source: "qrc:/pics/dl.png"
-                                            visible: toolbox.hasWritePermissions && !downloading && imgl.status == Image.Ready
+                                            source: toolbox.hasWritePermissions ? (toolbox.imgPath !== "" ? "qrc:/pics/dl_ok.png" : "qrc:/pics/dl.png") : "qrc:/pics/dl_ko.png"
+                                            visible: !downloading && imgl.status == Image.Ready
                                             MouseArea {
                                                 anchors.fill: parent
                                                 onClicked: {
-                                                    downloading = true;
-                                                    var dlHandler = function() {
-                                                        toolbox.downloadEnd.disconnect(dlHandler);
-                                                        downloading = false;
+                                                    if (toolbox.imgPath !== "") {
+                                                        Qt.openUrlExternally("file://" + toolbox.imgPath);
+                                                    } else if (toolbox.hasWritePermissions) {
+                                                        downloading = true;
+                                                        var dlHandler = function() {
+                                                            toolbox.downloadEnd.disconnect(dlHandler);
+                                                            downloading = false;
+                                                        }
+                                                        toolbox.downloadEnd.connect(dlHandler);
+                                                        toolbox.download(phereo.photo.imgurl, phereo.photo.imgid);
                                                     }
-                                                    toolbox.downloadEnd.connect(dlHandler);
-                                                    toolbox.download(phereo.photo.imgurl, phereo.photo.imgid)
                                                 }
                                             }
                                             SequentialAnimation {
