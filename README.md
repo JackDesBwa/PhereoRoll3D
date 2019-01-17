@@ -164,7 +164,7 @@ The information about image are
 
 A web icon is present on the right. When clicked, it opens the image URL on phereo website. On Android, if multiple apps can open the link, the system asks you to choose which one to use. As a consequence, it is a also a quick access to official phereo app (useful to quickly add a like on a picture). 
 
-On Android, when the app has permissions to write to the shared storage, a download button appears on the right. Clicking on it will silently download the stereophoto in side-by-side (parallel) format into [Pictures]/PhereoRoll3D/ folder.
+A download icon is present on the right. It is greyed when application has not the permissions to write, with a tick when the photo is already present, and normal when you can download. Clicking on it will download the stereophoto in side-by-side (parallel) format into [Pictures]/PhereoRoll3D/ folder, or open it if it is already there.
 
 Clicking on the information zone opens comments if present.
 
