@@ -123,22 +123,30 @@ Roll {
             property int totalFeatured: 0
             property int totalStaff: 0
             property int totalLove: 0
-            onCountChanged: {
-                var pc = 0;
-                var fc = 0;
-                var sc = 0;
-                var love = 0;
-                for (var i = 0; i < phereo.photosList.count; i++) {
-                    var photo = phereo.photosList.get(i);
-                    if (photo.flagPopular) pc += 1;
-                    if (photo.flagFeatured) fc += 1;
-                    if (photo.flagStaff) sc += 1;
-                    love += photo.likes;
+            onCountChanged: labels_count.restart();
+
+            Timer {
+                id: labels_count
+                interval: 5 //ms
+                onTriggered: {
+                    var pc = 0;
+                    var fc = 0;
+                    var sc = 0;
+                    var love = 0;
+                    for (var i = 0; i < phereo.photosList.count; i++) {
+                        var photo = phereo.photosList.get(i);
+                        if (photo) {
+                            if (photo.flagPopular) pc += 1;
+                            if (photo.flagFeatured) fc += 1;
+                            if (photo.flagStaff) sc += 1;
+                            love += photo.likes;
+                        }
+                    }
+                    parent.totalPopular = pc;
+                    parent.totalFeatured = fc;
+                    parent.totalStaff = sc;
+                    parent.totalLove = love;
                 }
-                totalPopular = pc;
-                totalFeatured = fc;
-                totalStaff = sc;
-                totalLove = love;
             }
             Row {
                 spacing: 3
