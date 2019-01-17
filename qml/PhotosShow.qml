@@ -206,19 +206,25 @@ Item {
                                         }
                                     }
                                     Column {
+                                        width: parent.width - 45-10
                                         anchors.verticalCenter: parent.verticalCenter
-                                        Row {
-                                            spacing: 5
+                                        Flow {
+                                            width: parent.width
                                             PLabel {
+                                                width: Math.min(implicitWidth, parent.width)
                                                 text: phereo.photo.title
                                                 font.bold: true
+                                                horizontalAlignment: Text.AlignLeft
                                             }
+                                            Item { width: 5; height: 1; visible: parent.height < 20 }
                                             CLabel {
+                                                width: Math.min(implicitWidth, parent.width)
                                                 text: phereo.photo.user
                                                 onClicked: {
                                                     phereo.showList();
                                                     phereo.loadUser(phereo.photo.userid, phereo.photo.user);
                                                 }
+                                                horizontalAlignment: Text.AlignLeft
                                                 onPressAndHold: phereo.showUser()
                                             }
                                         }
