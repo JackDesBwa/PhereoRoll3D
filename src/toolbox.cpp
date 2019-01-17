@@ -70,7 +70,7 @@ void Toolbox::download(QString imgurl, QString imgid) {
         emit downloadEnd(false);
         reply->deleteLater();
     };
-    QObject::connect(reply, QOverload<QNetworkReply::NetworkError>::of(&QNetworkReply::error), this, error);
+    QObject::connect(reply, static_cast<void(QNetworkReply::*)(QNetworkReply::NetworkError)>(&QNetworkReply::error), this, error);
     QObject::connect(reply, &QNetworkReply::sslErrors, this, error);
 }
 
