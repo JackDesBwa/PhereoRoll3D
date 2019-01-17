@@ -11,10 +11,34 @@ This software is created on my spare time for my own usage, but I share it as a 
 
 Source code is available, so if it lacks something for you, feel free to contribute yourself and share your changes back. Patches are welcome. I do not accept to be paid to add a feature, but some freelancers might do.
 
+* [Compatibility](#compatibility)
 * [Usage](#usage)
 * [Stereo screenshots](#stereo-screenshots)
 * [Download or build](#download-or-build)
 * [Licence](#licence)
+
+Compatibility
+-------------
+
+Precompiled APK are compatible down to Android API 16 which is 4.1/Jelly Bean. Motivated users with older Android version can try to compile with an older version of the framework, say Qt5.6, which should theorically work although untested.
+
+Most 3D tablet and phones use either vertical parallax barrier or lenticular film. The app should work with all of them (provided that Android version is not too old).
+
+Devices that use software-activated barrier are likely to not work, except if you can activate the barrier outside of the app. Experimental activation is present since v0.6 for somes models, but no feedback has been given at the time of writing.
+
+**Known be compatible:**\
+Elephone P8 3D\
+PPTV King 7S 3D\
+Doogee Y6 Max 3D\
+ZTE Axon 7 Max 
+
+**Known to not be compatible:**\
+Super D D1 (use LCD barrier)\
+InFocus M550 (use LCD barrier)\
+Evo 3D (old Android)\
+HTC Thrill (old Android)\
+Truly/Freevi tablet (old Android)
+
 
 Usage
 -----
