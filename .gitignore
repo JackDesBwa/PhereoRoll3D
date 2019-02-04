@@ -1,2 +1,3 @@
 *.user
 *.keystore
+build.sh.conf
