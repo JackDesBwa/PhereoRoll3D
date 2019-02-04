@@ -386,52 +386,53 @@ uniform sampler2D mask;
 uniform lowp float qt_Opacity;
 
 void main(void) {
+    lowp vec2 coordM = mod(coord, vec2(0.5, 1.0));
     if (mode == 0) { // LeftView
-        lowp vec4 l = texture2D(src, coord);
+        lowp vec4 l = texture2D(src, coordM);
         gl_FragColor = l * qt_Opacity;
 
     } else if (mode == 1) { // RightView
-        lowp vec4 r = texture2D(src, coord + vec2(0.5, 0.0));
+        lowp vec4 r = texture2D(src, coordM + vec2(0.5, 0.0));
         gl_FragColor = r * qt_Opacity;
 
     } else if (mode == 2) { // ColumnsInterleaved
-        lowp vec4 l = texture2D(src, coord);
-        lowp vec4 r = texture2D(src, coord + vec2(0.5, 0.0));
-        lowp float m = texture2D(mask, coord * 2.0).r;
+        lowp vec4 l = texture2D(src, coordM);
+        lowp vec4 r = texture2D(src, coordM + vec2(0.5, 0.0));
+        lowp float m = texture2D(mask, vec2(coordM.x * 2.0, 0.0)).r;
         if (m > 0.5)
             gl_FragColor = l * qt_Opacity;
         else
             gl_FragColor = r * qt_Opacity;
 
     } else if (mode == 3) { // ColumnsInterleavedInv
-        lowp vec4 l = texture2D(src, coord);
-        lowp vec4 r = texture2D(src, coord + vec2(0.5, 0.0));
-        lowp float m = texture2D(mask, coord * 2.0).r;
+        lowp vec4 l = texture2D(src, coordM);
+        lowp vec4 r = texture2D(src, coordM + vec2(0.5, 0.0));
+        lowp float m = texture2D(mask, vec2(coordM.x * 2.0, 0.0)).r;
         if (m > 0.5)
             gl_FragColor = r * qt_Opacity;
         else
             gl_FragColor = l * qt_Opacity;
 
     } else if (mode == 4) { // RowsInterleaved
-        lowp vec4 l = texture2D(src, coord);
-        lowp vec4 r = texture2D(src, coord + vec2(0.5, 0.0));
-        lowp float m = texture2D(mask, coord).r;
+        lowp vec4 l = texture2D(src, coordM);
+        lowp vec4 r = texture2D(src, coordM + vec2(0.5, 0.0));
+        lowp float m = texture2D(mask, vec2(0.0, coordM.y)).r;
         if (m > 0.5)
             gl_FragColor = l * qt_Opacity;
         else
             gl_FragColor = r * qt_Opacity;
 
     } else if (mode == 5) { // RowsInterleavedInv
-        lowp vec4 l = texture2D(src, coord);
-        lowp vec4 r = texture2D(src, coord + vec2(0.5, 0.0));
-        lowp float m = texture2D(mask, coord).r;
+        lowp vec4 l = texture2D(src, coordM);
+        lowp vec4 r = texture2D(src, coordM + vec2(0.5, 0.0));
+        lowp float m = texture2D(mask, vec2(0.0, coordM.y)).r;
         if (m > 0.5)
             gl_FragColor = r * qt_Opacity;
         else
             gl_FragColor = l * qt_Opacity;
 
     } else if (mode == 6) { // ParallelHalfView
-        lowp vec2 coord2 = vec2(coord.x * 2.0, coord.y);
+        lowp vec2 coord2 = vec2(coordM.x * 2.0, coordM.y);
         lowp vec4 l = texture2D(src, coord2);
         lowp vec4 r = texture2D(src, coord2);
         if (coord2.x < 0.5)
@@ -440,7 +441,7 @@ void main(void) {
             gl_FragColor = r * qt_Opacity;
 
     } else if (mode == 7) { // ParallelFullView
-        lowp vec2 coord2 = vec2(coord.x * 2.0, coord.y * 2.0) - vec2(0.0, 0.5);
+        lowp vec2 coord2 = vec2(coordM.x * 2.0, coordM.y * 2.0) - vec2(0.0, 0.5);
         lowp vec4 l = texture2D(src, coord2);
         lowp vec4 r = texture2D(src, coord2);
         if (coord2.y < 0.0 || coord.y > 0.75)
@@ -451,7 +452,7 @@ void main(void) {
             gl_FragColor = r * qt_Opacity;
 
     } else if (mode == 8) { // CrossHalfView
-        lowp vec2 coord2 = vec2(coord.x * 2.0, coord.y);
+        lowp vec2 coord2 = vec2(coordM.x * 2.0, coordM.y);
         lowp vec4 l = texture2D(src, coord2 - vec2(0.5, 0.0));
         lowp vec4 r = texture2D(src, coord2 + vec2(0.5, 0.0));
         if (coord2.x < 0.5)
@@ -460,7 +461,7 @@ void main(void) {
             gl_FragColor = l * qt_Opacity;
 
     } else if (mode == 9) { // CrossFullView
-        lowp vec2 coord2 = vec2(coord.x * 2.0, coord.y * 2.0) - vec2(0.0, 0.5);
+        lowp vec2 coord2 = vec2(coordM.x * 2.0, coordM.y * 2.0) - vec2(0.0, 0.5);
         lowp vec4 l = texture2D(src, coord2 - vec2(0.5, 0.0));
         lowp vec4 r = texture2D(src, coord2 + vec2(0.5, 0.0));
         if (coord2.y < 0.0 || coord.y > 0.75)
@@ -471,8 +472,8 @@ void main(void) {
             gl_FragColor = l * qt_Opacity;
 
     } else if (mode == 10) { // AnaglyphMonochrome
-        lowp vec4 l = texture2D(src, coord);
-        lowp vec4 r = texture2D(src, coord + vec2(0.5, 0.0));
+        lowp vec4 l = texture2D(src, coordM);
+        lowp vec4 r = texture2D(src, coordM + vec2(0.5, 0.0));
         lowp mat4 monoL = mat4(
             +0.299, +0.000, +0.000, 0.0,
             +0.587, +0.000, +0.000, 0.0,
@@ -488,8 +489,8 @@ void main(void) {
         gl_FragColor = monoL * l + monoR * r;
 
     } else if (mode == 11) { // AnaglyphDubois
-        lowp vec4 l = texture2D(src, coord);
-        lowp vec4 r = texture2D(src, coord + vec2(0.5, 0.0));
+        lowp vec4 l = texture2D(src, coordM);
+        lowp vec4 r = texture2D(src, coordM + vec2(0.5, 0.0));
         lowp mat4 duboisL = mat4(
             +0.456, -0.040, -0.015, 0.0,
             +0.500, -0.038, -0.021, 0.0,
