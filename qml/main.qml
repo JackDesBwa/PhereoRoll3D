@@ -473,19 +473,19 @@ void main(void) {
     } else if (mode == 10) { // AnaglyphMonochrome
         lowp vec4 l = texture2D(src, coord);
         lowp vec4 r = texture2D(src, coord + vec2(0.5, 0.0));
-        lowp mat4 duboisL = mat4(
+        lowp mat4 monoL = mat4(
             +0.299, +0.000, +0.000, 0.0,
             +0.587, +0.000, +0.000, 0.0,
             +0.114, +0.000, +0.000, 0.0,
             +0.000, +0.000, +0.000, 1.0
         );
-        lowp mat4 duboisR = mat4(
+        lowp mat4 monoR = mat4(
             +0.000, +0.299, +0.299, 0.0,
             +0.000, +0.587, +0.587, 0.0,
             +0.000, +0.114, +0.114, 0.0,
             +0.000, +0.000, +0.000, 1.0
         );
-        gl_FragColor = duboisL * l + duboisR * r;
+        gl_FragColor = monoL * l + monoR * r;
 
     } else if (mode == 11) { // AnaglyphDubois
         lowp vec4 l = texture2D(src, coord);
