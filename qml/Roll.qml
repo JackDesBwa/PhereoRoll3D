@@ -4,7 +4,7 @@ Item {
     id: roll
     property var model
     readonly property var modelItem: pvl.currentItem ? pvl.currentItem.modelItem : null
-    property int size: 200
+    property int size: 200 * adjScr
     property int dy: 0
     property bool replaceOnError: false
     property string modelThumb

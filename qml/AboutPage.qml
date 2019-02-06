@@ -21,19 +21,21 @@ MouseArea {
             property real direction: 1
             Grid {
                 anchors.centerIn: parent
-                spacing: 30
+                spacing: 30 * adjScr
                 horizontalItemAlignment: Grid.AlignHCenter
                 verticalItemAlignment: Grid.AlignVCenter
                 columns: page.width > 2 * page.height ? 0 : 1
                 rows: page.width > 2 * page.height ? 1 : 0
                 Item {
-                    width: 256
-                    height: 256
+                    width: 256 * adjScr
+                    height: 256 * adjScr
                     Image {
                         id: icon
                         anchors.centerIn: parent
                         anchors.horizontalCenterOffset: 1.5 * direction
                         source: "qrc:/pics/icon.png"
+                        width: implicitWidth * adjScr
+                        height: implicitHeight * adjScr
                         MouseArea {
                             anchors.fill: parent
                             onClicked: {
@@ -47,7 +49,7 @@ MouseArea {
                     width: childrenRect.width
                     height: childrenRect.height
                     Column {
-                        spacing: 5
+                        spacing: 5 * adjScr
                         PLabel {
                             text: "Project page, code & manual"
                             small: true
@@ -57,7 +59,7 @@ MouseArea {
                         }
                         Item {
                             width: 1
-                            height: 10
+                            height: 10 * adjScr
                         }
                         PLabel {
                             text: "Author"
@@ -69,10 +71,10 @@ MouseArea {
                         }
                         Item {
                             width: 1
-                            height: 10
+                            height: 10 * adjScr
                         }
                         PLabel {
-                            width: 300
+                            width: 300 * adjScr
                             text: "This software is created on my spare time for my own usage, but I share it as a free software (MIT licence, see project page).<br><br>" +
                                   "If you really want to thank me for this sharing, you can find my email in my profile.<br><br>" +
                                   "Source code is available, so if it lacks something for you, feel free to contribute yourself and share your changes back." +

@@ -3,8 +3,8 @@ import QtQuick 2.0
 Item {
     id: component
 
-    property real borderWidth: 50
-    property real borderHeight: 50
+    property real borderWidth: 50 * adjScr
+    property real borderHeight: 50 * adjScr
     property real gestureThreshold: 5
 
     signal canceled();

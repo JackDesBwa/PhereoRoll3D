@@ -17,15 +17,15 @@ MouseArea {
             Row {
                 anchors.centerIn: parent
                 width: Math.min(implicitWidth, parent.width)
-                spacing: 10
+                spacing: 10 * adjScr
                 Column {
                     Repeater {
                         model: ["Landscape", "Landscape Alt.", "Portrait", "Portrait Alt."]
                         CLabel {
                             anchors.horizontalCenter: parent.horizontalCenter;
                             anchors.horizontalCenterOffset: page.selection == index ? direction : 0;
-                            width: Math.max(implicitWidth, 150)
-                            height: 25
+                            width: Math.max(implicitWidth, 150 * adjScr)
+                            height: 25 * adjScr
                             text: modelData
                             font.bold: page.selection == index
                             onClicked: page.selection = index
@@ -40,8 +40,8 @@ MouseArea {
                             property string prop: ["landscapeMode", "landscapeModeAlt", "portraitMode", "portraitModeAlt"][page.selection]
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.horizontalCenterOffset: index === phereo.mode3D[prop] ? direction : 0
-                            width: Math.max(implicitWidth, 150)
-                            height: 20
+                            width: Math.max(implicitWidth, 150 * adjScr)
+                            height: 20 * adjScr
                             text: modelData
                             small: true
                             font.bold: index === phereo.mode3D[prop]
@@ -78,8 +78,8 @@ MouseArea {
     MouseArea {
         anchors.right: parent.horizontalCenter
         anchors.top: parent.top
-        width: 40
-        height: 40
+        width: 40 * adjScr
+        height: 40 * adjScr
         onClicked: phereo.mode3D.modeAlt = !phereo.mode3D.modeAlt
     }
 }

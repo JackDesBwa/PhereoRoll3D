@@ -10,6 +10,7 @@ Window {
     height: 336
     title: qsTr("PhereoRoll3D - unofficial phereo viewer")
     color: "black"
+    property real adjScr: Math.max(width, height)/640.0
 
     ListModel {
         id: photosList

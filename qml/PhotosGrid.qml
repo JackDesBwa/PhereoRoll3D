@@ -29,8 +29,8 @@ Roll {
 
                 delegate: Item {
                     property string category: model.text
-                    width: 80
-                    height: 20
+                    width: 80 * adjScr
+                    height: 20 * adjScr
                     PLabel {
                         property bool hl: category === phereo.category
                         anchors.fill: parent;
@@ -48,8 +48,8 @@ Roll {
         }
         Row {
             anchors.horizontalCenter: parent.horizontalCenter
-            y: parent.height/2 - 120
-            spacing: 5
+            y: parent.height/2 - 120 * adjScr
+            spacing: 5 * adjScr
 
             PLabel {
                 text: phereo.category
@@ -68,14 +68,14 @@ Roll {
         }
         Column {
             anchors.horizontalCenter: parent.horizontalCenter
-            y: parent.height/2 + 115
+            y: parent.height/2 + 115 * adjScr
             PLabel {
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.horizontalCenterOffset: direction
                 visible: phereo.photosList.count > 0
                 text: phereo.photo.title
                 font.bold: true
-                font.pixelSize: 15
+                font.pixelSize: 15 * adjScr
             }
             CLabel {
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -86,7 +86,7 @@ Roll {
             }
             Row {
                 anchors.horizontalCenter: parent.horizontalCenter
-                spacing: 8
+                spacing: 8 * adjScr
                 visible: phereo.photosList.count > 0
                 PLabel {
                     function pad(nb) { return nb < 10 ? "0"+nb : nb; }
@@ -97,18 +97,18 @@ Roll {
                     }
                 }
                 Row {
-                    spacing: 2
-                    Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/pics/likes.png" }
+                    spacing: 2 * adjScr
+                    Image { anchors.bottom: parent.bottom; width: 12 * adjScr; height: 12 * adjScr; source: "qrc:/pics/likes.png" }
                     PLabel { text: phereo.photo.likes; font.bold: true }
                 }
                 Row {
-                    spacing: 2
-                    Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/pics/views.png" }
+                    spacing: 2 * adjScr
+                    Image { anchors.bottom: parent.bottom; width: 12 * adjScr; height: 12 * adjScr; source: "qrc:/pics/views.png" }
                     PLabel { text: phereo.photo.views; font.italic: true }
                 }
                 Row {
-                    spacing: 2
-                    Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/pics/comments.png" }
+                    spacing: 2 * adjScr
+                    Image { anchors.bottom: parent.bottom; width: 12 * adjScr; height: 12 * adjScr; source: "qrc:/pics/comments.png" }
                     PLabel { text: phereo.photo.comments; font.italic: true }
                 }
             }
@@ -117,7 +117,7 @@ Roll {
             id: labels
             anchors.left: parent.left
             anchors.bottom: parent.bottom
-            anchors.margins: 5
+            anchors.margins: 5 * adjScr
             property int count: phereo.photosList.count
             property int totalPopular: 0
             property int totalFeatured: 0
@@ -149,23 +149,23 @@ Roll {
                 }
             }
             Row {
-                spacing: 3
-                Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/pics/likes.png" }
+                spacing: 3 * adjScr
+                Image { anchors.bottom: parent.bottom; width: 12 * adjScr; height: 12 * adjScr; source: "qrc:/pics/likes.png" }
                 PLabel { text: labels.totalLove; small: true }
             }
             Row {
-                spacing: 3
-                Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/pics/label.png" }
+                spacing: 3 * adjScr
+                Image { anchors.bottom: parent.bottom; width: 12 * adjScr; height: 12 * adjScr; source: "qrc:/pics/label.png" }
                 PLabel { text: "Popular " + labels.totalPopular; small: true }
             }
             Row {
-                spacing: 3
-                Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/pics/label.png" }
+                spacing: 3 * adjScr
+                Image { anchors.bottom: parent.bottom; width: 12 * adjScr; height: 12 * adjScr; source: "qrc:/pics/label.png" }
                 PLabel { text: "Featured " + labels.totalFeatured; small: true }
             }
             Row {
-                spacing: 3
-                Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/pics/label.png" }
+                spacing: 3 * adjScr
+                Image { anchors.bottom: parent.bottom; width: 12 * adjScr; height: 12 * adjScr; source: "qrc:/pics/label.png" }
                 PLabel { text: "Staff " + labels.totalStaff; small: true }
             }
         }
@@ -178,8 +178,8 @@ Roll {
                 spacing: 5
                 anchors.horizontalCenter: parent.horizontalCenter
                 Image {
-                    width: 32
-                    height: 32
+                    width: 32 * adjScr
+                    height: 32 * adjScr
                     source: "qrc:/pics/about.png"
                     MouseArea {
                         anchors.fill: parent
@@ -187,8 +187,8 @@ Roll {
                     }
                 }
                 Image {
-                    width: 32
-                    height: 32
+                    width: 32 * adjScr
+                    height: 32 * adjScr
                     source: "qrc:/pics/mag.png"
                     MouseArea {
                         anchors.fill: parent
@@ -196,8 +196,8 @@ Roll {
                     }
                 }
                 Image {
-                    width: 32
-                    height: 32
+                    width: 32 * adjScr
+                    height: 32 * adjScr
                     source: "qrc:/pics/gear.png"
                     MouseArea {
                         anchors.fill: parent
@@ -218,8 +218,8 @@ Roll {
     MouseArea {
         anchors.right: parent.horizontalCenter
         anchors.top: parent.top
-        width: 40
-        height: 40
+        width: 40 * adjScr
+        height: 40 * adjScr
         onClicked: phereo.mode3D.modeAlt = !phereo.mode3D.modeAlt
     }
 }

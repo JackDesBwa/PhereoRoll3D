@@ -182,26 +182,26 @@ Item {
             id: infosItem
             property real direction: 1
             Rectangle {
-                x: 5
-                y: 5
-                width: 75
-                height: 75
+                x: 5 * adjScr
+                y: 5 * adjScr
+                width: 75 * adjScr
+                height: 75 * adjScr
                 AvatarImage {
                     anchors.fill: parent
-                    anchors.margins: 2
+                    anchors.margins: 2 * adjScr
                     source: profileData && profileData.avatarurl || ""
                 }
             }
             Column {
-                x: 5
-                y: 85
-                width: 75
+                x: 5 * adjScr
+                y: 85 * adjScr
+                width: 75 * adjScr
                 Repeater {
                     model: 5
                     delegate: CLabel {
                         x: (index == rollData) * infosItem.direction
                         width: parent.width
-                        height: 20
+                        height: 20 * adjScr
                         text: {
                             if (index == 0)
                                 return profileData.amount + " photos";
@@ -233,10 +233,10 @@ Item {
             }
             Flickable {
                 id: flickableProperties
-                x: 85
-                y: 5
-                height: parent.height-10
-                width: parent.width-90
+                x: 85 * adjScr
+                y: 5 * adjScr
+                height: parent.height-10 * adjScr
+                width: parent.width-90 * adjScr
                 clip: true
                 flickableDirection: Qt.Vertical
                 contentHeight: columnProperties.height
@@ -266,7 +266,7 @@ Item {
                         width: parent.width
                         horizontalAlignment: Text.AlignJustify
                     }
-                    Item { width: 5; height: 5 }
+                    Item { width: 5 * adjScr; height: 5 * adjScr }
                     Repeater {
                         model: ["firstName", "lastName", "email", "phone", "location", "stereocamera", "viewer", "blog", "website", "flickr", "twitter", "facebook", "googleplus"]
                         delegate: Item {
@@ -319,8 +319,8 @@ Item {
         id: roll
         anchors.bottom: parent.bottom
         width: parent.width
-        height: 130
-        size: 100
+        height: 130 * adjScr
+        size: 100 * adjScr
 
         onClicked: {
             if (rollData == 1) {

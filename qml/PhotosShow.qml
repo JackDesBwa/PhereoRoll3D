@@ -118,15 +118,15 @@ Item {
                                     id: righttools
                                     anchors.right: parent.right
                                     anchors.top: parent.top
-                                    anchors.topMargin: 5
+                                    anchors.topMargin: 5 * adjScr
                                     Item {
-                                        width: 45
-                                        height: 45
+                                        width: 45 * adjScr
+                                        height: 45 * adjScr
                                         Image {
                                             id: dlimg
                                             anchors.centerIn: parent
-                                            width: 25
-                                            height: 25
+                                            width: 25 * adjScr
+                                            height: 25 * adjScr
                                             source: toolbox.hasWritePermissions ? (toolbox.imgPath !== "" ? "qrc:/pics/dl_ok.png" : "qrc:/pics/dl.png") : "qrc:/pics/dl_ko.png"
                                             visible: !downloading && imgl.status == Image.Ready
                                             MouseArea {
@@ -174,12 +174,12 @@ Item {
                                         }
                                     }
                                     Item {
-                                        width: 45
-                                        height: 45
+                                        width: 45 * adjScr
+                                        height: 45 * adjScr
                                         Image {
                                             anchors.centerIn: parent
-                                            width: 25
-                                            height: 25
+                                            width: 25 * adjScr
+                                            height: 25 * adjScr
                                             source: "qrc:/pics/web.png"
                                             MouseArea {
                                                 anchors.fill: parent
@@ -191,10 +191,10 @@ Item {
                                 Row {
                                     anchors.left: parent.left
                                     anchors.right: righttools.left
-                                    spacing: 5
+                                    spacing: 5 * adjScr
                                     AvatarImage {
-                                        width: 45
-                                        height: 45
+                                        width: 45 * adjScr
+                                        height: 45 * adjScr
                                         source: showInfos ? phereo.photo.avatarurl : ""
                                         MouseArea {
                                             anchors.fill: parent
@@ -216,7 +216,7 @@ Item {
                                                 font.bold: true
                                                 horizontalAlignment: Text.AlignLeft
                                             }
-                                            Item { width: 5; height: 1; visible: parent.height < 20 }
+                                            Item { width: 5 * adjScr; height: 1; visible: parent.height < 20 * adjScr }
                                             CLabel {
                                                 width: Math.min(implicitWidth, parent.width)
                                                 text: phereo.photo.user
@@ -229,7 +229,7 @@ Item {
                                             }
                                         }
                                         Row {
-                                            spacing: 8
+                                            spacing: 8 * adjScr
                                             PLabel {
                                                 function pad(nb) { return nb < 10 ? "0"+nb : nb; }
                                                 text: {
@@ -239,27 +239,27 @@ Item {
                                                 }
                                             }
                                             Row {
-                                                spacing: 2
-                                                Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/pics/likes.png" }
+                                                spacing: 2 * adjScr
+                                                Image { anchors.bottom: parent.bottom; width: 12 * adjScr; height: 12 * adjScr; source: "qrc:/pics/likes.png" }
                                                 PLabel { text: phereo.photo.likes; font.bold: true }
                                             }
                                             Row {
-                                                spacing: 2
-                                                Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/pics/views.png" }
+                                                spacing: 2 * adjScr
+                                                Image { anchors.bottom: parent.bottom; width: 12 * adjScr; height: 12 * adjScr; source: "qrc:/pics/views.png" }
                                                 PLabel { text: phereo.photo.views; font.italic: true }
                                             }
                                             Row {
-                                                spacing: 2
-                                                Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/pics/comments.png" }
+                                                spacing: 2 * adjScr
+                                                Image { anchors.bottom: parent.bottom; width: 12 * adjScr; height: 12 * adjScr; source: "qrc:/pics/comments.png" }
                                                 PLabel { text: phereo.photo.comments; font.italic: true }
                                             }
                                         }
                                         Row {
-                                            spacing: 5
+                                            spacing: 5 * adjScr
                                             Row {
-                                                spacing: 3
+                                                spacing: 3 * adjScr
                                                 visible: phereo.photo.flagPopular
-                                                Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/pics/label.png" }
+                                                Image { anchors.bottom: parent.bottom; width: 12 * adjScr; height: 12 * adjScr; source: "qrc:/pics/label.png" }
                                                 CLabel {
                                                     text: "Popular"
                                                     small: true
@@ -270,9 +270,9 @@ Item {
                                                 }
                                             }
                                             Row {
-                                                spacing: 3
+                                                spacing: 3 * adjScr
                                                 visible: phereo.photo.flagFeatured
-                                                Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/pics/label.png" }
+                                                Image { anchors.bottom: parent.bottom; width: 12 * adjScr; height: 12 * adjScr; source: "qrc:/pics/label.png" }
                                                 CLabel {
                                                     text: "Featured"
                                                     small: true
@@ -283,9 +283,9 @@ Item {
                                                 }
                                             }
                                             Row {
-                                                spacing: 3
+                                                spacing: 3 * adjScr
                                                 visible: phereo.photo.flagStaff
-                                                Image { anchors.bottom: parent.bottom; width: 12; height: 12; source: "qrc:/pics/label.png" }
+                                                Image { anchors.bottom: parent.bottom; width: 12 * adjScr; height: 12 * adjScr; source: "qrc:/pics/label.png" }
                                                 CLabel {
                                                     text: "Staff"
                                                     small: true
@@ -306,7 +306,7 @@ Item {
                                 horizontalAlignment: Text.AlignLeft
                             }
                             Row {
-                                spacing: 5
+                                spacing: 5 * adjScr
                                 PLabel {
                                     text: phereo.category
                                     font.bold: true
@@ -379,7 +379,6 @@ Item {
                                             onClicked: {
                                                 phereo.showList();
                                                 phereo.loadAlbum(model.id, "%1 [%2]".arg(model.title).arg(phereo.photo.user));
-
                                             }
                                         }
                                     }
@@ -399,14 +398,14 @@ Item {
                             }
                             Column {
                                 id: comment
-                                width: parent.width - 10
-                                x: 5
-                                y: 5
+                                width: parent.width - 10 * adjScr
+                                x: 5 * adjScr
+                                y: 5 * adjScr
                                 Row {
-                                    spacing: 5
+                                    spacing: 5 * adjScr
                                     AvatarImage {
-                                        width: 45
-                                        height: 45
+                                        width: 45 * adjScr
+                                        height: 45 * adjScr
                                         source: model.avatarurl
                                         MouseArea {
                                             anchors.fill: parent
@@ -617,8 +616,8 @@ Item {
     MouseArea {
         anchors.right: parent.horizontalCenter
         anchors.top: parent.top
-        width: 40
-        height: 40
+        width: 40 * adjScr
+        height: 40 * adjScr
         visible: !showComments
         onClicked: phereo.mode3D.modeAlt = !phereo.mode3D.modeAlt
     }

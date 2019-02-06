@@ -84,12 +84,12 @@ Item {
             property real direction: 0
             Row {
                 anchors.centerIn: parent
-                anchors.verticalCenterOffset: usersFound.count == 0 && searching == 0 ? 0 : -70 - height
-                spacing: 20
+                anchors.verticalCenterOffset: usersFound.count == 0 && searching == 0 ? 0 : -70 * adjScr - height
+                spacing: 20 * adjScr
                 Column {
                     Item {
-                        width: 120
-                        height: 20
+                        width: 120 * adjScr
+                        height: 20 * adjScr
                         CLabel {
                             anchors.fill: parent
                             anchors.leftMargin: (editbox.searchType == 0) * 2 * direction
@@ -99,8 +99,8 @@ Item {
                         }
                     }
                     Item {
-                        width: 120
-                        height: 20
+                        width: 120 * adjScr
+                        height: 20 * adjScr
                         CLabel {
                             anchors.fill: parent
                             anchors.leftMargin: (editbox.searchType == 1) * 2 * direction
@@ -110,8 +110,8 @@ Item {
                         }
                     }
                     Item {
-                        width: 120
-                        height: 20
+                        width: 120 * adjScr
+                        height: 20 * adjScr
                         CLabel {
                             anchors.fill: parent
                             anchors.leftMargin: (editbox.searchType == 2) * 2 * direction
@@ -124,7 +124,7 @@ Item {
                 CLabel {
                     property bool empty: editbox.activeFocus && !editbox.text
                     anchors.verticalCenter: parent.verticalCenter
-                    width: Math.max(implicitWidth, 120)
+                    width: Math.max(implicitWidth, 120 * adjScr)
                     text: empty ? "<Enter your search>" :
                                   editbox.text.substring(0, editbox.selectionStart) + "<u>" +
                                   editbox.text.substring(editbox.selectionStart, editbox.selectionEnd) + "</u>" +
@@ -137,7 +137,7 @@ Item {
             }
             PLabel {
                 anchors.centerIn: parent
-                anchors.verticalCenterOffset: 140
+                anchors.verticalCenterOffset: 140 * adjScr
                 text: usersFound.count > 0 ? (roll.modelItem ? roll.modelItem.username + " (" + roll.modelItem.amount + ")" : "") :
                                              searching == 1 ? "Searching..." :
                                              searching == 2 ? "No result" : ""
@@ -148,8 +148,8 @@ Item {
     MouseArea {
         anchors.right: parent.horizontalCenter
         anchors.top: parent.top
-        width: 40
-        height: 40
+        width: 40 * adjScr
+        height: 40 * adjScr
         onClicked: phereo.mode3D.modeAlt = !phereo.mode3D.modeAlt
     }
 }
