@@ -27,5 +27,7 @@
         <file>qml/SearchPage.qml</file>
         <file>qml/Settings.qml</file>
         <file>qml/UserProfile.qml</file>
+        <file>pics/cursorr.png</file>
+        <file>pics/cursorl.png</file>
     </qresource>
 </RCC>

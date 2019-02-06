@@ -346,6 +346,44 @@ Window {
             anchors.fill: parent
         }
 
+        MouseArea {
+            id: screenMouseArea
+            property bool moving: false
+            anchors.fill: parent
+            propagateComposedEvents: true
+            acceptedButtons: Qt.NoButton
+            cursorShape: Qt.BlankCursor
+            hoverEnabled: true
+            onMouseXChanged: { moving = true ; screenMouseTimer.restart() }
+            onMouseYChanged: { moving = true ; screenMouseTimer.restart() }
+            Timer {
+                id: screenMouseTimer
+                interval: 1500
+                repeat: false
+                onTriggered: screenMouseArea.moving = false
+            }
+            Image {
+                source: "qrc:/pics/cursorl.png"
+                width: implicitWidth / 10.0 * adjScr
+                height: implicitHeight / 10.0 * adjScr
+                visible: screenMouseArea.containsMouse
+                opacity: screenMouseArea.moving ? 1 : 0
+                x: screenMouseArea.mouseX
+                y: screenMouseArea.mouseY
+                Behavior on opacity { NumberAnimation{ duration: screenMouseArea.moving ? 1500 : 0 } }
+            }
+            Image {
+                source: "qrc:/pics/cursorr.png"
+                width: implicitWidth / 10.0 * adjScr
+                height: implicitHeight / 10.0 * adjScr
+                visible: screenMouseArea.containsMouse
+                opacity: screenMouseArea.moving ? 1 : 0
+                x: parent.width/2 + screenMouseArea.mouseX
+                y: screenMouseArea.mouseY
+                Behavior on opacity { NumberAnimation{ duration: screenMouseArea.moving ? 1500 : 0 } }
+            }
+        }
+
         layer.enabled: true
         layer.effect: ShaderEffect {
             property variant src: parallel_surface
