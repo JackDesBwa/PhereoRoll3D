@@ -4,9 +4,7 @@
 #include "httpcache.h"
 #include "toolbox.h"
 
-int main(int argc, char *argv[])
-{
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+int main(int argc, char *argv[]) {
     qputenv("QT_ANDROID_VOLUME_KEYS", "1");
 
     QGuiApplication app(argc, argv);
