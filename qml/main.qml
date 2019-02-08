@@ -395,17 +395,19 @@ Window {
                 onWidthChanged: requestPaint()
                 onHeightChanged: requestPaint()
                 onPaint: {
+                    if (!width || !height)
+                        return;
                     var ctx = getContext("2d");
-                    var img = ctx.createImageData(width, height)
-                    ctx.fillStyle = "black";
-                    ctx.fillRect(0, 0, width, height);
-                    ctx.fillStyle = "white";
-                    if (_vert)
-                        for (var i = 0; i < height; i += 2)
-                            ctx.fillRect(0, i, width, 1);
-                    else
-                        for (var i = 0; i < width; i += 2)
-                            ctx.fillRect(i, 0, 1, height);
+                    var img = ctx.createImageData(width, height);
+                    var val = 0;
+                    for (var i = 0; i < img.data.length; i += 4) {
+                        val = val ? 0 : 255;
+                        img.data[i+0] = val;
+                        img.data[i+1] = val;
+                        img.data[i+2] = val;
+                        img.data[i+3] = 255;
+                    }
+                    ctx.drawImage(img, 0, 0);
                 }
             }
             vertexShader: "
