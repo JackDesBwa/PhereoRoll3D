@@ -348,47 +348,41 @@ Window {
 
         MouseArea {
             id: screenMouseArea
-            property bool moving: false
+            property bool displayCustomCursor: false
             anchors.fill: parent
             propagateComposedEvents: true
             acceptedButtons: Qt.NoButton
             cursorShape: Qt.BlankCursor
             hoverEnabled: true
             onPositionChanged: {
-                moving = screenMousePremoveTimer.running;
-                screenMousePremoveTimer.restart();
+                displayCustomCursor = true;
                 screenMouseOutTimer.restart();
-            }
-            Timer {
-                id: screenMousePremoveTimer
-                interval: 50
-                repeat: false
             }
             Timer {
                 id: screenMouseOutTimer
                 interval: 1500
                 repeat: false
-                onTriggered: screenMouseArea.moving = false
+                onTriggered: screenMouseArea.displayCustomCursor = false
             }
             Image {
                 source: "qrc:/pics/cursorl.png"
                 width: implicitWidth / 10.0 * adjScr
                 height: implicitHeight / 10.0 * adjScr
                 visible: screenMouseArea.containsMouse
-                opacity: screenMouseArea.moving ? 1 : 0
+                opacity: screenMouseArea.displayCustomCursor ? 1 : 0
                 x: screenMouseArea.mouseX
                 y: screenMouseArea.mouseY
-                Behavior on opacity { NumberAnimation{ duration: screenMouseArea.moving ? 1500 : 0 } }
+                Behavior on opacity { NumberAnimation{ duration: screenMouseArea.displayCustomCursor ? 1500 : 0 } }
             }
             Image {
                 source: "qrc:/pics/cursorr.png"
                 width: implicitWidth / 10.0 * adjScr
                 height: implicitHeight / 10.0 * adjScr
                 visible: screenMouseArea.containsMouse
-                opacity: screenMouseArea.moving ? 1 : 0
+                opacity: screenMouseArea.displayCustomCursor ? 1 : 0
                 x: parent.width/2 + screenMouseArea.mouseX
                 y: screenMouseArea.mouseY
-                Behavior on opacity { NumberAnimation{ duration: screenMouseArea.moving ? 1500 : 0 } }
+                Behavior on opacity { NumberAnimation{ duration: screenMouseArea.displayCustomCursor ? 1500 : 0 } }
             }
         }
 
