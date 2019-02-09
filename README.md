@@ -160,7 +160,7 @@ The information about image are
   A + sign is appended if there are more images in the list.
   Clicking on the text loads next images.
 - Optionally, the list of tags
-- Optionnally, the list of albums in which the image is (clicking on it opens the album)
+- Optionally, the list of albums in which the image is (clicking on it opens the album)
 
 A web icon is present on the right. When clicked, it opens the image URL on phereo website. On Android, if multiple apps can open the link, the system asks you to choose which one to use. As a consequence, it is a also a quick access to official phereo app (useful to quickly add a like on a picture). 
 
