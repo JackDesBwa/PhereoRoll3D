@@ -180,6 +180,8 @@ Clicking on the author name or avatar opens its gallery, long press opens user i
 
 Select the orientation you want to show/change on the left list, and show/select associated 3D mode on the right list.
 
+A zone indicates if the cursor is visible when a mouse is used. Clicking on it change the cursor status. Note: when enabled, the cursor is visible only when the mouse moves.
+
 Click elsewhere to come back to list view.
 
 ### Search page

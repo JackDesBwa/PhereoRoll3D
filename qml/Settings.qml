@@ -31,6 +31,14 @@ MouseArea {
                             onClicked: page.selection = index
                         }
                     }
+                    CLabel {
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        width: Math.max(implicitWidth, 150 * adjScr)
+                        height: 20 * adjScr
+                        text: "[Cursor " + (phereo.disableCursor ? "disabled]" : "enabled]")
+                        small: true
+                        onClicked: phereo.disableCursor = !phereo.disableCursor
+                    }
                 }
 
                 Column {

@@ -22,6 +22,7 @@ Window {
        property string category_url
        property int nbImagesMax: 0
        property int selection: 0
+       property bool disableCursor: false
        property var _photo: photosList.get(selection)
        property var photo: _photo ? _photo : {
                imgid: 0,
@@ -368,7 +369,7 @@ Window {
                 source: "qrc:/pics/cursorl.png"
                 width: implicitWidth / 10.0 * adjScr
                 height: implicitHeight / 10.0 * adjScr
-                visible: screenMouseArea.containsMouse
+                visible: screenMouseArea.containsMouse && !phereo.disableCursor
                 opacity: screenMouseArea.displayCustomCursor ? 1 : 0
                 x: screenMouseArea.mouseX
                 y: screenMouseArea.mouseY
@@ -378,7 +379,7 @@ Window {
                 source: "qrc:/pics/cursorr.png"
                 width: implicitWidth / 10.0 * adjScr
                 height: implicitHeight / 10.0 * adjScr
-                visible: screenMouseArea.containsMouse
+                visible: screenMouseArea.containsMouse && !phereo.disableCursor
                 opacity: screenMouseArea.displayCustomCursor ? 1 : 0
                 x: parent.width/2 + screenMouseArea.mouseX
                 y: screenMouseArea.mouseY
@@ -556,6 +557,7 @@ void main(void) {
     }
 
     QtLabsSettings.Settings {
+        property alias disableCursor: phereo.disableCursor
         property alias mode3D_portraitMode: mode3D.portraitMode
         property alias mode3D_landscapeMode: mode3D.landscapeMode
         property alias mode3D_portraitModeAlt: mode3D.portraitModeAlt
