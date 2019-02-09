@@ -354,10 +354,18 @@ Window {
             acceptedButtons: Qt.NoButton
             cursorShape: Qt.BlankCursor
             hoverEnabled: true
-            onMouseXChanged: { moving = true ; screenMouseTimer.restart() }
-            onMouseYChanged: { moving = true ; screenMouseTimer.restart() }
+            onPositionChanged: {
+                moving = screenMousePremoveTimer.running;
+                screenMousePremoveTimer.restart();
+                screenMouseOutTimer.restart();
+            }
             Timer {
-                id: screenMouseTimer
+                id: screenMousePremoveTimer
+                interval: 50
+                repeat: false
+            }
+            Timer {
+                id: screenMouseOutTimer
                 interval: 1500
                 repeat: false
                 onTriggered: screenMouseArea.moving = false
