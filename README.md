@@ -20,25 +20,27 @@ Source code is available, so if it lacks something for you, feel free to contrib
 Compatibility
 -------------
 
-Precompiled APK are compatible down to Android API 16 which is 4.1/Jelly Bean. Motivated users with older Android version can try to compile with an older version of the framework, say Qt5.6, which should theorically work although untested.
+Precompiled APK are compatible down to Android API 16 which is 4.1/Jelly Bean, and down to Android API 9 which is 2.3/Gingerbread for the "retro" version.
 
-Most 3D tablet and phones use either vertical parallax barrier or lenticular film. The app should work with all of them (provided that Android version is not too old).
+Most 3D tablets and phones use either parallax barrier or lenticular film. The app should work with all of them.
 
-Devices that use software-activated barrier are likely to not work, except if you can activate the barrier outside of the app. Experimental activation is present since v0.6 for somes models, but no feedback has been given at the time of writing.
+Devices that use software-activated barrier are likely to not work, except if you can activate the barrier outside of the app. Experimental activation is present since v0.6 for some models.
 
-**Known be compatible:**\
+**Known to be compatible:**\
 Elephone P8 3D\
 PPTV King 7S 3D\
 Doogee Y6 Max 3D\
-ZTE Axon 7 Max 
+ZTE Axon 7 Max\
+VKworld Discovery S2\
+Truly/Freevi tablet (with retro version)
 
-**Known to not be compatible:**\
+**Known for NOT being compatible:**\
 Super D D1 (use LCD barrier)\
-InFocus M550 (use LCD barrier)\
-Evo 3D (old Android)\
-HTC Thrill (old Android)\
-Truly/Freevi tablet (old Android)
+InFocus M550 (use LCD barrier)
 
+**Known for NOT being compatible** in older versions, but not tested with recent improvements:\
+Evo 3D\
+HTC Thrill
 
 Usage
 -----
