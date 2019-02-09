@@ -13,6 +13,26 @@ Item {
     property bool showInfos: false
     property bool showComments: false
     property bool downloading: false
+    property bool longDescription: false
+
+    function openInfosAndComments(action) {
+        if (action === true || action === undefined) { // Always open
+            if (showInfos) {
+                if ((phereo.photo.comments > 0 || longDescription) && !showComments)
+                    showComments = true;
+                else if (action === undefined)
+                    showComments = false;
+            } else {
+                showInfos = true;
+            }
+
+        } else if (action === false) { // Always close
+            if (showComments)
+                showComments = false;
+            else if (showInfos)
+                showInfos = false;
+        }
+    }
 
     onShowInfosChanged: {
         if (!showInfos)
@@ -86,6 +106,7 @@ Item {
                 height: showComments ? parent.height : Math.min(infosData.height + 10 * adjScr, parent.height/2)
                 interactive: contentHeight > height
                 onContentYChanged: commentsY = contentY
+                onInteractiveChanged: longDescription = interactive
                 Connections {
                     target: show
                     onCommentsYChanged: {
@@ -102,12 +123,7 @@ Item {
                         y: 5 * adjScr
                         width: parent.width
                         height: childrenRect.height
-                        onClicked: {
-                            if (phereo.photo.comments > 0 && !showComments)
-                                showComments = true;
-                            else
-                                showComments = false;
-                        }
+                        onClicked: openInfosAndComments()
                         Column {
                             width: parent.width - 10 * adjScr
 
@@ -480,24 +496,6 @@ Item {
             posX = x;
             posY = y;
         }
-        function openInfosAndCOmments(action) {
-            if (action === true || action === undefined) { // Always open
-                if (showInfos) {
-                    if (phereo.photo.comments > 0 && !showComments)
-                        showComments = true;
-                    else if (action === undefined)
-                        showComments = false;
-                } else {
-                    showInfos = true;
-                }
-
-            } else if (action === false) { // Always close
-                if (showComments)
-                    showComments = false;
-                else if (showInfos)
-                    showInfos = false;
-            }
-        }
 
         onCanceled: {
             scaleFactor = i_scale;
@@ -507,7 +505,7 @@ Item {
         onLeftClicked: phereo.previous()
         onRightClicked: phereo.next()
         onTopClicked: back()
-        onBottomClicked: openInfosAndCOmments()
+        onBottomClicked: openInfosAndComments()
         onCenterClicked: showInfos = !showInfos
 
         onLeftProportionalStart: i_scale = scaleFactor
@@ -524,15 +522,15 @@ Item {
         onTopProportionalStop: inverted = !inverted
         onTopDuoPressed: inverted = !inverted
 
-        onBottomProportionalStop: openInfosAndCOmments(true)
+        onBottomProportionalStop: openInfosAndComments(true)
         onBottomDuoPressed: posX = posY = 0
 
         onSwipedLeft: phereo.next();
         onSwipedRight: phereo.previous();
-        onSwipedUp:  openInfosAndCOmments(true);
+        onSwipedUp:  openInfosAndComments(true);
         onSwipedDown: {
             if (showInfos)
-                openInfosAndCOmments(false);
+                openInfosAndComments(false);
             else
                 inverted = !inverted;
         }
