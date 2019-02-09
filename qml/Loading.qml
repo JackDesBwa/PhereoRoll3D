@@ -5,7 +5,7 @@ Item {
     Rectangle {
         anchors.centerIn: parent
         width: parent.width * 0.8
-        height: 10
+        height: 10 * adjScr
         color: "white"
 
         Rectangle {

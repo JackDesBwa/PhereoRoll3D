@@ -68,7 +68,7 @@ Item {
     Roll {
         id: roll
         anchors.fill: parent
-        dy: 20
+        dy: 20 * adjScr
 
         model: ListModel { id: usersFound }
         modelThumb: "avatarurl"

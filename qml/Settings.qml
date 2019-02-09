@@ -62,7 +62,7 @@ MouseArea {
             right: parent.horizontalCenter
         }
         sourceComponent: infos
-        onLoaded: item.direction = 1
+        onLoaded: item.direction = adjScr
     }
     Loader {
         anchors {
@@ -72,7 +72,7 @@ MouseArea {
             right: parent.right
         }
         sourceComponent: infos
-        onLoaded: item.direction = -1
+        onLoaded: item.direction = -adjScr
     }
 
     MouseArea {

@@ -97,7 +97,7 @@ MouseArea {
             right: parent.horizontalCenter
         }
         sourceComponent: infos
-        onLoaded: item.direction = 1
+        onLoaded: item.direction = adjScr
     }
     Loader {
         anchors {
@@ -107,14 +107,14 @@ MouseArea {
             right: parent.right
         }
         sourceComponent: infos
-        onLoaded: item.direction = -1
+        onLoaded: item.direction = -adjScr
     }
 
     MouseArea {
         anchors.right: parent.horizontalCenter
         anchors.top: parent.top
-        width: 40
-        height: 40
+        width: 40 * adjScr
+        height: 40 * adjScr
         onClicked: phereo.mode3D.modeAlt = !phereo.mode3D.modeAlt
     }
 }

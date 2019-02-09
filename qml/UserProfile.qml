@@ -281,8 +281,8 @@ Item {
                             }
                             PLabel {
                                 id: lineText
-                                x: lineLabel.width + 5
-                                width: columnProperties.width - lineLabel.width - 10
+                                x: lineLabel.width + 5 * adjScr
+                                width: columnProperties.width - lineLabel.width - 10 * adjScr
                                 text: toolbox.reformatText(profileData[modelData])
                                 horizontalAlignment: Text.AlignLeft
                             }
@@ -303,7 +303,7 @@ Item {
             right: parent.horizontalCenter
         }
         sourceComponent: infos
-        onLoaded: item.direction = 1
+        onLoaded: item.direction = adjScr
     }
     Loader {
         anchors {
@@ -313,7 +313,7 @@ Item {
             right: parent.right
         }
         sourceComponent: infos
-        onLoaded: item.direction = -1
+        onLoaded: item.direction = -adjScr
     }
     Roll {
         id: roll
@@ -353,8 +353,8 @@ Item {
     MouseArea {
         anchors.right: parent.horizontalCenter
         anchors.top: parent.top
-        width: 40
-        height: 40
+        width: 40 * adjScr
+        height: 40 * adjScr
         onClicked: phereo.mode3D.modeAlt = !phereo.mode3D.modeAlt
     }
 }

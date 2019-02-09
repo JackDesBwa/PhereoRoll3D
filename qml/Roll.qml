@@ -85,7 +85,7 @@ Item {
     }
     PathView {
         id: pvl
-        property real dir: 1
+        property real dir: adjScr
 
         width: parent.width/2
         height: parent.height
@@ -114,7 +114,7 @@ Item {
     }
     PathView {
         id: pvr
-        property real dir: -1
+        property real dir: -adjScr
 
         x:parent.width/2
         width: parent.width/2

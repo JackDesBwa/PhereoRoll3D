@@ -5,7 +5,7 @@ Item {
 
     property real borderWidth: 50 * adjScr
     property real borderHeight: 50 * adjScr
-    property real gestureThreshold: 5
+    property real gestureThreshold: 5 * adjScr
 
     signal canceled();
 

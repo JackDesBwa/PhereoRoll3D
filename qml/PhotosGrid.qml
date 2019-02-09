@@ -18,7 +18,7 @@ Roll {
         property int direction: 0
         Row {
             anchors.horizontalCenter: parent.horizontalCenter
-            spacing: 2
+            spacing: 2 * adjScr
             Repeater {
                 model: ListModel {
                     ListElement { text: "Popular" }
@@ -172,10 +172,10 @@ Roll {
         Column {
             anchors.right: parent.right
             anchors.bottom: parent.bottom
-            anchors.margins: 5
-            spacing: 5
+            anchors.margins: 5 * adjScr
+            spacing: 5 * adjScr
             Row {
-                spacing: 5
+                spacing: 5 * adjScr
                 anchors.horizontalCenter: parent.horizontalCenter
                 Image {
                     width: 32 * adjScr

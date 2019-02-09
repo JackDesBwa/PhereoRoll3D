@@ -83,7 +83,7 @@ Item {
                 flickableDirection: Flickable.VerticalFlick
                 clip: true
                 contentHeight: infosData.height
-                height: showComments ? parent.height : Math.min(infosData.height + 10, parent.height/2)
+                height: showComments ? parent.height : Math.min(infosData.height + 10 * adjScr, parent.height/2)
                 interactive: contentHeight > height
                 onContentYChanged: commentsY = contentY
                 Connections {
@@ -95,11 +95,11 @@ Item {
                 }
                 Column {
                     id: infosData
-                    spacing: 10
+                    spacing: 10 * adjScr
                     width: parent.width
                     MouseArea {
-                        x: 5
-                        y: 5
+                        x: 5 * adjScr
+                        y: 5 * adjScr
                         width: parent.width
                         height: childrenRect.height
                         onClicked: {
@@ -109,7 +109,7 @@ Item {
                                 showComments = false;
                         }
                         Column {
-                            width: parent.width-10
+                            width: parent.width - 10 * adjScr
 
                             Item {
                                 height: childrenRect.height
@@ -206,7 +206,7 @@ Item {
                                         }
                                     }
                                     Column {
-                                        width: parent.width - 45-10
+                                        width: parent.width - (45 + 10) * adjScr
                                         anchors.verticalCenter: parent.verticalCenter
                                         Flow {
                                             width: parent.width
@@ -339,12 +339,12 @@ Item {
                                 }
                                 Flow {
                                     id: tagTextFlow
-                                    x: tagLabel.width + 5
-                                    width: parent.width - tagLabel.width - 10
+                                    x: tagLabel.width + 5 * adjScr
+                                    width: parent.width - tagLabel.width - 10 * adjScr
                                     Repeater {
                                         model: tagslist
                                         delegate: CLabel {
-                                            width: implicitWidth + 5
+                                            width: implicitWidth + 5 * adjScr
                                             text: modelData
                                             font.italic: true
                                             onClicked: {
@@ -368,12 +368,12 @@ Item {
                                 }
                                 Flow {
                                     id: albumsTextFlow
-                                    x: albumsLabel.width + 5
-                                    width: parent.width - albumsLabel.width - 10
+                                    x: albumsLabel.width + 5 * adjScr
+                                    width: parent.width - albumsLabel.width - 10 * adjScr
                                     Repeater {
                                         model: phereo.photo.albums
                                         delegate: CLabel {
-                                            width: implicitWidth + 5
+                                            width: implicitWidth + 5 * adjScr
                                             text: model.title
                                             font.italic: true
                                             onClicked: {
@@ -390,7 +390,7 @@ Item {
                         model: showComments ? commentList : null
                         delegate: Item {
                             width: parent.width
-                            height: comment.height + 10
+                            height: comment.height + 10 * adjScr
                             Rectangle {
                                 anchors.fill: parent
                                 color: "white"
