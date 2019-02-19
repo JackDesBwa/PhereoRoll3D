@@ -31,16 +31,18 @@ Elephone P8 3D\
 PPTV King 7S 3D\
 Doogee Y6 Max 3D\
 ZTE Axon 7 Max\
+ZTE K3DX V5\
 VKworld Discovery S2\
-Truly/Freevi tablet (with retro version)
+Galaz N1 (in colums interleaved inverted mode) \
+Truly/Freevi tablet (with retro version)\
+Aikun Morphus X300\
+Most computers (although there is no prebuilt version)
 
 **Known for NOT being compatible:**\
-Super D D1 (use LCD barrier)\
-InFocus M550 (use LCD barrier)
-
-**Known for NOT being compatible** in older versions, but not tested with recent improvements:\
-Evo 3D\
-HTC Thrill
+Super D D1 (uses LCD barrier)\
+InFocus M550 (uses LCD barrier)\
+HTC Evo 3D (uses LCD barrier)\
+LG P720 (app refuses to install)
 
 Usage
 -----
