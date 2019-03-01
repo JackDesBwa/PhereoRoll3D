@@ -34,6 +34,13 @@ Item {
         }
     }
 
+    function handleKey(event) {
+        if (event.key === Qt.Key_X) {
+            inverted = !inverted;
+            event.accepted = true;
+        }
+    }
+
     onShowInfosChanged: {
         if (!showInfos)
             showComments = false;

@@ -63,6 +63,8 @@ F and F11: Toggle fullscreen
 
 C: Toggle cursor visibility
 
+X: Toggle Left/Right images in photo view
+
 ### List view
 
 This view lists all images of the currently selected category/user/album (only first items are loaded, but you can load more images).
