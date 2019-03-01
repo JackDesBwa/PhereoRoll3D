@@ -4,6 +4,7 @@ MouseArea {
     id: page
     property var phereo: null
     property int selection: 0
+    property string version: "X.X"
 
     function back() {
         phereo.showList();
@@ -50,6 +51,13 @@ MouseArea {
                     height: childrenRect.height
                     Column {
                         spacing: 5 * adjScr
+                        PLabel {
+                            text: "PhereoRoll3D v" + version
+                        }
+                        Item {
+                            width: 1
+                            height: 10 * adjScr
+                        }
                         PLabel {
                             text: "Project page, code & manual"
                             small: true
