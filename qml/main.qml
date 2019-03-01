@@ -310,6 +310,12 @@ Window {
 
         focus: true
         Keys.onReleased: {
+            if (loader.item.handleKey) {
+                loader.item.handleKey(event);
+                if (event.accepted)
+                    return;
+            }
+
             if (event.key === Qt.Key_VolumeUp || event.key === Qt.Key_Left) {
                 phereo.previous();
                 event.accepted = true;
