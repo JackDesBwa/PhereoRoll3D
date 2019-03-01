@@ -57,6 +57,8 @@ Volume Up/Down and Left/Right arrow keys: Previous/Next image
 
 Back and Escape: Return to list view (or exit)
 
+Return: Select current photo (in list view only)
+
 F and F11: Toggle fullscreen
 
 C: Toggle cursor visibility

@@ -325,6 +325,11 @@ Window {
                     Qt.quit();
                 }
 
+            } else if (event.key === Qt.Key_Return) {
+                if (!loader.item.back)
+                    phereo.showPhoto(phereo.selection);
+                event.accepted = true;
+
             } else if (event.key === Qt.Key_C) {
                 phereo.disableCursor = !phereo.disableCursor;
                 event.accepted = true;
