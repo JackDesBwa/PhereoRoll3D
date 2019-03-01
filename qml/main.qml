@@ -313,15 +313,22 @@ Window {
             if (event.key === Qt.Key_VolumeUp || event.key === Qt.Key_Left) {
                 phereo.previous();
                 event.accepted = true;
+
             } else if (event.key === Qt.Key_VolumeDown || event.key === Qt.Key_Right) {
                 phereo.next();
                 event.accepted = true;
+
             } else if (event.key === Qt.Key_Back || event.key === Qt.Key_Escape) {
                 if (loader.item.back && loader.item.back()) {
                     event.accepted = true;
                 } else {
                     Qt.quit();
                 }
+
+            } else if (event.key === Qt.Key_C) {
+                phereo.disableCursor = !phereo.disableCursor;
+                event.accepted = true;
+
             } else if (event.key === Qt.Key_F || event.key === Qt.Key_F11) {
                 win.visibility = (win.visibility == Window.Windowed) ? Window.FullScreen :  Window.Windowed
             }

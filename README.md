@@ -59,6 +59,8 @@ Back and Escape: Return to list view (or exit)
 
 F and F11: Toggle fullscreen
 
+C: Toggle cursor visibility
+
 ### List view
 
 This view lists all images of the currently selected category/user/album (only first items are loaded, but you can load more images).
