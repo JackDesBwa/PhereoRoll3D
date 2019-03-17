@@ -69,6 +69,18 @@ Item {
         } else if (event.key === Qt.Key_Equal || event.key === Qt.Key_0) {
             setScale(1.0);
             event.accepted = true;
+
+        } else if (event.key === Qt.Key_2) {
+            setDivergence(divergence + 1);
+            event.accepted = true;
+
+        } else if (event.key === Qt.Key_8) {
+            setDivergence(divergence - 1);
+            event.accepted = true;
+
+        } else if (event.key === Qt.Key_5) {
+            setDivergence(0);
+            event.accepted = true;
         }
     }
 

@@ -71,6 +71,8 @@ Up/Down arrow keys: Open/Close information and comments
 
 +/-/0=: Respectively zoom, unzoom and reset zoom (0 or =)
 
+2/8/5: Move window (2=forward, 8= backward, 5=reset; think about the position on numpad)
+
 ### List view
 
 This view lists all images of the currently selected category/user/album (only first items are loaded, but you can load more images).
