@@ -1,6 +1,8 @@
 PhereoRoll3D
 ============
 
+![Logo](pics/logo.png)
+
 I was frustrated to not be able to use native autostereoscopic capabilities of my ELEPHONE P8 3D to watch stereophotographs of Phereo website ; so I made this app to display them nicely. Some other display modes were added afterwards.
 
 The app is developped in c++ with Qt/QML and a tiny bit of Java. Although only tested on Android and Linux, it is supposed to work on many platforms if compiled for them. Only Android prebuilds are provided.
