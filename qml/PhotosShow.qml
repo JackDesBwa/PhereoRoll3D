@@ -34,6 +34,17 @@ Item {
         }
     }
 
+    function setScale(v) {
+        scaleFactor = Math.min(Math.max(v, 0.1), 10);
+    }
+    function setDivergence(v) {
+        divergence = Math.min(Math.max(v, -100), 100);
+    }
+    function setXY(x, y) {
+        posX = x;
+        posY = y;
+    }
+
     function handleKey(event) {
         if (event.key === Qt.Key_X) {
             inverted = !inverted;
@@ -500,17 +511,6 @@ Item {
         property real i_divergence: 1
         property real i_posX: 0
         property real i_posY: 0
-
-        function setScale(v) {
-            scaleFactor = Math.min(Math.max(v, 0.1), 10);
-        }
-        function setDivergence(v) {
-            divergence = Math.min(Math.max(v, -100), 100);
-        }
-        function setXY(x, y) {
-            posX = x;
-            posY = y;
-        }
 
         onCanceled: {
             scaleFactor = i_scale;
