@@ -38,6 +38,14 @@ Item {
         if (event.key === Qt.Key_X) {
             inverted = !inverted;
             event.accepted = true;
+
+        } else if (event.key === Qt.Key_Up) {
+            openInfosAndComments(true);
+            event.accepted = true;
+
+        } else if (event.key === Qt.Key_Down) {
+            openInfosAndComments(false);
+            event.accepted = true;
         }
     }
 

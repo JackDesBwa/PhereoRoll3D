@@ -63,7 +63,11 @@ F and F11: Toggle fullscreen
 
 C: Toggle cursor visibility
 
-X: Toggle Left/Right images in photo view
+**In photo view:**
+
+X: Toggle Left/Right images
+
+Up/Down arrow keys: Open/Close information and comments
 
 ### List view
 
