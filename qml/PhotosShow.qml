@@ -57,6 +57,18 @@ Item {
         } else if (event.key === Qt.Key_Down) {
             openInfosAndComments(false);
             event.accepted = true;
+
+        } else if (event.key === Qt.Key_Plus) {
+            setScale(scaleFactor * 1.1);
+            event.accepted = true;
+
+        } else if (event.key === Qt.Key_Minus) {
+            setScale(scaleFactor / 1.1);
+            event.accepted = true;
+
+        } else if (event.key === Qt.Key_Equal || event.key === Qt.Key_0) {
+            setScale(1.0);
+            event.accepted = true;
         }
     }
 

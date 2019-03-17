@@ -69,6 +69,8 @@ X: Toggle Left/Right images
 
 Up/Down arrow keys: Open/Close information and comments
 
++/-/0=: Respectively zoom, unzoom and reset zoom (0 or =)
+
 ### List view
 
 This view lists all images of the currently selected category/user/album (only first items are loaded, but you can load more images).
