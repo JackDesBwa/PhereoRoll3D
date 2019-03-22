@@ -18,6 +18,7 @@ Item {
     }
 
     property int searching: 0
+    property bool toomanyusers: false
     function searchUser(keyword) {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
@@ -35,6 +36,7 @@ Item {
                     });
                 }
                 founds.sort(function(a,b){ return b.amount - a.amount; });
+                toomanyusers = (founds.length >= 500);
                 for (var j in founds) {
                     usersFound.append(founds[j]);
                 }
@@ -146,6 +148,13 @@ Item {
                 text: usersFound.count > 0 ? (roll.modelItem ? roll.modelItem.username + " (" + roll.modelItem.amount + ")" : "") :
                                              searching == 1 ? "Searching..." :
                                              searching == 2 ? "No result" : ""
+            }
+            PLabel {
+                anchors.centerIn: parent
+                anchors.verticalCenterOffset: 155 * adjScr
+                text: "Limited to 500 users"
+                small: true
+                visible: toomanyusers
             }
         }
     }
