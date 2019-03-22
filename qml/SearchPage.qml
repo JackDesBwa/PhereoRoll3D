@@ -24,14 +24,19 @@ Item {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 var res = JSON.parse(xhr.responseText);
                 usersFound.clear();
+                var founds = [];
                 for (var i in res.assets) {
                     var user = res.assets[i];
-                    usersFound.append({
+                    founds.push({
                         userid: user.id,
                         username: user.screenName,
                         amount: user.amount,
                         avatarurl: "http://api.phereo.com/avatar/%1/100.100".arg(user.id)
                     });
+                }
+                founds.sort(function(a,b){ return b.amount - a.amount; });
+                for (var j in founds) {
+                    usersFound.append(founds[j]);
                 }
                 searching = 2;
             }
