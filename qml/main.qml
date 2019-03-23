@@ -49,10 +49,10 @@ Window {
            id: mode3D
            readonly property int leftView: 0
            readonly property int rightView: 1
-           readonly property int columnsInterleaved: 2
-           readonly property int columnsInterleavedInv: 3
-           readonly property int rowsInterleaved: 4
-           readonly property int rowsInterleavedInv: 5
+           readonly property int columnsInterleaved1: 2
+           readonly property int columnsInterleaved2: 3
+           readonly property int rowsInterleaved1: 4
+           readonly property int rowsInterleaved2: 5
            readonly property int parallelHalfView: 6
            readonly property int parallelFullView: 7
            readonly property int crossHalfView: 8
@@ -63,10 +63,10 @@ Window {
            readonly property var list: [
                "left view",
                "right view",
-               "columns interleaved",
-               "columns interleaved inverted",
-               "rows interleaved",
-               "rows interleaved inverted",
+               "columns interleaved 1",
+               "columns interleaved 2",
+               "rows interleaved 1",
+               "rows interleaved 2",
                "parallel half view",
                "parallel full view",
                "cross half view",
@@ -77,8 +77,8 @@ Window {
 
            property bool modeAlt: false
            property int portraitMode: leftView
-           property int landscapeMode: columnsInterleaved
-           property int portraitModeAlt: rowsInterleaved
+           property int landscapeMode: columnsInterleaved1
+           property int portraitModeAlt: rowsInterleaved1
            property int landscapeModeAlt: anaglyphMonochrome
            property int activeMode: win.width > win.height ?
                                           (modeAlt ? landscapeModeAlt : landscapeMode) :
@@ -457,7 +457,7 @@ void main(void) {
         lowp vec4 r = texture2D(src, coordM + vec2(0.5, 0.0));
         gl_FragColor = r * qt_Opacity;
 
-    } else if (mode == 2) { // ColumnsInterleaved
+    } else if (mode == 2) { // ColumnsInterleaved1
         lowp vec4 l = texture2D(src, coordM);
         lowp vec4 r = texture2D(src, coordM + vec2(0.5, 0.0));
         lowp float m = texture2D(mask, vec2(coordM.x * 2.0, 0.0)).r;
@@ -466,7 +466,7 @@ void main(void) {
         else
             gl_FragColor = r * qt_Opacity;
 
-    } else if (mode == 3) { // ColumnsInterleavedInv
+    } else if (mode == 3) { // ColumnsInterleaved2
         lowp vec4 l = texture2D(src, coordM);
         lowp vec4 r = texture2D(src, coordM + vec2(0.5, 0.0));
         lowp float m = texture2D(mask, vec2(coordM.x * 2.0, 0.0)).r;
@@ -475,7 +475,7 @@ void main(void) {
         else
             gl_FragColor = l * qt_Opacity;
 
-    } else if (mode == 4) { // RowsInterleaved
+    } else if (mode == 4) { // RowsInterleaved1
         lowp vec4 l = texture2D(src, coordM);
         lowp vec4 r = texture2D(src, coordM + vec2(0.5, 0.0));
         lowp float m = texture2D(mask, vec2(0.0, coordM.y)).r;
@@ -484,7 +484,7 @@ void main(void) {
         else
             gl_FragColor = r * qt_Opacity;
 
-    } else if (mode == 5) { // RowsInterleavedInv
+    } else if (mode == 5) { // RowsInterleaved2
         lowp vec4 l = texture2D(src, coordM);
         lowp vec4 r = texture2D(src, coordM + vec2(0.5, 0.0));
         lowp float m = texture2D(mask, vec2(0.0, coordM.y)).r;
