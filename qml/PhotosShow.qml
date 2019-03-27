@@ -596,7 +596,7 @@ Item {
 
         Image {
             id: imgl
-            x: parent.width/2 - width/2 * scale + posX + divergence
+            x: parent.width/2 - width/2 * scale + posX + divergence * scale
             y: parent.height/2 - height/2 * scale + posY
             source: phereo.photo.imgurl
             fillMode: Image.PreserveAspectCrop
@@ -628,7 +628,7 @@ Item {
 
         Image {
             id: imgr
-            x: parent.width/2 - width/2 * scale + posX - divergence
+            x: parent.width/2 - width/2 * scale + posX - divergence * scale
             y: parent.height/2 - height/2 * scale + posY
             property real fitScale: Math.min(2 * parent.width / implicitWidth, parent.height/implicitHeight)
             source: phereo.photo.imgurl
