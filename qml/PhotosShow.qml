@@ -38,7 +38,7 @@ Item {
         scaleFactor = Math.min(Math.max(v, 0.1), 10);
     }
     function setDivergence(v) {
-        divergence = Math.min(Math.max(v, -100), 100);
+        divergence = Math.min(Math.max(v, -imgl.implicitWidth*0.25), imgl.implicitWidth*0.25);
     }
     function setXY(x, y) {
         posX = x;
