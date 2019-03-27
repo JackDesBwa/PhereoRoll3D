@@ -45,6 +45,13 @@ Item {
     signal pitchUpdate(real v, real dx, real dy);
     signal pitchStop();
 
+    signal wheel(var wheel);
+
+    MouseArea {
+        anchors.fill: parent
+        onWheel: component.wheel(wheel)
+    }
+
     MultiPointTouchArea {
         anchors.fill: parent
 
