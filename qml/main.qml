@@ -331,7 +331,7 @@ Window {
                     Qt.quit();
                 }
 
-            } else if (event.key === Qt.Key_Return) {
+            } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
                 if (!loader.item.back)
                     phereo.showPhoto(phereo.selection);
                 event.accepted = true;
