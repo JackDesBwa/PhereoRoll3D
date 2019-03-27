@@ -574,6 +574,14 @@ Item {
                 inverted = !inverted;
         }
 
+        onWheel: {
+            if (wheel.modifiers & Qt.ShiftModifier) {
+                setDivergence(divergence + wheel.angleDelta.y / 100);
+            } else {
+                setScale(scaleFactor + wheel.angleDelta.y / 1000);
+            }
+        }
+
         onPitchStart: {
             i_posX = posX;
             i_posY = posY;
