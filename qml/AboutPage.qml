@@ -4,7 +4,7 @@ MouseArea {
     id: page
     property var phereo: null
     property int selection: 0
-    property string version: "X.X"
+    property string version: "0.9"
 
     function back() {
         phereo.showList();
