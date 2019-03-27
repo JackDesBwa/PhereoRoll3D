@@ -17,6 +17,14 @@ Item {
         editbox.focus = true;
     }
 
+    function handleKey(event) {
+        if (event.key === Qt.Key_C || event.key === Qt.Key_F
+                || event.key === Qt.Key_Return || event.key === Qt.Key_Enter
+                || event.key === Qt.Key_Left || event.key === Qt.Key_Right) {
+            event.accepted = true; // Prevent default behavior of these keys which interfere with search box
+        }
+    }
+
     property int searching: 0
     property bool toomanyusers: false
     function searchUser(keyword) {
