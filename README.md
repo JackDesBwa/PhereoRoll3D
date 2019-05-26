@@ -35,6 +35,7 @@ Doogee Y6 Max 3D\
 ZTE Axon 7 Max\
 ZTE K3DX V5\
 VKworld Discovery S2\
+RoKiT IO Pro 3D \
 Galaz N1 (in colums interleaved inverted mode) \
 Truly/Freevi tablet (with retro version)\
 Aikun Morphus X300\
