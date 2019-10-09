@@ -23,6 +23,7 @@ Window {
        property int nbImagesMax: 0
        property int selection: 0
        property bool disableCursor: false
+       property bool hq: false
        property var _photo: photosList.get(selection)
        property var photo: _photo ? _photo : {
                imgid: 0,
@@ -228,7 +229,7 @@ Window {
                        var photo = res["assets"][i];
                        photosList.append({
                          imgid: photo.id,
-                         imgurl: "http://api.phereo.com/imagestore2/%1/sidebyside/m/".arg(photo.id),
+                         imgurl: "http://api.phereo.com/imagestore2/%1/sidebyside/%2/".arg(photo.id).arg(phereo.hq ? 'l' : 'm'),
                          thumburl: "http://api.phereo.com/imagestore/%1/thumb.square/280/".arg(photo.id),
                          avatarurl: "http://api.phereo.com/avatar/%1/100.100".arg(photo.user.id),
                          title: photo.title,

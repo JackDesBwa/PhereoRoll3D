@@ -39,6 +39,14 @@ MouseArea {
                         small: true
                         onClicked: phereo.disableCursor = !phereo.disableCursor
                     }
+                    CLabel {
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        width: Math.max(implicitWidth, 150 * adjScr)
+                        height: 20 * adjScr
+                        text: "[Phereo " + (phereo.hq ? "large definition]" : "medium definition]")
+                        small: true
+                        onClicked: phereo.hq = !phereo.hq
+                    }
                 }
 
                 Column {
