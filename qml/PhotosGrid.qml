@@ -122,6 +122,7 @@ Roll {
             property int totalPopular: 0
             property int totalFeatured: 0
             property int totalStaff: 0
+            property int totalComments: 0
             property int totalLove: 0
             onCountChanged: labels_count.restart();
 
@@ -132,6 +133,7 @@ Roll {
                     var pc = 0;
                     var fc = 0;
                     var sc = 0;
+                    var cc = 0;
                     var love = 0;
                     for (var i = 0; i < phereo.photosList.count; i++) {
                         var photo = phereo.photosList.get(i);
@@ -139,12 +141,14 @@ Roll {
                             if (photo.flagPopular) pc += 1;
                             if (photo.flagFeatured) fc += 1;
                             if (photo.flagStaff) sc += 1;
+                            cc += photo.comments;
                             love += photo.likes;
                         }
                     }
                     parent.totalPopular = pc;
                     parent.totalFeatured = fc;
                     parent.totalStaff = sc;
+                    parent.totalComments = cc;
                     parent.totalLove = love;
                 }
             }
@@ -152,6 +156,11 @@ Roll {
                 spacing: 3 * adjScr
                 Image { anchors.bottom: parent.bottom; width: 12 * adjScr; height: 12 * adjScr; source: "qrc:/pics/likes.png" }
                 PLabel { text: labels.totalLove; small: true }
+            }
+            Row {
+                spacing: 3 * adjScr
+                Image { anchors.bottom: parent.bottom; width: 12 * adjScr; height: 12 * adjScr; source: "qrc:/pics/comments.png" }
+                PLabel { text: labels.totalComments; small: true }
             }
             Row {
                 spacing: 3 * adjScr
