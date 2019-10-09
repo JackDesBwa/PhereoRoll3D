@@ -18,12 +18,17 @@ Window {
 
     QtObject {
        id: phereo
+       property string version: "0.9"
        property string category
        property string category_url
        property int nbImagesMax: 0
        property int selection: 0
        property bool disableCursor: false
        property bool hq: false
+       property var lastVersionCheck: 0
+       property string lastVersionCheckVersion: ""
+       property string lastVersionTag: ""
+       property var jsonVersion: null
        property var _photo: photosList.get(selection)
        property var photo: _photo ? _photo : {
                imgid: 0,
@@ -290,7 +295,30 @@ Window {
                sel = photosList.count - 1;
            selection = sel;
        }
+       function checkVersion(forced) {
+           if (phereo.jsonVersion == null) {
+               var xhr = new XMLHttpRequest();
+               xhr.onreadystatechange = function() {
+                   if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                       var res = JSON.parse(xhr.responseText);
+                       phereo.jsonVersion = res;
+                       phereo.lastVersionCheck = new Date().getTime();
+                       forced |= (phereo.lastVersionCheckVersion != phereo.version);
+                       phereo.lastVersionCheckVersion = phereo.version;
+                       phereo.checkVersion(forced);
+                   }
+               }
+               xhr.open("GET", "https://raw.githubusercontent.com/JackDesBwa/PhereoRoll3D/master/version.json");
+               xhr.send();
+               return;
+           }
+           if (!forced && (phereo.version + phereo.jsonVersion.versionTag === phereo.lastVersionTag || phereo.version > phereo.jsonVersion.currentVersion))
+               return;
+           phereo.lastVersionTag = phereo.version + phereo.jsonVersion.versionTag;
+           loader.setSource("qrc:/qml/VersionPage.qml", {"phereo": phereo});
+       }
        function init() {
+
            var handleUri = function(uri) {
                loadUri(uri, true);
            }
@@ -301,6 +329,9 @@ Window {
                loadCategory(0);
                showList();
            }
+
+           if (phereo.lastVersionCheckVersion !== phereo.version || phereo.lastVersionCheck + 5*24*60*60 < new Date().getTime())
+               phereo.checkVersion(false);
        }
     }
 
@@ -581,6 +612,9 @@ void main(void) {
         property alias mode3D_landscapeMode: mode3D.landscapeMode
         property alias mode3D_portraitModeAlt: mode3D.portraitModeAlt
         property alias mode3D_landscapeModeAlt: mode3D.landscapeModeAlt
+        property alias lastVersionCheck: phereo.lastVersionCheck
+        property alias lastVersionCheckVersion: phereo.lastVersionCheckVersion
+        property alias lastVersionTag: phereo.lastVersionTag
     }
 
     Component.onCompleted: phereo.init()

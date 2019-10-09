@@ -10,11 +10,6 @@ MouseArea {
         return true;
     }
 
-    function gotoAuthor() {
-        phereo.loadUser("585576c4888428d211000000", "JackDesBwa");
-        phereo.showUser();
-    }
-
     Component {
         id: infos
         Item {
@@ -36,13 +31,6 @@ MouseArea {
                         source: "qrc:/pics/icon.png"
                         width: implicitWidth * adjScr
                         height: implicitHeight * adjScr
-                        MouseArea {
-                            anchors.fill: parent
-                            onClicked: {
-                                gotoAuthor();
-                                Qt.openUrlExternally("https://github.com/JackDesBwa/PhereoRoll3D");
-                            }
-                        }
                     }
                 }
                 MouseArea {
@@ -50,14 +38,6 @@ MouseArea {
                     height: childrenRect.height
                     Column {
                         spacing: 5 * adjScr
-                        CLabel {
-                            text: "PhereoRoll3D v" + phereo.version + " <small><font color='gray'>[check updates]</font></small>"
-                            onClicked: phereo.checkVersion(true)
-                        }
-                        Item {
-                            width: 1
-                            height: 10 * adjScr
-                        }
                         PLabel {
                             text: "Project page, code & manual"
                             small: true
@@ -70,12 +50,10 @@ MouseArea {
                             height: 10 * adjScr
                         }
                         PLabel {
-                            text: "Author"
-                            small: true
+                            text: "Last version: v" + phereo.jsonVersion.currentVersion
                         }
-                        CLabel {
-                            text: "<u>JackDesBwa</u>"
-                            onClicked: gotoAuthor()
+                        PLabel {
+                            text: "Your version: v" + phereo.version
                         }
                         Item {
                             width: 1
@@ -83,10 +61,7 @@ MouseArea {
                         }
                         PLabel {
                             width: 300 * adjScr
-                            text: "This software is created on my spare time for my own usage, but I share it as a free software (MIT licence, see project page).<br><br>" +
-                                  "If you really want to thank me for this sharing, you can find my email in my profile.<br><br>" +
-                                  "Source code is available, so if it lacks something for you, feel free to contribute yourself and share your changes back." +
-                                  " I do not accept to be paid to add a feature, but some freelancers might do."
+                            text: toolbox.reformatText((phereo.version < phereo.jsonVersion.currentVersion) ? phereo.jsonVersion.oldmsg : phereo.jsonVersion.newmsg);
                             small: true
                             horizontalAlignment: Text.AlignJustify
                         }

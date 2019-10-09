@@ -25,4 +25,6 @@ sed -i "s/android:versionName=\"[^\"]*\"/android:versionName=\"${VERSION_S}\"/" 
 sed -i "s/android:versionCode=\"[^\"]*\"/android:versionCode=\"${VERSION_C}\"/" android/AndroidManifest.xml
 sed -i "s/android:versionName=\"[^\"]*\"/android:versionName=\"${VERSION_S}\"/" android/retro/AndroidManifest.xml
 sed -i "s/android:versionCode=\"[^\"]*\"/android:versionCode=\"${VERSION_C}\"/" android/retro/AndroidManifest.xml
-sed -i "s/version: \"[^\"]*\"/version: \"${VERSION_S}\"/" qml/AboutPage.qml
+sed -i "s/version: \"[^\"]*\"/version: \"${VERSION_S}\"/" qml/main.qml
+
+echo "Don't forget to change version.json"

@@ -29,5 +29,6 @@
         <file>qml/UserProfile.qml</file>
         <file>pics/cursorr.png</file>
         <file>pics/cursorl.png</file>
+        <file>qml/VersionPage.qml</file>
     </qresource>
 </RCC>
