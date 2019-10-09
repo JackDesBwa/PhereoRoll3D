@@ -15,6 +15,9 @@ Window {
     ListModel {
         id: photosList
     }
+    ListModel {
+        id: photosListDisplayed
+    }
 
     QtObject {
        id: phereo
@@ -22,14 +25,16 @@ Window {
        property string category
        property string category_url
        property int nbImagesMax: 0
+       property alias nbImagesLoaded: photosList.count
        property int selection: 0
        property bool disableCursor: false
        property bool hq: false
+       property bool _filterComments: false
        property var lastVersionCheck: 0
        property string lastVersionCheckVersion: ""
        property string lastVersionTag: ""
        property var jsonVersion: null
-       property var _photo: photosList.get(selection)
+       property var _photo: photosListDisplayed.get(selection)
        property var photo: _photo ? _photo : {
                imgid: 0,
                imgurl: "",
@@ -49,7 +54,7 @@ Window {
                flagPopular: false,
                comments: 0,
            }
-       property alias photosList: photosList
+       property alias photosList: photosListDisplayed
 
        property var mode3D: QtObject {
            id: mode3D
@@ -110,6 +115,7 @@ Window {
            if (cat === category && photosList.count > 0)
                return;
            photosList.clear();
+           photosListDisplayed.clear();
            category = cat;
            category_url = caturl;
            nbImagesMax = 0;
@@ -118,6 +124,7 @@ Window {
        }
        function loadUser(userid, user) {
            photosList.clear();
+           photosListDisplayed.clear();
            category = user;
            category_url = "images/?user=%1&userId=&userApi=&".arg(userid);
            nbImagesMax = 0;
@@ -126,6 +133,7 @@ Window {
        }
        function loadAlbum(albumid, album) {
            photosList.clear();
+           photosListDisplayed.clear();
            category = album;
            category_url = "images/?albumId=%1&userId=&userApi=&".arg(albumid);
            nbImagesMax = 0;
@@ -134,6 +142,7 @@ Window {
        }
        function loadTag(tagname) {
            photosList.clear();
+           photosListDisplayed.clear();
            category = "%1 [tag]".arg(tagname);
            category_url = "search_tags/?ss=%1&userId=&userApi=&".arg(encodeURIComponent(tagname));
            nbImagesMax = 0;
@@ -142,6 +151,7 @@ Window {
        }
        function loadSearch(keyword) {
            photosList.clear();
+           photosListDisplayed.clear();
            category = "%1 [search]".arg(keyword);
            category_url = "search/?ss=%1&userId=&userApi=&".arg(encodeURIComponent(keyword));
            nbImagesMax = 0;
@@ -158,6 +168,7 @@ Window {
                if (imgid) {
                    if (display) showPhoto(0);
                    photosList.clear();
+                   photosListDisplayed.clear();
                    category = "URL";
                    category_url = "image/%1?userId=&userApi=&".arg(imgid);
                    nbImagesMax = 0;
@@ -212,6 +223,7 @@ Window {
                if (imgid) {
                    if (display) showPhoto(0);
                    photosList.clear();
+                   photosListDisplayed.clear();
                    category = "URL";
                    category_url = "image/%1?userId=&userApi=&".arg(imgid);
                    nbImagesMax = 0;
@@ -226,6 +238,8 @@ Window {
        }
 
        function loadNext() {
+           if (nbImagesLoaded == nbImagesMax && nbImagesMax !== 0)
+               return;
            var xhr = new XMLHttpRequest();
            xhr.onreadystatechange = function() {
                if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -257,6 +271,7 @@ Window {
                        nbImagesMax = res["totalCount"];
                    if (selection == -1)
                        selection = 0;
+                   filterList();
                }
            }
 
@@ -285,15 +300,31 @@ Window {
        }
        function next() {
            var sel = selection + 1;
-           if (sel >= photosList.count)
+           if (sel >= photosListDisplayed.count)
                sel = 0;
            selection = sel;
        }
        function previous() {
            var sel = selection - 1;
            if (sel < 0)
-               sel = photosList.count - 1;
+               sel = photosListDisplayed.count - 1;
            selection = sel;
+       }
+       function filterList() {
+           photosListDisplayed.clear();
+           for (var i = 0; i < photosList.count; i++) {
+               if (!phereo._filterComments || photosList.get(i).comments > 0)
+                   photosListDisplayed.append(photosList.get(i));
+           }
+           var sel = selection;
+           if (sel >= photosListDisplayed.count)
+               sel = 0;
+           selection = sel;
+           selectionChanged();
+       }
+       function toggleCommentsFilter() {
+           phereo._filterComments = !phereo._filterComments;
+           filterList();
        }
        function checkVersion(forced) {
            if (phereo.jsonVersion == null) {

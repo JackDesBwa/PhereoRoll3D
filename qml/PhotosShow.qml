@@ -378,7 +378,7 @@ Item {
                                     font.bold: true
                                 }
                                 CLabel {
-                                    text: (phereo.selection+1) + "/" + phereo.photosList.count + (phereo.photosList.count < phereo.nbImagesMax ? "+": "")
+                                    text: (phereo.selection+1) + "/" + phereo.nbImagesLoaded + (phereo.nbImagesLoaded < phereo.nbImagesMax ? "+": "") + (phereo.nbImagesLoaded > phereo.photosList.count ? " ("+phereo.photosList.count+" filtered)" : "")
                                     onClicked: phereo.loadNext()
                                 }
                             }

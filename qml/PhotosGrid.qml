@@ -61,7 +61,7 @@ Roll {
                         return "...";
                     if (phereo.photosList.count === 0)
                         return "No result";
-                    return (phereo.selection+1) + "/" + phereo.photosList.count + (phereo.photosList.count < phereo.nbImagesMax ? "+": "")
+                    return (phereo.selection+1) + "/" + phereo.nbImagesLoaded + (phereo.nbImagesLoaded < phereo.nbImagesMax ? "+": "") + (phereo.nbImagesLoaded > phereo.photosList.count ? " ("+phereo.photosList.count+" filtered)" : "")
                 }
                 onClicked: phereo.loadNext()
             }
@@ -160,7 +160,7 @@ Roll {
             Row {
                 spacing: 3 * adjScr
                 Image { anchors.bottom: parent.bottom; width: 12 * adjScr; height: 12 * adjScr; source: "qrc:/pics/comments.png" }
-                PLabel { text: labels.totalComments; small: true }
+                CLabel { text: labels.totalComments; small: true; onClicked: phereo.toggleCommentsFilter() }
             }
             Row {
                 spacing: 3 * adjScr
