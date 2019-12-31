@@ -4,11 +4,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 HEADERS += \
     src/httpcache.h \
+    src/photolist.h \
     src/toolbox.h
 
 SOURCES += \
     src/main.cpp \
     src/httpcache.cpp \
+    src/photolist.cpp \
     src/toolbox.cpp
 
 RESOURCES += resources.qrc
