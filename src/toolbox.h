@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QRegularExpression>
 #include <QNetworkAccessManager>
+#include "photoloader.h"
 
 class Toolbox : public QObject {
     Q_OBJECT
@@ -13,6 +14,7 @@ class Toolbox : public QObject {
 
     Q_PROPERTY(QString lastUri READ lastUri NOTIFY uriReceived)
 
+    Q_PROPERTY(QObject * photoLoader READ photoLoader CONSTANT)
 public:
     explicit Toolbox(QNetworkAccessManager & nam, QObject *parent = nullptr);
     void setUri(QString uri);
@@ -30,12 +32,14 @@ public slots:
     QString lastUri();
     void setDownloadId(QString n);
     QString imgPath() { return m_imgPath; }
+    PhotoLoader * photoLoader() { return &m_photoLoader; }
 
 private:
     QNetworkAccessManager & m_nam;
     QRegularExpression regexpURL;
     QString m_lastUri;
     QString m_imgPath;
+    PhotoLoader m_photoLoader;
 };
 
 #endif // TOOLBOX_H
