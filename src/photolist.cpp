@@ -1,7 +1,7 @@
 #include "photolist.h"
 
 void PhotoList::add(QVector<PhotoData> v) {
-    beginInsertRows(QModelIndex(), rowCount(), rowCount());
+    beginInsertRows(QModelIndex(), rowCount(), rowCount()+v.count()-1);
     m_photodata << v;
     endInsertRows();
 }
