@@ -8,6 +8,9 @@ class HttpCache_NAM : public QNetworkAccessManager {
 public:
     using QNetworkAccessManager::QNetworkAccessManager;
     QNetworkReply * createRequest(QNetworkAccessManager::Operation op, const QNetworkRequest &originalReq, QIODevice *outgoingData = nullptr) override;
+private:
+    QByteArray userAgent();
+    QByteArray m_userAgent;
 };
 
 class HttpCache_NAMF : public QQmlNetworkAccessManagerFactory {
