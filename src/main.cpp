@@ -11,6 +11,7 @@ int main(int argc, char *argv[]) {
     app.setOrganizationName("DesBwa");
     app.setOrganizationDomain("desbwa.org");
     app.setApplicationName("PhereoRoll3D");
+    app.setApplicationVersion("1.0");
 
     QQmlApplicationEngine engine;
     engine.setNetworkAccessManagerFactory(new HttpCache_NAMF);

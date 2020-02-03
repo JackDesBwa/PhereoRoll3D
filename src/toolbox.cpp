@@ -7,6 +7,7 @@
 #include <QCryptographicHash>
 #include <QNetworkRequest>
 #include <QNetworkReply>
+#include <QCoreApplication>
 
 namespace {
 Toolbox * toolboxInstance = nullptr;
@@ -80,6 +81,10 @@ void Toolbox::setDownloadId(QString imgid) {
     QFile f(picturesPathFinal + QDir::separator() + imgid + "_3d_sbs.jpg");
     m_imgPath = f.exists() ? f.fileName() : "";
     emit imgPathChanged();
+}
+
+QString Toolbox::appVersion() const {
+    return qApp->applicationVersion();
 }
 
 #ifdef Q_OS_ANDROID

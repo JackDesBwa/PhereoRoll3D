@@ -11,6 +11,7 @@ class Toolbox : public QObject {
 
     Q_PROPERTY(bool hasWritePermissions READ hasWritePermissions CONSTANT)
     Q_PROPERTY(QString imgPath READ imgPath NOTIFY imgPathChanged)
+    Q_PROPERTY(QString appVersion READ appVersion CONSTANT)
 
     Q_PROPERTY(QString lastUri READ lastUri NOTIFY uriReceived)
 
@@ -32,6 +33,7 @@ public slots:
     QString lastUri();
     void setDownloadId(QString n);
     QString imgPath() { return m_imgPath; }
+    QString appVersion() const;
     PhotoLoader * photoLoader() { return &m_photoLoader; }
 
 private:
