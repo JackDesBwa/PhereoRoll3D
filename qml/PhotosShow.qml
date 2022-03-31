@@ -120,7 +120,7 @@ Item {
 
     Connections {
         target: phereo
-        onSelectionChanged: {
+        function onSelectionChanged() {
             if (showComments)
                 updateComments();
             toolbox.setDownloadId(phereo.photo.imgid);
@@ -159,7 +159,7 @@ Item {
                 onInteractiveChanged: longDescription = interactive
                 Connections {
                     target: show
-                    onCommentsYChanged: {
+                    function onCommentsYChanged() {
                         if (!commentFlick.moving)
                             commentFlick.contentY = commentsY;
                     }
@@ -232,7 +232,7 @@ Item {
                                             }
                                             Connections {
                                                 target: show
-                                                onDownloadingChanged: {
+                                                function onDownloadingChanged() {
                                                     if (!downloading)
                                                         dlAnimation.start();
                                                 }

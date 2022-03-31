@@ -171,7 +171,9 @@ Item {
 
     Connections {
         target: phereo
-        onPhotoChanged: updateProfile()
+        function onPhotoChanged() {
+            updateProfile();
+        }
     }
 
     Component.onCompleted: updateProfile()
@@ -245,7 +247,10 @@ Item {
                 onContentYChanged: flickY = contentY
                 Connections {
                     target: page
-                    onFlickYChanged: if (!flickableProperties.moving) flickableProperties.contentY = flickY
+                    function onFlickYChanged() {
+                        if (!flickableProperties.moving)
+                            flickableProperties.contentY = flickY;
+                    }
                 }
 
                 Column {
