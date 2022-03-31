@@ -612,6 +612,13 @@ Item {
             horizontalAlignment: inverted ? Image.AlignRight : Image.AlignLeft
             scale: imgr.scale
             transformOrigin: Item.TopLeft
+            onStatusChanged: {
+                const sourceStr = source.toString();
+                if (status == Image.Error && sourceStr.indexOf('//api.phereo.com/') !== -1 && sourceStr.indexOf('imagestore2') !== -1) {
+                    phereo.photo.imgurl = sourceStr.replace('imagestore2', 'imagestore');
+                    phereo.selectionChanged();
+                }
+            }
         }
         Loading {
             anchors.fill: parent
