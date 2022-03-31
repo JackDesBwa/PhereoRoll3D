@@ -9,7 +9,7 @@ The app is developped in c++ with Qt/QML and a tiny bit of Java. Although only t
 
 **Status: Working**
 
-This software is created on my spare time for my own usage, but I share it as a free software (MIT licence, see afterwards). If you really want to thank me for this sharing, you can find my email in my phereo profile. You can also tip me on tipeee: https://tipeee.com/jackdesbwa
+This software is created on my spare time for my own usage, but I share it as a free software (MIT licence, see afterwards). If you really want to thank me for this sharing, you can find my email in my phereo profile. You can also tip me: https://jackdesbwa3d.desbwa.org/donate/
 
 Source code is available, so if it lacks something for you, feel free to contribute yourself and share your changes back. Patches are welcome. I do not accept to be paid to add a feature, but some freelancers might do.
 
