@@ -1,6 +1,6 @@
 {
-	"versionTag": "10b",
-	"currentVersion": "1.0",
+	"versionTag": "11",
+	"currentVersion": "1.1",
 	"oldmsg": "Your version is outdated.\nSee https://github.com/JackDesBwa/PhereoRoll3D/releases",
-	"newmsg": "Your version is up to date.\nTo know what is new, consult the changelog page:\nhttps://github.com/JackDesBwa/PhereoRoll3D/releases/tag/v1.0\n\nIf you like this app, you can optionally make a donation at\nhttps://tipeee.com/jackdesbwa\n\n<b>Note:</b> The APK of the retro version was built and uploaded again. The old one was reported to have random crashes that this new build seems to solve. Please, reinstall if you face such crashes."
+	"newmsg": "Your version is up to date.\nTo know what is new, consult the changelog page:\nhttps://github.com/JackDesBwa/PhereoRoll3D/releases/tag/v1.1\n\nIf you like this app, you can optionally donate at\nhttps://jackdesbwa3d.desbwa.org/donate/"
 }

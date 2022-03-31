@@ -21,7 +21,7 @@ Window {
 
     QtObject {
        id: phereo
-       property string version: "1.0"
+       property string version: "1.1"
        property string category
        property string category_url
        property int nbImagesMax: 0
